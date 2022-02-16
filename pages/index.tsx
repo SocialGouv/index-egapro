@@ -1,8 +1,11 @@
-import type { NextPage } from "next"
-import { Span } from "../components/Span"
+import { Span } from "@/components/Span"
+import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
+import { ReactElement } from "react"
 
-const Home: NextPage = () => {
+export default function HomePage() {
   return <Span name="Marty"></Span>
 }
 
-export default Home
+HomePage.getLayout = function getLayout(page: ReactElement) {
+  return <SinglePageLayout>{page}</SinglePageLayout>
+}

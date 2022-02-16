@@ -755,6 +755,16 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/cabin@^4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/cabin/-/cabin-4.5.2.tgz#97cf81411083ff9c773e2040142bdd6ef2733c6c"
+  integrity sha512-KFqv9ZNKAMPAc+hIWldVZIJk+CNKGPTIfXO8BpvXsZPa0RbOk9tdpdz1LCmgXsqBk3pydoFawHDmDFkWFSw1JA==
+
+"@fontsource/gabriela@^4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/gabriela/-/gabriela-4.5.2.tgz#65f2c3f47824d8d43b37b77e70988b4415516af0"
+  integrity sha512-ewNiWKGgMPT2cCUw89HzI2XpOfGJ49HynzseBhjkOBEm9cwNjGg3lEnKPTBupsd+kkkV7LujXMl19yk6MfNxpw==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.3.tgz#f2564c744b387775b436418491f15fce6601f63e"
