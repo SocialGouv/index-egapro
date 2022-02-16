@@ -2,7 +2,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"]
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ]
     },
     "target": "es5",
     "lib": [
@@ -25,9 +33,9 @@
   },
   "include": [
     "next-env.d.ts",
+    "lib.dom.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components"
   ],
   "exclude": [
     "node_modules"

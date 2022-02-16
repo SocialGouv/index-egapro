@@ -1,22 +1,23 @@
 import React from "react"
 import NextLink from "next/link"
-import { Box, Container, Link, Flex, Text, ListItem, List, HStack } from "@chakra-ui/react"
+import { Box, Container, Link, Flex, Text, ListItem, List, HStack, Button, useColorMode } from "@chakra-ui/react"
 
 import Logo from "@/components/ds/Logo"
+import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 
 function Header() {
+  const { colorMode, toggleColorMode } = useColorMode()
+
   return (
     <Box
       as="header"
       role="banner"
-      bg="white"
       sx={{
         flexShrink: 0,
         borderBottom: "1px solid #E3E4ED",
       }}
     >
       <Box
-        bg="white"
         fontSize="xs"
         sx={{
           height: 0,
@@ -61,15 +62,15 @@ function Header() {
           </Box>
           <Box fontFamily="gabriela">
             <NextLink href="/" passHref>
-              <Link fontSize="2xl" color="gray.900">
-                Index Egapro
-              </Link>
+              <Link fontSize="2xl">Index Egapro</Link>
             </NextLink>
             <Text fontSize="xs">
               L'outil de calcul et de déclaration de votre index égalité professionnelle Femmes-Hommes
             </Text>
           </Box>
-          <Box ml="auto">{/* <MenuProfile /> */}</Box>
+          <Box ml="auto">
+            <Button onClick={toggleColorMode}>{colorMode === "light" ? <MoonIcon /> : <SunIcon />}</Button>
+          </Box>
         </Flex>
       </Container>
     </Box>
