@@ -20,6 +20,8 @@ export type FetcherReturn = {
   error: any
 }
 
+export type FetcherReturnImmutable = Omit<FetcherReturn, "mutate">
+
 /* Fetcher which can use an options and handles error in a generic way.
  *
  * @param endpoint the full end point to use

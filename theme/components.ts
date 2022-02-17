@@ -12,7 +12,6 @@ const components = {
     Heading: {
       baseStyle: {
         fontWeight: "semibold",
-        color: "gray.700",
       },
     },
 
