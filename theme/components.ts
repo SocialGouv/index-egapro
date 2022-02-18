@@ -14,42 +14,15 @@ const components = {
         fontWeight: "semibold",
       },
     },
-
     Input: {
-      variants: {
-        outline: (props: StyleFunctionProps) => ({
-          ...defaultTheme.components.Input.variants.outline(props),
-          field: {
-            ...defaultTheme.components.Input.variants.outline(props).field,
-            borderColor: "gray.400",
-            background: "white",
-            _readOnly: {
-              background: "primary.200",
-              borderColor: "transparent",
-            },
+      baseStyle: (props: StyleFunctionProps) => ({
+        field: {
+          _placeholder: {
+            color: props.colorMode === "dark" ? "gray.400" : "gray.500",
           },
-        }),
-        outlinePrimary: (props: StyleFunctionProps) => ({
-          ...defaultTheme.components.Input.variants.outline(props),
-          field: {
-            ...defaultTheme.components.Input.variants.outline(props).field,
-            borderColor: "primary.400",
-            background: "primary.50",
-            _hover: {
-              borderColor: "primary.500",
-            },
-            _placeholder: {
-              color: "primary.400",
-            },
-            _readOnly: {
-              background: "primary.200",
-              borderColor: "transparent",
-            },
-          },
-        }),
-      },
+        },
+      }),
     },
-
     Select: {
       variants: {
         outline: (props: StyleFunctionProps) => ({
