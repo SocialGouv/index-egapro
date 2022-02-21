@@ -8,6 +8,7 @@ import {
   Flex,
   Heading,
   Icon,
+  Input,
   ListItem,
   OrderedList,
   Tag,
@@ -17,10 +18,8 @@ import {
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react"
-import { Form, Field } from "react-final-form"
 
 import ButtonAction from "@/components/ds/ButtonAction"
-import InputGroup from "@/components/ds/InputGroup"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
 import type { CompaniesType, CompanyType } from "@/models/useSearch"
 import { useSearch } from "@/models/useSearch"
@@ -160,7 +159,7 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
         textAlign="center"
         height="200px"
         mt={4}
-        colorScheme="yellow"
+        colorScheme="cyan"
       >
         <AlertIcon boxSize="40px" mr={0} />
         <AlertTitle mt={4} mb={1} fontSize="lg">
@@ -173,9 +172,11 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
 
   return (
     <>
-      <Box my={4}>
-        {companies?.data?.length} sur {companies?.count} résultats
-      </Box>
+      {!companies?.count ? null : (
+        <Box my={4}>
+          {companies?.data?.length} sur {companies?.count} résultats
+        </Box>
+      )}
       {companies?.data?.map((company) => (
         <Company company={company} key={company.entreprise?.siren} />
       ))}
@@ -184,36 +185,39 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
 }
 
 export default function HomePage() {
-  const [search, setSearch] = React.useState()
+  const formRef = React.useRef(null)
+
+  const [search, setSearch] = React.useState("")
   const { companies, error, size, setSize } = useSearch(search)
 
-  function handleSubmit({ search }: any) {
-    setSearch(search)
+  function handleSubmit(event: React.SyntheticEvent) {
+    event.preventDefault()
+    const data = new FormData(formRef.current || undefined)
+
+    const { search } = Object.fromEntries(data)
+
+    setSearch(search as string)
   }
+
+  function reset() {
+    setSearch("")
+    if (formRef.current) {
+      ;(formRef.current as HTMLFormElement)?.reset()
+    }
+  }
+
   return (
     <>
-      <Form onSubmit={handleSubmit}>
-        {({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
-            <Heading as="h1" size="md">
-              Rechercher l'index de l'égalité professionnelle d'une entreprise de plus de 250 salariés
-            </Heading>
-            <Field name="search">
-              {({ input }) => (
-                <Box mt={4} maxW="container.md" mx="auto">
-                  <InputGroup
-                    {...input}
-                    label=""
-                    fieldName={input.name}
-                    placeholder="Saisissez le nom ou le SIREN d'une entreprise"
-                  />
-                </Box>
-              )}
-            </Field>
-            <ButtonAction mt={4} label="Rechercher" type="submit" />
-          </form>
-        )}
-      </Form>
+      <form onSubmit={handleSubmit} style={{ textAlign: "center" }} ref={formRef} noValidate>
+        <Heading as="h1" size="md" mb="8">
+          Rechercher l'index de l'égalité professionnelle d'une entreprise de plus de 250 salariés
+        </Heading>
+        <Box mt={4} maxW="container.md" mx="auto">
+          <Input placeholder="Saisissez le nom ou le SIREN d'une entreprise" size="md" name="search" type="text" />
+        </Box>
+        <ButtonAction mt={4} label="Rechercher" type="submit" />
+        <ButtonAction mt={4} label="Réinitialiser" variant="ghost" onClick={reset} ml="2" />
+      </form>
 
       <DisplayCompanies companies={companies} error={error} />
 
