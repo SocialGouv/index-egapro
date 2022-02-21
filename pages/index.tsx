@@ -14,6 +14,7 @@ import {
   TagLabel,
   TagLeftIcon,
   Text,
+  Tooltip,
   useDisclosure,
 } from "@chakra-ui/react"
 import { Form, Field } from "react-final-form"
@@ -52,10 +53,12 @@ const workforceLabels: Record<string, string[]> = {
 
 function UES() {
   return (
-    <Tag size="md" key="md" variant="subtle" colorScheme="cyan">
-      <TagLeftIcon boxSize="18px" as={HiOutlineOfficeBuilding} />
-      <TagLabel>UES</TagLabel>
-    </Tag>
+    <Tooltip label="Unité Économique et Sociale" aria-label="Unité Économique et Sociale">
+      <Tag size="md" key="md" variant="subtle" colorScheme="cyan">
+        <TagLeftIcon boxSize="18px" as={HiOutlineOfficeBuilding} />
+        <TagLabel>UES</TagLabel>
+      </Tag>
+    </Tooltip>
   )
 }
 
@@ -98,10 +101,16 @@ function Company({ company }: { company: CompanyType }) {
         {years.map((year) => (
           <Box key={year} w="15%" as="section" pr={2} textAlign="center" borderLeft="1px solid gray">
             <Text fontSize="lg" fontWeight="bold">
-              {company.notes[year]}
+              {company.notes[year] === null ? (
+                <Tooltip label="Index non calculable" aria-label="Index non calculable">
+                  NC
+                </Tooltip>
+              ) : (
+                company.notes[year]
+              )}
             </Text>
-            <Text fontSize="lg">{`Index ${year}`}</Text>
-            <Text fontSize="xs">{`(données ${year - 1})`}</Text>
+            <Text fontSize="lg">{`Index ${year + 1}`}</Text>
+            <Text fontSize="xs">{`(données ${year})`}</Text>
           </Box>
         ))}
       </Flex>
