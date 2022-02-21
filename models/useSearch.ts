@@ -1,6 +1,6 @@
-import useSWR from "swr"
+import useSWRInfinite, { SWRInfiniteKeyLoader } from "swr/infinite"
 
-import type { FetcherReturn } from "@/utils/fetcher"
+import type { FetcherInfiniteReturn } from "@/utils/fetcher"
 import { fetcher } from "@/utils/fetcher"
 
 export type CompanyType = {
@@ -22,17 +22,38 @@ export type CompaniesType = {
   count: number
 }
 
-export function useSearch(search?: string): FetcherReturn & { companies: CompaniesType } {
-  const { data, error, mutate } = useSWR(search ? `/search?q=${search}` : null, fetcher)
+function getKey(search?: string) {
+  return function (pageIndex: number): ReturnType<SWRInfiniteKeyLoader> {
+    if (!search) return null
+    return `/search?q=${search}&offset=${pageIndex * 10}`
+  }
+}
 
-  const isLoading = !data && !error
+export function useSearch(search?: string): FetcherInfiniteReturn & { companies: CompaniesType } {
+  const { data: companies, error, size, setSize } = useSWRInfinite(getKey(search), fetcher)
+
+  const isLoading = !companies && !error
   const isError = Boolean(error)
 
+  let newData: CompanyType[] = []
+
+  if (companies && companies.length > 0) {
+    for (const company of companies) {
+      newData = [...newData, ...company.data]
+    }
+  }
+
+  const flattenCompanies = {
+    count: companies?.[0].count,
+    data: newData,
+  }
+
   return {
-    companies: data,
+    companies: flattenCompanies,
     error,
     isLoading,
     isError,
-    mutate,
+    size,
+    setSize,
   }
 }

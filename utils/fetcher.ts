@@ -16,11 +16,18 @@ export type FetchError = Error & {
 export type FetcherReturn = {
   isLoading: boolean
   isError: boolean
+  // eslint-disable-next-line no-unused-vars
   mutate: (data: unknown) => void
   error: any
 }
 
 export type FetcherReturnImmutable = Omit<FetcherReturn, "mutate">
+
+export type FetcherInfiniteReturn = FetcherReturnImmutable & {
+  size: number
+  // eslint-disable-next-line no-unused-vars
+  setSize: (size: number) => void
+}
 
 /* Fetcher which can use an options and handles error in a generic way.
  *

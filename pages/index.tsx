@@ -173,7 +173,9 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
 
   return (
     <>
-      <Box my={4}>10 sur {companies?.count} résultats</Box>
+      <Box my={4}>
+        {companies?.data?.length} sur {companies?.count} résultats
+      </Box>
       {companies?.data?.map((company) => (
         <Company company={company} key={company.entreprise?.siren} />
       ))}
@@ -183,9 +185,7 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
 
 export default function HomePage() {
   const [search, setSearch] = React.useState()
-  const { companies, error } = useSearch(search)
-
-  console.log("companies", companies)
+  const { companies, error, size, setSize } = useSearch(search)
 
   function handleSubmit({ search }: any) {
     setSearch(search)
@@ -216,6 +216,12 @@ export default function HomePage() {
       </Form>
 
       <DisplayCompanies companies={companies} error={error} />
+
+      {companies?.data?.length < companies?.count && (
+        <Box textAlign="center" mt="8">
+          <ButtonAction variant="outline" label="Voir les résultats suivants" onClick={() => setSize(size + 1)} />
+        </Box>
+      )}
     </>
   )
 }
