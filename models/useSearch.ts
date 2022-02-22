@@ -22,14 +22,30 @@ export type CompaniesType = {
   count: number
 }
 
-function getKey(search?: string) {
+export type SearchCompanyParams = {
+  query?: string
+  region?: string
+  departement?: string
+  naf?: string
+}
+
+function getKey(search?: SearchCompanyParams) {
   return function (pageIndex: number): ReturnType<SWRInfiniteKeyLoader> {
     if (!search) return null
-    return `/search?q=${search}&offset=${pageIndex * 10}`
+
+    var searchParams = new URLSearchParams()
+
+    if (search.query) searchParams.set("q", search.query)
+    if (search.region) searchParams.set("region", search.region)
+    if (search.departement) searchParams.set("departement", search.departement)
+    if (search.naf) searchParams.set("section_naf", search.naf)
+    if (pageIndex > 0) searchParams.set("offset", String(pageIndex * 10))
+
+    return "/search?" + searchParams.toString()
   }
 }
 
-export function useSearch(search?: string): FetcherInfiniteReturn & { companies: CompaniesType } {
+export function useSearch(search?: SearchCompanyParams): FetcherInfiniteReturn & { companies: CompaniesType } {
   const { data: companies, error, size, setSize } = useSWRInfinite(getKey(search), fetcher)
 
   const isLoading = !companies && !error

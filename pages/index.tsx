@@ -7,10 +7,12 @@ import {
   Box,
   Flex,
   Heading,
+  HStack,
   Icon,
   Input,
   ListItem,
   OrderedList,
+  Select,
   Tag,
   TagLabel,
   TagLeftIcon,
@@ -21,12 +23,13 @@ import {
 
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
-import type { CompaniesType, CompanyType } from "@/models/useSearch"
+import type { CompaniesType, CompanyType, SearchCompanyParams } from "@/models/useSearch"
 import { useSearch } from "@/models/useSearch"
 
 import { HiOutlineLocationMarker, HiOutlineOfficeBuilding } from "react-icons/hi"
 import { useConfig } from "@/models/useConfig"
 import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons"
+import { capitalize } from "@/utils/string"
 
 function useAdressLabel({ departement, region }: { departement?: string; region?: string }) {
   const { data } = useConfig()
@@ -185,22 +188,26 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
 }
 
 export default function HomePage() {
-  const formRef = React.useRef(null)
-
-  const [search, setSearch] = React.useState("")
+  const [search, setSearch] = React.useState<SearchCompanyParams>({})
   const { companies, error, size, setSize } = useSearch(search)
+  const formRef = React.useRef(null)
+  const { data: config } = useConfig()
+
+  if (!config) return ""
+
+  const { DEPARTEMENTS_TRIES, REGIONS_TRIES, SECTIONS_NAF_TRIES } = config
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
     const data = new FormData(formRef.current || undefined)
 
-    const { search } = Object.fromEntries(data)
+    const formData = Object.fromEntries(data)
 
-    setSearch(search as string)
+    setSearch(formData)
   }
 
   function reset() {
-    setSearch("")
+    setSearch({})
     if (formRef.current) {
       ;(formRef.current as HTMLFormElement)?.reset()
     }
@@ -213,7 +220,33 @@ export default function HomePage() {
           Rechercher l'index de l'égalité professionnelle d'une entreprise de plus de 250 salariés
         </Heading>
         <Box mt={4} maxW="container.md" mx="auto">
-          <Input placeholder="Saisissez le nom ou le SIREN d'une entreprise" size="md" name="search" type="text" />
+          <Input placeholder="Saisissez le nom ou le SIREN d'une entreprise" size="md" name="query" type="text" />
+          <HStack mt="2">
+            <Text fontSize="sm" mx="3">
+              Filtres
+            </Text>
+            <Select placeholder="Région" size="sm" name="region">
+              {REGIONS_TRIES.map(([key, value]) => (
+                <option key={key} value={key}>
+                  {value}
+                </option>
+              ))}
+            </Select>
+            <Select placeholder="Département" size="sm" name="departement">
+              {DEPARTEMENTS_TRIES.map(([key, value]) => (
+                <option key={key} value={key}>
+                  {value}
+                </option>
+              ))}
+            </Select>
+            <Select placeholder="Secteur d'activité" size="sm" name="naf">
+              {SECTIONS_NAF_TRIES.map(([key, value]) => (
+                <option key={key} value={key}>
+                  {capitalize(value)}
+                </option>
+              ))}
+            </Select>
+          </HStack>
         </Box>
         <ButtonAction mt={4} label="Rechercher" type="submit" />
         <ButtonAction mt={4} label="Réinitialiser" variant="ghost" onClick={reset} ml="2" />
