@@ -14,6 +14,12 @@ export type CompanyType = {
     effectif: { tranche: string }
   }
   notes: Record<number, number>
+  notes_remunerations: Record<number, number>
+  notes_augmentations: Record<number, number>
+  notes_promotions: Record<number, number>
+  notes_augmentations_et_promotions: Record<number, number> // Toujours utile?
+  notes_conges_maternite: Record<number, number>
+  notes_hautes_rémunérations: Record<number, number> // notes_hautes_r\u00e9mun\u00e9rations
   label: string
 }
 

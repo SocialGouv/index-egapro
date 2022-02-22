@@ -18,6 +18,7 @@ import {
   TagLeftIcon,
   Text,
   Tooltip,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react"
 
@@ -66,16 +67,26 @@ function UES() {
 
 function Company({ company }: { company: CompanyType }) {
   const { isOpen, onToggle } = useDisclosure()
+  const [yearSelected, setYearSelected] = React.useState<number>()
+  const highlightColor = useColorModeValue("blue.100", "blue.800")
 
   const years = Object.keys(company.notes)
     .map((elt) => Number(elt))
     .sort()
     .reverse()
 
+  function selectOrToggle(year: number) {
+    if (yearSelected === year) {
+      setYearSelected(undefined)
+    } else {
+      setYearSelected(year)
+    }
+  }
+
   return (
     <Flex direction="column" mt={6}>
       <Flex>
-        <Box as="header" w={"30%"} pr={4}>
+        <Box as="header" w="30%" pr={4}>
           <Flex alignItems="flex-start" justifyContent="space-between">
             <Heading as="h2" size="md">
               {company.entreprise.ues?.nom || company.label}
@@ -92,30 +103,150 @@ function Company({ company }: { company: CompanyType }) {
             {useAdressLabel({ departement: company.entreprise.département, region: company.entreprise.région })}
           </Flex>
         </Box>
-        <Box as="section" textAlign="center" w="20%" borderLeft="1px solid gray" pr={2}>
-          <Text fontSize="lg" fontWeight="bold">
-            {company?.entreprise?.effectif?.tranche && workforceLabels[company?.entreprise?.effectif?.tranche][0]}
-          </Text>
-          <Text fontSize="lg">
-            {company?.entreprise?.effectif?.tranche && workforceLabels[company?.entreprise?.effectif?.tranche][1]}
-          </Text>
-        </Box>
-        {years.map((year) => (
-          <Box key={year} w="15%" as="section" pr={2} textAlign="center" borderLeft="1px solid gray">
+        <Flex
+          as="section"
+          textAlign="center"
+          w="20%"
+          borderLeft="1px solid gray"
+          pr={2}
+          align="center"
+          justify="center"
+        >
+          <Box>
             <Text fontSize="lg" fontWeight="bold">
-              {company.notes[year] === null ? (
-                <Tooltip label="Index non calculable" aria-label="Index non calculable">
-                  NC
-                </Tooltip>
-              ) : (
-                company.notes[year]
-              )}
+              {company?.entreprise?.effectif?.tranche && workforceLabels[company?.entreprise?.effectif?.tranche][0]}
             </Text>
-            <Text fontSize="lg">{`Index ${year + 1}`}</Text>
-            <Text fontSize="xs">{`(données ${year})`}</Text>
+            <Text fontSize="lg">
+              {company?.entreprise?.effectif?.tranche && workforceLabels[company?.entreprise?.effectif?.tranche][1]}
+            </Text>
           </Box>
+        </Flex>
+        {years.map((year) => (
+          <Flex
+            key={year}
+            w="15%"
+            as="section"
+            pr={2}
+            textAlign="center"
+            borderLeft="1px solid gray"
+            onClick={() => selectOrToggle(year)}
+            bgColor={yearSelected === year ? highlightColor : "transparent"}
+            borderTop={yearSelected === year ? "1px solid gray" : "1px solid transparent"}
+            borderRight={yearSelected === year ? "1px solid gray" : "1px solid transparent"}
+            marginRight="-1px"
+            zIndex="20"
+            justify="center"
+            align="center"
+          >
+            <Box>
+              <Text fontSize="lg" fontWeight="bold">
+                {company.notes[year] === null ? (
+                  <Tooltip label="Index non calculable" aria-label="Index non calculable">
+                    NC
+                  </Tooltip>
+                ) : (
+                  company.notes[year]
+                )}
+              </Text>
+              <Text fontSize="lg">{`Index ${year + 1}`}</Text>
+              <Text fontSize="xs">{`(données ${year})`}</Text>
+              <Text fontSize="xs" textDecoration="underline" colorScheme="blue">
+                Voir le détail
+              </Text>
+            </Box>
+          </Flex>
         ))}
       </Flex>
+      {yearSelected && (
+        <Flex marginTop="-1px" zIndex="10">
+          <Box w="30%" pr={4}></Box>
+
+          <Flex
+            px="2"
+            bgColor={highlightColor}
+            p={2}
+            textAlign="center"
+            borderTop="1px solid gray"
+            justify="center"
+            align="center"
+          >
+            <Box>
+              <Text fontSize="sm">Écart rémunérations</Text>
+              <Text fontSize="md" fontWeight="bold">
+                {company.notes_remunerations[yearSelected] ?? "NC"}
+              </Text>
+            </Box>
+          </Flex>
+          <Flex
+            borderLeft="1px solid gray"
+            px="2"
+            bgColor={highlightColor}
+            p={2}
+            textAlign="center"
+            borderTop="1px solid gray"
+            justify="center"
+            align="center"
+          >
+            <Box>
+              <Text fontSize="sm">Écart taux d'augmentation</Text>
+              <Text fontSize="md" fontWeight="bold">
+                {company.notes_augmentations[yearSelected] ?? "NC"}
+              </Text>
+            </Box>
+          </Flex>
+          <Flex
+            borderLeft="1px solid gray"
+            px="2"
+            bgColor={highlightColor}
+            p={2}
+            textAlign="center"
+            borderTop="1px solid gray"
+            justify="center"
+            align="center"
+          >
+            <Box>
+              <Text fontSize="sm">Écart taux promotion</Text>
+              <Text fontSize="md" fontWeight="bold">
+                {company.notes_promotions[yearSelected] ?? "NC"}
+              </Text>
+            </Box>
+          </Flex>
+          <Flex
+            borderLeft="1px solid gray"
+            px="2"
+            bgColor={highlightColor}
+            p={2}
+            textAlign="center"
+            borderTop="1px solid gray"
+            justify="center"
+            align="center"
+          >
+            <Box>
+              <Text fontSize="sm">Retour congé maternité</Text>
+              <Text fontSize="md" fontWeight="bold">
+                {company.notes_conges_maternite[yearSelected] ?? "NC"}
+              </Text>
+            </Box>
+          </Flex>
+          <Flex
+            borderLeft="1px solid gray"
+            px="2"
+            bgColor={highlightColor}
+            p={2}
+            textAlign="center"
+            borderTop="1px solid gray"
+            justify="center"
+            align="center"
+          >
+            <Box>
+              <Text fontSize="sm">Hautes rémunérations</Text>
+              <Text fontSize="md" fontWeight="bold">
+                {company.notes_hautes_rémunérations[yearSelected] ?? "NC"}
+              </Text>
+            </Box>
+          </Flex>
+        </Flex>
+      )}
       {company.entreprise.ues && (
         <Box onClick={onToggle}>
           {isOpen ? <Icon as={ChevronDownIcon} /> : <Icon as={ChevronRightIcon} />}
