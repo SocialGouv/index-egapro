@@ -2,6 +2,7 @@ import useSWRImmutable from "swr/immutable"
 
 import type { FetcherReturnImmutable } from "@/utils/fetcher"
 import { fetcher } from "@/utils/fetcher"
+import React from "react"
 
 export type ConfigTypeApi = {
   YEARS: number[]
@@ -20,7 +21,7 @@ export type ConfigTypeFormatted = ConfigTypeApi & {
   SECTIONS_NAF_TRIES: [string, string][]
 }
 
-export function useConfig(): FetcherReturnImmutable & { data?: ConfigTypeFormatted } {
+export function useConfig(): FetcherReturnImmutable & { data: ConfigTypeFormatted | null } {
   const { data, error } = useSWRImmutable<ConfigTypeApi>("/config", fetcher)
 
   const isLoading = !data && !error
@@ -35,8 +36,15 @@ export function useConfig(): FetcherReturnImmutable & { data?: ConfigTypeFormatt
     SECTIONS_NAF_TRIES: !SECTIONS_NAF ? [] : Object.entries(SECTIONS_NAF).sort((a, b) => a[1].localeCompare(b[1])),
   }
 
+  // We want to ensure that the data is always the same object on every render, once there is a value.
+  const newData = React.useMemo(
+    () => (!data ? null : { ...data, ...addon }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data],
+  )
+
   return {
-    data: !data ? undefined : { ...data, ...addon },
+    data: newData,
     error,
     isLoading,
     isError,

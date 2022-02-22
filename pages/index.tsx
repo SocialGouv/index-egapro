@@ -27,7 +27,7 @@ import type { CompaniesType, CompanyType, SearchCompanyParams } from "@/models/u
 import { useSearch } from "@/models/useSearch"
 
 import { HiOutlineLocationMarker, HiOutlineOfficeBuilding } from "react-icons/hi"
-import { useConfig } from "@/models/useConfig"
+import { ConfigTypeFormatted, useConfig } from "@/models/useConfig"
 import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import { capitalize } from "@/utils/string"
 
@@ -187,15 +187,30 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
   )
 }
 
+function filterDepartments(config: ConfigTypeFormatted | null, region?: string) {
+  if (!config) return []
+
+  const { DEPARTEMENTS_TRIES, REGIONS_TO_DEPARTEMENTS } = config
+
+  return !region
+    ? DEPARTEMENTS_TRIES
+    : // eslint-disable-next-line no-unused-vars
+      DEPARTEMENTS_TRIES.filter(([key, _]) => REGIONS_TO_DEPARTEMENTS[region].includes(key))
+}
+
 export default function HomePage() {
   const [search, setSearch] = React.useState<SearchCompanyParams>({})
+  const [region, setRegion] = React.useState("")
+  const [departments, setDepartments] = React.useState<ReturnType<typeof filterDepartments>>([])
   const { companies, error, size, setSize } = useSearch(search)
   const formRef = React.useRef(null)
   const { data: config } = useConfig()
 
-  if (!config) return ""
+  React.useEffect(() => {
+    setDepartments(filterDepartments(config, region))
+  }, [region, config])
 
-  const { DEPARTEMENTS_TRIES, REGIONS_TRIES, SECTIONS_NAF_TRIES } = config
+  const { REGIONS_TRIES = [], SECTIONS_NAF_TRIES = [] } = config ?? {}
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
@@ -225,7 +240,7 @@ export default function HomePage() {
             <Text fontSize="sm" mx="3">
               Filtres
             </Text>
-            <Select placeholder="Région" size="sm" name="region">
+            <Select placeholder="Région" size="sm" name="region" onChange={(e) => setRegion(e.target.value)}>
               {REGIONS_TRIES.map(([key, value]) => (
                 <option key={key} value={key}>
                   {value}
@@ -233,7 +248,7 @@ export default function HomePage() {
               ))}
             </Select>
             <Select placeholder="Département" size="sm" name="departement">
-              {DEPARTEMENTS_TRIES.map(([key, value]) => (
+              {departments.map(([key, value]) => (
                 <option key={key} value={key}>
                   {value}
                 </option>
