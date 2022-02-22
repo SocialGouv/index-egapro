@@ -69,6 +69,7 @@ function Company({ company }: { company: CompanyType }) {
   const { isOpen, onToggle } = useDisclosure()
   const [yearSelected, setYearSelected] = React.useState<number>()
   const highlightColor = useColorModeValue("blue.100", "blue.800")
+  const linkColor = useColorModeValue("primary.600", "primary.100")
 
   const years = Object.keys(company.notes)
     .map((elt) => Number(elt))
@@ -150,7 +151,7 @@ function Company({ company }: { company: CompanyType }) {
               </Text>
               <Text fontSize="lg">{`Index ${year + 1}`}</Text>
               <Text fontSize="xs">{`(données ${year})`}</Text>
-              <Text fontSize="xs" textDecoration="underline" colorScheme="blue">
+              <Text fontSize="xs" textDecoration="underline" color={linkColor}>
                 Voir le détail
               </Text>
             </Box>
@@ -169,6 +170,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
+            w="14%"
           >
             <Box>
               <Text fontSize="sm">Écart rémunérations</Text>
@@ -186,6 +188,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
+            w="14%"
           >
             <Box>
               <Text fontSize="sm">Écart taux d'augmentation</Text>
@@ -203,6 +206,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
+            w="14%"
           >
             <Box>
               <Text fontSize="sm">Écart taux promotion</Text>
@@ -220,6 +224,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
+            w="14%"
           >
             <Box>
               <Text fontSize="sm">Retour congé maternité</Text>
@@ -237,6 +242,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
+            w="14%"
           >
             <Box>
               <Text fontSize="sm">Hautes rémunérations</Text>
