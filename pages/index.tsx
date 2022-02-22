@@ -78,7 +78,7 @@ function Company({ company }: { company: CompanyType }) {
         <Box as="header" w={"30%"} pr={4}>
           <Flex alignItems="flex-start" justifyContent="space-between">
             <Heading as="h2" size="md">
-              {company.label}
+              {company.entreprise.ues?.nom || company.label}
             </Heading>
             {company.entreprise.ues && (
               <Box ml={2}>
@@ -177,7 +177,8 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
     <>
       {!companies?.count ? null : (
         <Box my={4}>
-          {companies?.data?.length} sur {companies?.count} résultats
+          {companies?.data?.length} {companies?.count > 10 ? `sur ${companies?.count}` : ""} résultat
+          {companies?.count > 1 ? "s" : ""}
         </Box>
       )}
       {companies?.data?.map((company) => (
