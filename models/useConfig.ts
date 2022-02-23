@@ -21,6 +21,25 @@ export type ConfigTypeFormatted = ConfigTypeApi & {
   SECTIONS_NAF_TRIES: [string, string][]
 }
 
+type SelectItemsType = [string, string][]
+
+/**
+ * Return all departments found in config API endpoint, possibly filtered by region.
+ *
+ * @param config The config return by useConfig
+ * @param region The region id
+ */
+export function filterDepartements(config: ConfigTypeFormatted | null, region?: string): SelectItemsType {
+  if (!config) return []
+
+  const { DEPARTEMENTS_TRIES, REGIONS_TO_DEPARTEMENTS } = config
+
+  return !region
+    ? DEPARTEMENTS_TRIES
+    : // eslint-disable-next-line no-unused-vars
+      DEPARTEMENTS_TRIES.filter(([key, _]) => REGIONS_TO_DEPARTEMENTS[region].includes(key))
+}
+
 export function useConfig(): FetcherReturnImmutable & { data: ConfigTypeFormatted | null } {
   const { data, error } = useSWRImmutable<ConfigTypeApi>("/config", fetcher)
 
