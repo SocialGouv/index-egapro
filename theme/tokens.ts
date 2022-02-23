@@ -5,6 +5,7 @@ const tokens = {
     heading: "Cabin",
     body: "Cabin",
     gabriela: "Gabriela",
+    cabin: "Cabin",
   },
   breakpoints: createBreakpoints({
     sm: "30em",
