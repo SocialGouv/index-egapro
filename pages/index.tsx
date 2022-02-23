@@ -54,7 +54,13 @@ export default function HomePage() {
             Téléchargez le fichier recensant toutes les notes de l’Index pour les entreprises de plus de 250 salariés au
             23/2/2022 au format tableur (.csv) :
           </Text>
-          <ButtonAction label="Télécharger" leftIcon={<HiDownload />} variant="outline" mt={8} />
+          <ButtonAction
+            label="Télécharger"
+            leftIcon={<HiDownload />}
+            variant="outline"
+            mt={8}
+            onClick={() => router.push("index-egalite-fh.csv")}
+          />
         </Box>
       </Center>
     </VStack>
