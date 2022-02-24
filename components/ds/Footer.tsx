@@ -1,10 +1,11 @@
 import React from "react"
-import NextLink from "next/link"
-import { Box, Container, List, ListItem, Text, Link } from "@chakra-ui/react"
+// import NextLink from "next/link"
+import { Box, Container, List, ListItem, Text, Link, Flex } from "@chakra-ui/react"
 
 import Logo from "@/components/ds/Logo"
 import TextLink from "@/components/ds/TextLink"
 import packageConfig from "../../package.json"
+import { ExternalLinkIcon } from "@chakra-ui/icons"
 
 function Footer() {
   const version = process.env.REACT_APP_VERSION || packageConfig.version
@@ -55,10 +56,12 @@ function Footer() {
           >
             <ListItem>
               <Link href="https://travail-emploi.gouv.fr/IMG/xlsx/referents_egalite_professionnelle.xlsx" isExternal>
-                Télécharger la liste des référents Egapro (XLSX, 22 Ko)
+                <Flex justify="center" align="center">
+                  Télécharger la liste des référents Egapro (XLSX, 22 Ko) <ExternalLinkIcon ml={2} />
+                </Flex>
               </Link>
             </ListItem>
-            <ListItem>
+            {/* <ListItem>
               <NextLink href="/mentions-legales">
                 <Link>Mentions légales</Link>
               </NextLink>
@@ -77,7 +80,7 @@ function Footer() {
               <NextLink href="/politique-confidentialite">
                 <Link>Politique de confidentialité</Link>
               </NextLink>
-            </ListItem>
+            </ListItem> */}
           </List>
         </Box>
 
