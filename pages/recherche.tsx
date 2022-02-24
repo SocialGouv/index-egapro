@@ -59,7 +59,7 @@ const workforceLabels: Record<string, string[]> = {
 function UES() {
   return (
     <Tooltip label="Unité Économique et Sociale" aria-label="Unité Économique et Sociale">
-      <Tag size="md" key="md" variant="subtle" colorScheme="cyan">
+      <Tag size="md" key="md" variant="subtle" colorScheme="cyan" tabIndex={0}>
         <TagLeftIcon boxSize="18px" as={HiOutlineOfficeBuilding} />
         <TagLabel>UES</TagLabel>
       </Tag>
@@ -145,7 +145,7 @@ function Company({ company }: { company: CompanyType }) {
             <Box>
               <Text fontSize="lg" fontWeight="bold">
                 {company.notes[year] === null ? (
-                  <Tooltip label="Index non calculable" aria-label="Index non calculable">
+                  <Tooltip label="Index non calculable" aria-label="Index non calculable" tabIndex={-1}>
                     NC
                   </Tooltip>
                 ) : (
