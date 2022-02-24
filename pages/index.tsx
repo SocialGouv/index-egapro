@@ -69,7 +69,7 @@ export default function HomePage() {
             {getAverage()}
           </Text>
           <Text fontFamily="cabin" fontSize="2xl" fontWeight="bold" casing="capitalize">
-            Index moyen {config?.data?.CURRENT_YEAR}
+            Index moyen {config?.data?.CURRENT_PUBLIC_YEAR}
           </Text>
           <ButtonAction mt={8} label="Voir les entreprises" type="submit" onClick={() => router.push("/recherche")} />
         </Box>
