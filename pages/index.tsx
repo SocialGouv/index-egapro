@@ -7,6 +7,7 @@ import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
 import { LinkButton } from "@/components/ds/LinkButton"
 import { useStats } from "@/models/useStats"
+import { useConfig } from "@/models/useConfig"
 
 async function getDateCsv(): Promise<string> {
   try {
@@ -28,6 +29,8 @@ export default function HomePage() {
   const formRef = React.useRef(null)
   const bgColor = useColorModeValue("blue.100", "blue.800")
   const stats = useStats()
+  const config = useConfig()
+
   const [dateCsv, setDateCsv] = React.useState("")
 
   React.useEffect(() => {
@@ -66,7 +69,7 @@ export default function HomePage() {
             {getAverage()}
           </Text>
           <Text fontFamily="cabin" fontSize="2xl" fontWeight="bold" casing="capitalize">
-            Index moyen 2021
+            Index moyen {config?.data?.CURRENT_YEAR}
           </Text>
           <ButtonAction mt={8} label="Voir les entreprises" type="submit" onClick={() => router.push("/recherche")} />
         </Box>

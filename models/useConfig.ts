@@ -6,6 +6,7 @@ import React from "react"
 
 export type ConfigTypeApi = {
   YEARS: number[]
+  CURRENT_YEAR: number
   EFFECTIFS: Record<string, string>
   DEPARTEMENTS: Record<string, string>
   REGIONS: Record<string, string>
