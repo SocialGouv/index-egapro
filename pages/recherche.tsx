@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react"
+import Head from "next/head"
 import { useRouter } from "next/router"
 import { ParsedUrlQuery } from "querystring"
 import {
@@ -389,6 +390,10 @@ export default function HomePage() {
 
   return (
     <>
+      <Head>
+        <title>Recherche - Index Egapro</title>
+      </Head>
+
       <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
         <Heading as="h1" size="md" mb="8">
           Rechercher l'index de l'égalité professionnelle d'une entreprise de plus de 250 salariés
@@ -401,12 +406,20 @@ export default function HomePage() {
             type="text"
             onChange={handleChange}
             value={getValue("query")}
+            aria-label="filtre sur le nom ou le SIREN de l'entreprise"
           />
           <HStack mt="2">
             <Text fontSize="sm" mx="3">
               Filtres
             </Text>
-            <Select placeholder="Région" size="sm" name="region" onChange={handleChange} value={getValue("region")}>
+            <Select
+              placeholder="Région"
+              size="sm"
+              name="region"
+              onChange={handleChange}
+              value={getValue("region")}
+              aria-label="filtre sur la région"
+            >
               {REGIONS_TRIES.map(([key, value]) => (
                 <option key={key} value={key}>
                   {value}
@@ -419,6 +432,7 @@ export default function HomePage() {
               name="departement"
               onChange={handleChange}
               value={getValue("departement")}
+              aria-label="filtre sur le département"
             >
               {departements.map(([key, value]) => (
                 <option key={key} value={key}>
@@ -432,6 +446,7 @@ export default function HomePage() {
               name="naf"
               onChange={handleChange}
               value={getValue("naf")}
+              aria-label="filtre sur le secteur d'activité"
             >
               {SECTIONS_NAF_TRIES.map(([key, value]) => (
                 <option key={key} value={key}>

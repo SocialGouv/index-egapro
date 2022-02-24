@@ -63,7 +63,9 @@ function Header() {
             </Text>
           </Box>
           <Box ml="auto">
-            <Button onClick={toggleColorMode}>{colorMode === "light" ? <MoonIcon /> : <SunIcon />}</Button>
+            <Button aria-label="Changer le mode de couleur" onClick={toggleColorMode}>
+              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+            </Button>
           </Box>
         </Flex>
       </Container>

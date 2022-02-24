@@ -2,6 +2,7 @@ import React, { ReactElement } from "react"
 import { Box, Center, Heading, Input, Text, useColorModeValue, VStack } from "@chakra-ui/react"
 import { HiDownload } from "react-icons/hi"
 import { useRouter } from "next/router"
+import Head from "next/head"
 
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
@@ -53,6 +54,9 @@ export default function HomePage() {
 
   return (
     <VStack spacing={16}>
+      <Head>
+        <title>Index Egapro</title>
+      </Head>
       <form onSubmit={handleSubmit} style={{ textAlign: "center" }} ref={formRef} noValidate>
         <Heading as="h1" size="md" mb="8">
           Rechercher l'index de l'égalité professionnelle d'une entreprise de plus de 250 salariés
