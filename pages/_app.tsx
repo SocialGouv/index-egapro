@@ -5,6 +5,7 @@ import type { ReactElement, ReactNode } from "react"
 import type { NextPage } from "next"
 import type { AppProps } from "next/app"
 import { ChakraProvider } from "@chakra-ui/react"
+
 import theme from "../theme"
 
 type NextPageWithLayout = NextPage & {

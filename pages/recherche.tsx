@@ -27,6 +27,7 @@ import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import { HiOutlineLocationMarker, HiOutlineOfficeBuilding } from "react-icons/hi"
 
 import type { CompaniesType, CompanyType, SearchCompanyParams } from "@/models/useSearch"
+
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
 import { AlertSpinner } from "@/components/ds/AlertSpinner"

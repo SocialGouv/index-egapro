@@ -33,13 +33,7 @@ function Header() {
         <Container maxW="container.xl">
           <HStack as={List} spacing={4}>
             <ListItem>
-              <Link href="#menu">Aller au menu</Link>
-            </ListItem>
-            <ListItem>
               <Link href="#main">Aller au contenu</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="#search">Aller à l'aide</Link>
             </ListItem>
             <ListItem>
               <Link href="#footer">Aller au pied de page</Link>
