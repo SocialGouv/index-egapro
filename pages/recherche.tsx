@@ -26,9 +26,10 @@ import {
 import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import { HiOutlineLocationMarker, HiOutlineOfficeBuilding } from "react-icons/hi"
 
+import type { CompaniesType, CompanyType, SearchCompanyParams } from "@/models/useSearch"
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
-import type { CompaniesType, CompanyType, SearchCompanyParams } from "@/models/useSearch"
+import { AlertSpinner } from "@/components/ds/AlertSpinner"
 import { useSearch } from "@/models/useSearch"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
@@ -351,6 +352,7 @@ export default function HomePage() {
 
   // We destructure so we can benefit to have the same reference for all strings properties event if the inputs object change over time.
   const { query, region, departement, naf } = inputs
+  const { companies, isLoading, error, size, setSize } = useSearch(inputs)
 
   React.useEffect(() => {
     setSearch({ query, region, departement, naf })
@@ -358,8 +360,6 @@ export default function HomePage() {
     // we don't need config to run the useEffect.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, region, departement, naf])
-
-  const { companies, error, size, setSize } = useSearch(inputs)
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
@@ -439,9 +439,18 @@ export default function HomePage() {
             </Select>
           </HStack>
         </Box>
-        <ButtonAction mt={4} label="Rechercher" type="submit" />
-        <ButtonAction mt={4} label="Réinitialiser" variant="ghost" onClick={reset} ml="2" />
+        <ButtonAction mt={4} label="Rechercher" type="submit" disabled={isLoading} />
+        <ButtonAction
+          mt={4}
+          label="Réinitialiser"
+          variant="ghost"
+          onClick={reset}
+          ml="2"
+          disabled={isLoading || !Object.values(search).filter(Boolean).length}
+        />
       </form>
+
+      {isLoading && <AlertSpinner>Recherche en cours</AlertSpinner>}
 
       <DisplayCompanies companies={companies} error={error} />
 
