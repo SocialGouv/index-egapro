@@ -109,7 +109,7 @@ function Company({ company }: { company: CompanyType }) {
         <Flex
           as="section"
           textAlign="center"
-          w="20%"
+          w="15%"
           borderLeft="1px solid gray"
           pr={2}
           align="center"
@@ -127,9 +127,9 @@ function Company({ company }: { company: CompanyType }) {
         {years.map((year) => (
           <Flex
             key={year}
-            w="15%"
+            maxW="15%"
             as="section"
-            pr={2}
+            px={3}
             textAlign="center"
             borderLeft="1px solid gray"
             onClick={() => selectOrToggle(year)}
@@ -140,6 +140,7 @@ function Company({ company }: { company: CompanyType }) {
             zIndex="20"
             justify="center"
             align="center"
+            grow="1"
           >
             <Box>
               <Text fontSize="lg" fontWeight="bold">
@@ -172,7 +173,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
-            w="14%"
+            maxW="14%"
           >
             <Box>
               <Text fontSize="sm">Écart rémunérations</Text>
@@ -190,7 +191,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
-            w="14%"
+            maxW="14%"
           >
             <Box>
               <Text fontSize="sm">Écart taux d'augmentation</Text>
@@ -208,7 +209,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
-            w="14%"
+            maxW="14%"
           >
             <Box>
               <Text fontSize="sm">Écart taux promotion</Text>
@@ -226,7 +227,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
-            w="14%"
+            maxW="14%"
           >
             <Box>
               <Text fontSize="sm">Retour congé maternité</Text>
@@ -244,7 +245,7 @@ function Company({ company }: { company: CompanyType }) {
             borderTop="1px solid gray"
             justify="center"
             align="center"
-            w="14%"
+            maxW="14%"
           >
             <Box>
               <Text fontSize="sm">Hautes rémunérations</Text>
