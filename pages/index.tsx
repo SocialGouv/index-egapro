@@ -19,7 +19,7 @@ import Head from "next/head"
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
 import { LinkButton } from "@/components/ds/LinkButton"
-import { makeUrlSearchParam, StatsParams, useStats } from "@/models/useStats"
+import { StatsParams, useStats } from "@/models/useStats"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
 
@@ -36,6 +36,18 @@ async function getDateCsv(): Promise<string> {
     console.error("Error on fetch HEAD /index-egalite-fh.csv", error)
   }
   return ""
+}
+
+export function makeUrlSearchParam(params?: StatsParams) {
+  var searchParams = new URLSearchParams()
+
+  if (params) {
+    if (params.region) searchParams.set("region", params.region)
+    if (params.departement) searchParams.set("departement", params.departement)
+    if (params.naf) searchParams.set("section_naf", params.naf)
+  }
+
+  return searchParams.toString()
 }
 
 export default function HomePage() {
