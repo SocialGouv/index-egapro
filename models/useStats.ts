@@ -15,7 +15,7 @@ export type StatsParams = {
   year?: string
 }
 
-export function useStats(params?: StatsParams): FetcherReturn & { stats: StatsType | null } {
+export function makeUrlSearchParam(params?: StatsParams) {
   var searchParams = new URLSearchParams()
 
   if (params) {
@@ -25,6 +25,11 @@ export function useStats(params?: StatsParams): FetcherReturn & { stats: StatsTy
     if (params.naf) searchParams.set("section_naf", params.naf)
   }
 
+  return searchParams.toString()
+}
+
+export function useStats(params?: StatsParams): FetcherReturn & { stats: StatsType | null } {
+  const searchParams = makeUrlSearchParam(params)
   const key = "/stats?" + searchParams.toString()
 
   const { data, error, mutate } = useSWR(key, fetcher)

@@ -353,16 +353,12 @@ export default function HomePage() {
   const [departements, setDepartements] = React.useState<ReturnType<typeof filterDepartements>>([])
   const [search, setSearch] = React.useState<SearchCompanyParams>(inputs)
 
-  // We destructure so we can benefit to have the same reference for all strings properties event if the inputs object change over time.
-  const { query, region, departement, naf } = inputs
   const { companies, isLoading, error, size, setSize } = useSearch(inputs)
 
   React.useEffect(() => {
-    setSearch({ query, region, departement, naf })
-    setDepartements(filterDepartements(config, region))
-    // we don't need config to run the useEffect.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, region, departement, naf])
+    // inital load of departments.
+    setDepartements(filterDepartements(config))
+  }, [config]) // config change only at start.
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()

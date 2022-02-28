@@ -19,7 +19,7 @@ import Head from "next/head"
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
 import { LinkButton } from "@/components/ds/LinkButton"
-import { StatsParams, useStats } from "@/models/useStats"
+import { makeUrlSearchParam, StatsParams, useStats } from "@/models/useStats"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
 
@@ -50,9 +50,16 @@ export default function HomePage() {
   const [departements, setDepartements] = React.useState<ReturnType<typeof filterDepartements>>([])
   const { stats, isLoading } = useStats(filters)
 
+  const urlSearchParams = makeUrlSearchParam(filters)
+
   React.useEffect(() => {
     setFilters({ year: LAST_PUBLIC_YEAR })
   }, [LAST_PUBLIC_YEAR])
+
+  React.useEffect(() => {
+    // inital load of departments.
+    setDepartements(filterDepartements(config))
+  }, [config]) // config change only at start.
 
   React.useEffect(() => {
     async function runEffect() {
@@ -179,7 +186,12 @@ export default function HomePage() {
             </Select>
           </HStack>
 
-          <ButtonAction mt={8} label="Voir les entreprises" type="submit" onClick={() => router.push("/recherche")} />
+          <ButtonAction
+            mt={8}
+            label="Voir les entreprises"
+            type="submit"
+            onClick={() => router.push(`/recherche${urlSearchParams ? `?${urlSearchParams}` : ""}`)}
+          />
         </Box>
       </Center>
       {dateCsv && (
