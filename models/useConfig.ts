@@ -21,6 +21,7 @@ export type ConfigTypeFormatted = ConfigTypeApi & {
   REGIONS_TRIES: [string, string][]
   SECTIONS_NAF_TRIES: [string, string][]
   LAST_PUBLIC_YEAR: string
+  PUBLIC_YEARS_TRIES: number[]
 }
 
 type SelectItemsType = [string, string][]
@@ -42,7 +43,7 @@ export function filterDepartements(config: ConfigTypeFormatted | null, region?: 
       DEPARTEMENTS_TRIES.filter(([key, _]) => REGIONS_TO_DEPARTEMENTS[region].includes(key))
 }
 
-export function useConfig(): FetcherReturnImmutable & { data: ConfigTypeFormatted | null } {
+export function useConfig(): FetcherReturnImmutable & { config: ConfigTypeFormatted | null } {
   const { data, error } = useSWRImmutable<ConfigTypeApi>("/config", fetcher)
 
   const isLoading = !data && !error
@@ -56,6 +57,7 @@ export function useConfig(): FetcherReturnImmutable & { data: ConfigTypeFormatte
     REGIONS_TRIES: !REGIONS ? [] : Object.entries(REGIONS).sort((a, b) => a[1].localeCompare(b[1])),
     SECTIONS_NAF_TRIES: !SECTIONS_NAF ? [] : Object.entries(SECTIONS_NAF).sort((a, b) => a[1].localeCompare(b[1])),
     LAST_PUBLIC_YEAR: String(PUBLIC_YEARS?.sort()?.reverse()?.[0] || ""),
+    PUBLIC_YEARS_TRIES: PUBLIC_YEARS?.sort()?.reverse() || [],
   }
 
   // We want to ensure that the data is always the same object on every render, once there is a value.
@@ -66,7 +68,7 @@ export function useConfig(): FetcherReturnImmutable & { data: ConfigTypeFormatte
   )
 
   return {
-    data: newData,
+    config: newData,
     error,
     isLoading,
     isError,

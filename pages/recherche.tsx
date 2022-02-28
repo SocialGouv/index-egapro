@@ -37,11 +37,11 @@ import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
 
 function useAdressLabel({ departement, region }: { departement?: string; region?: string }) {
-  const { data } = useConfig()
+  const { config } = useConfig()
 
-  if (!data) return ""
+  if (!config) return ""
 
-  const { DEPARTEMENTS, REGIONS } = data
+  const { DEPARTEMENTS, REGIONS } = config
 
   let result = ""
   if (departement) {
@@ -345,7 +345,7 @@ function normalizeInputs(parsedUrlQuery: ParsedUrlQuery) {
 }
 
 export default function HomePage() {
-  const { data: config } = useConfig()
+  const { config } = useConfig()
   const { REGIONS_TRIES = [], SECTIONS_NAF_TRIES = [] } = config ?? {}
 
   const router = useRouter()
