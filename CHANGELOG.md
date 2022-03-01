@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/SocialGouv/egapro-next/compare/v1.5.1...v1.5.2) (2022-03-01)
+
+
+### Bug Fixes
+
+* Remove extra out folder ([3028cbf](https://github.com/SocialGouv/egapro-next/commit/3028cbfed626bad262d7495d7ce81579cf5fe7f5))
+
 ## [1.5.1](https://github.com/SocialGouv/egapro-next/compare/v1.5.0...v1.5.1) (2022-03-01)
 
 
