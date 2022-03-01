@@ -35,7 +35,7 @@ jobs:
       with:
         type: 'zip'
         filename: 'release.zip'
-        directory: 'out'
+        path: 'out'
         exclusions: '*.git* /*node_modules/* .editorconfig'
 
     - name: Upload Release
