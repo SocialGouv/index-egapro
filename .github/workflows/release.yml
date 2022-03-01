@@ -3,7 +3,7 @@ name: Release
 on:
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [master, alpha, beta, next]
 
 jobs:
   release:
@@ -11,36 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: SocialGouv/actions/autodevops-release@v1
+    - name: Checkout repository
+      uses: actions/checkout@v2
       with:
-        author-name: ${{ secrets.SOCIALGROOVYBOT_NAME }}
-        author-email: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
-        github-token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
-        
-    - name: Install Dependencies
-      run: |
-        yarn install --frozen-lockfile --force --non-interactive
-        
-    - name: Build app
-      run: yarn build
+        fetch-depth: 0
+        persist-credentials: false
+
+    - name: Semantic Release
+      uses: cycjimmy/semantic-release-action@v2
+      with:
+        semantic_version: 17
+        extra_plugins: |
+          @semantic-release/changelog@5.0.1
+          @semantic-release/git@9.0.0
       env:
-        CI: false
-        NEXT_PUBLIC_API_URL: "https://index-egapro.travail.gouv.fr/api"
-
-    - name: Export app
-      run: yarn export
-
-    - name: Archive Release
-      uses: thedoctor0/zip-release@master
-      with:
-        type: 'zip'
-        filename: 'release.zip'
-        path: 'out'
-        exclusions: '*.git* /*node_modules/* .editorconfig'
-
-    - name: Upload Release
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: "release.zip"
-        token: ${{ secrets.GITHUB_TOKEN }}
-
+        GITHUB_TOKEN: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
