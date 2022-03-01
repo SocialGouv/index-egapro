@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/SocialGouv/egapro-next/compare/v1.5.2...v1.5.3) (2022-03-01)
+
+
+### Bug Fixes
+
+* Replace path by directory ([9454bbd](https://github.com/SocialGouv/egapro-next/commit/9454bbdd8b6ffac5900b253fefcd40a2abd1cdea))
+
 ## [1.5.2](https://github.com/SocialGouv/egapro-next/compare/v1.5.1...v1.5.2) (2022-03-01)
 
 
