@@ -7,10 +7,10 @@ export function makeUrlSearchParam(params: Record<string, string | string[]> = {
   for (const [key, value] of entries) {
     if (Array.isArray(value)) {
       for (const element of value) {
-        searchParams.append(key, element)
+        if (value) searchParams.append(key, element)
       }
     } else {
-      searchParams.set(key, value)
+      if (value) searchParams.set(key, value)
     }
   }
 
