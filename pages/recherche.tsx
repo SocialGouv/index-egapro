@@ -35,13 +35,14 @@ import { AlertSpinner } from "@/components/ds/AlertSpinner"
 import { useSearch } from "@/models/useSearch"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
+import { useCallbackOnMount } from "@/utils/hooks"
 
 function useAdressLabel({ departement, region }: { departement?: string; region?: string }) {
-  const { data } = useConfig()
+  const { config } = useConfig()
 
-  if (!data) return ""
+  if (!config) return ""
 
-  const { DEPARTEMENTS, REGIONS } = data
+  const { DEPARTEMENTS, REGIONS } = config
 
   let result = ""
   if (departement) {
@@ -344,8 +345,8 @@ function normalizeInputs(parsedUrlQuery: ParsedUrlQuery) {
   }
 }
 
-export default function HomePage() {
-  const { data: config } = useConfig()
+export default function SearchPage() {
+  const { config } = useConfig()
   const { REGIONS_TRIES = [], SECTIONS_NAF_TRIES = [] } = config ?? {}
 
   const router = useRouter()
@@ -353,25 +354,32 @@ export default function HomePage() {
   const [departements, setDepartements] = React.useState<ReturnType<typeof filterDepartements>>([])
   const [search, setSearch] = React.useState<SearchCompanyParams>(inputs)
 
-  // We destructure so we can benefit to have the same reference for all strings properties event if the inputs object change over time.
-  const { query, region, departement, naf } = inputs
   const { companies, isLoading, error, size, setSize } = useSearch(inputs)
 
+  const { query, region, departement, naf } = inputs
+
+  const reset = useCallbackOnMount(() => {
+    setDepartements(filterDepartements(config))
+    setSearch({})
+  })
+
   React.useEffect(() => {
+    // inital load of departments.
+    reset()
+  }, [config, reset]) // config change only at start.
+
+  React.useEffect(() => {
+    if (region) {
+      setDepartements(filterDepartements(config, region))
+    }
+
     setSearch({ query, region, departement, naf })
-    setDepartements(filterDepartements(config, region))
-    // we don't need config to run the useEffect.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, region, departement, naf])
+  }, [query, region, departement, naf, config])
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
 
     router.replace({ pathname: "/recherche", query: search })
-  }
-
-  function reset() {
-    setSearch({})
   }
 
   function handleChange(event: React.SyntheticEvent) {
@@ -480,6 +488,6 @@ export default function HomePage() {
   )
 }
 
-HomePage.getLayout = function getLayout(page: ReactElement) {
+SearchPage.getLayout = function getLayout(page: ReactElement) {
   return <SinglePageLayout>{page}</SinglePageLayout>
 }

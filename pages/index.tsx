@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react"
-import { Box, Center, Heading, Input, Text, useColorModeValue, VStack } from "@chakra-ui/react"
+import { Box, Center, Heading, Input, Text, VStack } from "@chakra-ui/react"
 import { HiDownload } from "react-icons/hi"
 import { useRouter } from "next/router"
 import Head from "next/head"
@@ -7,8 +7,7 @@ import Head from "next/head"
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
 import { LinkButton } from "@/components/ds/LinkButton"
-import { useStats } from "@/models/useStats"
-import { useConfig } from "@/models/useConfig"
+import { AverageIndicator } from "@/components/AverageIndicator"
 
 async function getDateCsv(): Promise<string> {
   try {
@@ -25,23 +24,9 @@ async function getDateCsv(): Promise<string> {
   return ""
 }
 
-export default function HomePage() {
+function FormSearchSiren() {
   const router = useRouter()
   const formRef = React.useRef(null)
-  const bgColor = useColorModeValue("blue.100", "blue.800")
-  const stats = useStats()
-  const config = useConfig()
-
-  const [dateCsv, setDateCsv] = React.useState("")
-
-  React.useEffect(() => {
-    async function runEffect() {
-      setDateCsv(await getDateCsv())
-    }
-    runEffect()
-  }, [])
-
-  const getAverage = () => (!stats ? "" : stats.data?.avg?.toFixed(0))
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
@@ -53,31 +38,30 @@ export default function HomePage() {
   }
 
   return (
-    <VStack spacing={16}>
-      <Head>
-        <title>Index Egapro</title>
-      </Head>
-      <form onSubmit={handleSubmit} style={{ textAlign: "center" }} ref={formRef} noValidate>
-        <Heading as="h1" size="md" mb="8">
-          Rechercher l'index de l'égalité professionnelle d'une entreprise de plus de 250 salariés
-        </Heading>
-        <Box mt={4} maxW="container.md" mx="auto">
-          <Input placeholder="Saisissez le nom ou le SIREN d'une entreprise" size="md" name="query" type="text" />
-        </Box>
-        <ButtonAction mt={4} label="Rechercher" type="submit" />
-      </form>
+    <form onSubmit={handleSubmit} style={{ textAlign: "center" }} ref={formRef} noValidate>
+      <Heading as="h1" size="md" mb="8" mt={["0", "16"]}>
+        Rechercher l'index de l'égalité professionnelle d'une entreprise de plus de 250 salariés
+      </Heading>
+      <Box mt={4} maxW="container.md" mx="auto">
+        <Input placeholder="Saisissez le nom ou le SIREN d'une entreprise" size="lg" name="query" type="text" />
+      </Box>
+      <ButtonAction mt={8} label="Rechercher" type="submit" />
+    </form>
+  )
+}
 
-      <Center bgColor={bgColor} w="100vw" py={16}>
-        <Box textAlign="center">
-          <Text fontFamily="cabin" fontSize="6xl">
-            {getAverage()}
-          </Text>
-          <Text fontFamily="cabin" fontSize="2xl" fontWeight="bold" casing="capitalize">
-            Index moyen {config?.data?.LAST_PUBLIC_YEAR}
-          </Text>
-          <ButtonAction mt={8} label="Voir les entreprises" type="submit" onClick={() => router.push("/recherche")} />
-        </Box>
-      </Center>
+function DownloadCsvFileZone() {
+  const [dateCsv, setDateCsv] = React.useState("")
+
+  React.useEffect(() => {
+    async function runEffect() {
+      setDateCsv(await getDateCsv())
+    }
+    runEffect()
+  }, [])
+
+  return (
+    <>
       {dateCsv && (
         <Center>
           <Box textAlign="center" py={8}>
@@ -93,6 +77,22 @@ export default function HomePage() {
           </Box>
         </Center>
       )}
+    </>
+  )
+}
+
+export default function HomePage() {
+  return (
+    <VStack spacing={8}>
+      <Head>
+        <title>Index Egapro</title>
+      </Head>
+
+      <FormSearchSiren />
+
+      <AverageIndicator />
+
+      <DownloadCsvFileZone />
     </VStack>
   )
 }

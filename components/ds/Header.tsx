@@ -4,6 +4,7 @@ import { Box, Container, Link, Flex, Text, ListItem, List, HStack, Button, useCo
 
 import Logo from "@/components/ds/Logo"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
+import { isOpenFeature } from "@/utils/feature"
 
 function Header() {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -62,11 +63,13 @@ function Header() {
               L'outil de calcul et de déclaration de votre index égalité professionnelle Femmes-Hommes
             </Text>
           </Box>
-          <Box ml="auto">
-            <Button aria-label="Changer le mode de couleur" onClick={toggleColorMode}>
-              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-            </Button>
-          </Box>
+          {isOpenFeature(process.env.NEXT_PUBLIC_FEATURE_DARK_MODE) && (
+            <Box ml="auto">
+              <Button aria-label="Changer le mode de couleur" onClick={toggleColorMode}>
+                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+              </Button>
+            </Box>
+          )}
         </Flex>
       </Container>
     </Box>

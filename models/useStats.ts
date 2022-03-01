@@ -1,4 +1,5 @@
 import { fetcher, FetcherReturn } from "@/utils/fetcher"
+import { makeUrlSearchParam } from "@/utils/url"
 import useSWR from "swr"
 
 type StatsType = {
@@ -8,14 +9,24 @@ type StatsType = {
   min: number
 }
 
-export function useStats(): FetcherReturn & { data: StatsType | null } {
-  const { data, error, mutate } = useSWR("/stats", fetcher)
+export type StatsParams = {
+  region?: string
+  departement?: string
+  naf?: string
+  year?: string
+}
+
+export function useStats(params?: StatsParams): FetcherReturn & { stats: StatsType | null } {
+  const searchParams = makeUrlSearchParam(params)
+  const key = "/stats?" + searchParams.toString()
+
+  const { data, error, mutate } = useSWR(key, fetcher)
 
   const isLoading = !data && !error
   const isError = Boolean(error)
 
   return {
-    data,
+    stats: data,
     error,
     isLoading,
     isError,
