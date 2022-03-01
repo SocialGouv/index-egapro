@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/SocialGouv/egapro-next/compare/v1.5.3...v1.5.4) (2022-03-01)
+
+
+### Bug Fixes
+
+* upload release ([3aa475e](https://github.com/SocialGouv/egapro-next/commit/3aa475eafd530b9dd349dbc6dcf94849ecc2793b))
+
 ## [1.5.3](https://github.com/SocialGouv/egapro-next/compare/v1.5.2...v1.5.3) (2022-03-01)
 
 
