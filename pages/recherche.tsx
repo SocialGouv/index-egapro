@@ -35,6 +35,7 @@ import { AlertSpinner } from "@/components/ds/AlertSpinner"
 import { useSearch } from "@/models/useSearch"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
+import { useCallbackOnMount } from "@/utils/hooks"
 
 function useAdressLabel({ departement, region }: { departement?: string; region?: string }) {
   const { config } = useConfig()
@@ -344,7 +345,7 @@ function normalizeInputs(parsedUrlQuery: ParsedUrlQuery) {
   }
 }
 
-export default function HomePage() {
+export default function SearchPage() {
   const { config } = useConfig()
   const { REGIONS_TRIES = [], SECTIONS_NAF_TRIES = [] } = config ?? {}
 
@@ -355,19 +356,30 @@ export default function HomePage() {
 
   const { companies, isLoading, error, size, setSize } = useSearch(inputs)
 
+  const { query, region, departement, naf } = inputs
+
+  const reset = useCallbackOnMount(() => {
+    setDepartements(filterDepartements(config))
+    setSearch({})
+  })
+
   React.useEffect(() => {
     // inital load of departments.
-    setDepartements(filterDepartements(config))
-  }, [config]) // config change only at start.
+    reset()
+  }, [config, reset]) // config change only at start.
+
+  React.useEffect(() => {
+    if (region) {
+      setDepartements(filterDepartements(config, region))
+    }
+
+    setSearch({ query, region, departement, naf })
+  }, [query, region, departement, naf, config])
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
 
     router.replace({ pathname: "/recherche", query: search })
-  }
-
-  function reset() {
-    setSearch({})
   }
 
   function handleChange(event: React.SyntheticEvent) {
@@ -476,6 +488,6 @@ export default function HomePage() {
   )
 }
 
-HomePage.getLayout = function getLayout(page: ReactElement) {
+SearchPage.getLayout = function getLayout(page: ReactElement) {
   return <SinglePageLayout>{page}</SinglePageLayout>
 }

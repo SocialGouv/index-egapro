@@ -1,4 +1,5 @@
 import { fetcher, FetcherReturn } from "@/utils/fetcher"
+import { makeUrlSearchParam } from "@/utils/url"
 import useSWR from "swr"
 
 type StatsType = {
@@ -13,19 +14,6 @@ export type StatsParams = {
   departement?: string
   naf?: string
   year?: string
-}
-
-export function makeUrlSearchParam(params?: StatsParams) {
-  var searchParams = new URLSearchParams()
-
-  if (params) {
-    if (params.year) searchParams.set("year", params.year)
-    if (params.region) searchParams.set("region", params.region)
-    if (params.departement) searchParams.set("departement", params.departement)
-    if (params.naf) searchParams.set("section_naf", params.naf)
-  }
-
-  return searchParams.toString()
 }
 
 export function useStats(params?: StatsParams): FetcherReturn & { stats: StatsType | null } {
