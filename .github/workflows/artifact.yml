@@ -1,0 +1,44 @@
+on: 
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      
+name: Create an artifact
+
+jobs:
+  build:
+    name: Create an artifact from tag
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      - name: Checkout commit
+        uses: actions/checkout@v2
+    
+      - name: Install Dependencies
+        run: |
+          yarn install --frozen-lockfile --force --non-interactive
+
+      - name: Build app
+        run: yarn build
+        env:
+          CI: false
+          NEXT_PUBLIC_API_URL: "https://index-egapro.travail.gouv.fr/api"
+
+      - name: Export app
+        run: yarn export
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: 'release.zip'
+          path: 'out'
+          exclusions: '*.git* /*node_modules/* .editorconfig'
+
+      - name: Upload Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "release.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
