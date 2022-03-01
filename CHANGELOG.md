@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/SocialGouv/egapro-next/compare/v1.4.0...v1.5.0) (2022-03-01)
+
+
+### Features
+
+* new GH action for making zip artifact ([758e2ea](https://github.com/SocialGouv/egapro-next/commit/758e2ea69e90b82c9f925913d11a793d104174ab))
+
 # [1.4.0](https://github.com/SocialGouv/egapro-next/compare/v1.3.0...v1.4.0) (2022-03-01)
 
 
