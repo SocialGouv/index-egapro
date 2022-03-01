@@ -3,7 +3,7 @@ name: Release
 on:
   workflow_dispatch:
   push:
-    branches: [master, alpha, beta, next]
+    branches: [master]
 
 jobs:
   release:
@@ -16,3 +16,31 @@ jobs:
         author-name: ${{ secrets.SOCIALGROOVYBOT_NAME }}
         author-email: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
         github-token: ${{ secrets.SOCIALGROOVYBOT_BOTO_PAT }}
+        
+    - name: Install Dependencies
+      run: |
+        yarn install --frozen-lockfile --force --non-interactive
+        
+    - name: Build app
+      run: yarn build
+      env:
+        CI: false
+        NEXT_PUBLIC_API_URL: "https://index-egapro.travail.gouv.fr/api"
+
+    - name: Export app
+      run: yarn export
+
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
+      with:
+        type: 'zip'
+        filename: 'release.zip'
+        directory: 'out'
+        exclusions: '*.git* /*node_modules/* .editorconfig'
+
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "release.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
+
