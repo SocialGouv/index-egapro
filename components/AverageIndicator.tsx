@@ -76,13 +76,9 @@ export function AverageIndicator() {
       <Box textAlign="center">
         <Text fontFamily="cabin" fontSize="6xl" height="90px">
           {isLoading ? (
-            <Spinner />
+            <Spinner as="span" />
           ) : (
-            getAverage() || (
-              <Tooltip label="Il n'y pas assez de données pour les critères demandés">
-                <Text>NC</Text>
-              </Tooltip>
-            )
+            getAverage() || <Tooltip label="Il n'y pas assez de données pour les critères demandés">NC</Tooltip>
           )}
         </Text>
         <Text fontFamily="cabin" fontSize="2xl" fontWeight="bold" casing="capitalize">
