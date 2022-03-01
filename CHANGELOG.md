@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/SocialGouv/egapro-next/compare/v1.3.0...v1.4.0) (2022-03-01)
+
+
+### Features
+
+* update GH action release ([c6b3b40](https://github.com/SocialGouv/egapro-next/commit/c6b3b404a891a603f9b6d66aec20f14c87acf7a0))
+
 # [1.3.0](https://github.com/SocialGouv/egapro-next/compare/v1.2.0...v1.3.0) (2022-03-01)
 
 
