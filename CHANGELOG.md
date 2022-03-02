@@ -1,3 +1,12 @@
+# [1.6.0](https://github.com/SocialGouv/egapro-next/compare/v1.5.4...v1.6.0) (2022-03-02)
+
+
+### Features
+
+* add a banner for list ([38429a7](https://github.com/SocialGouv/egapro-next/commit/38429a7b51f10e709b475743d07da172e3e3f5ef))
+* UI improvements ([e946f7f](https://github.com/SocialGouv/egapro-next/commit/e946f7f36ec23d14c7eb8f60db07c3da9f81a7c1))
+* wording ([e737edc](https://github.com/SocialGouv/egapro-next/commit/e737edcb5387d1d6d581a5fb910aa27a4c0afe99))
+
 ## [1.5.4](https://github.com/SocialGouv/egapro-next/compare/v1.5.3...v1.5.4) (2022-03-01)
 
 
