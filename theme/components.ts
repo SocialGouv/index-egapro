@@ -1,5 +1,4 @@
 import { StyleFunctionProps } from "@chakra-ui/theme-tools"
-import defaultTheme from "@chakra-ui/theme"
 
 const components = {
   components: {

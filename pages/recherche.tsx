@@ -36,6 +36,7 @@ import { useSearch } from "@/models/useSearch"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
 import { useCallbackOnMount } from "@/utils/hooks"
+import { Banner } from "@/components/ds/Banner"
 
 function useAdressLabel({ departement, region }: { departement?: string; region?: string }) {
   const { config } = useConfig()
@@ -478,6 +479,8 @@ export default function SearchPage() {
       </form>
 
       {isLoading && <AlertSpinner>Recherche en cours</AlertSpinner>}
+
+      {companies?.data?.length ? <Banner /> : null}
 
       <DisplayCompanies companies={companies} error={error} />
 
