@@ -78,7 +78,9 @@ export function AverageIndicator() {
           {isLoading ? (
             <Spinner as="span" />
           ) : (
-            getAverage() || <Tooltip label="Il n'y pas assez de données pour les critères demandés">NC</Tooltip>
+            getAverage() || (
+              <Tooltip label="Il n'y pas assez de données pour les critères demandés">Non applicable</Tooltip>
+            )
           )}
         </Text>
         <Text fontFamily="cabin" fontSize="2xl" fontWeight="bold" casing="capitalize">
@@ -87,7 +89,7 @@ export function AverageIndicator() {
         <Container maxW="container.md">
           <Stack direction={["column", "row"]} mt={8}>
             <FilterSelect
-              placeholder="Année"
+              placeholder="Année de déclaration"
               name="year"
               onChange={handleChange}
               value={getValue("year")}

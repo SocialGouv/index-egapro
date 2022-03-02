@@ -179,7 +179,9 @@ function Company({ company }: { company: CompanyType }) {
             maxW="14%"
           >
             <Box>
-              <Text fontSize="sm">Écart rémunérations</Text>
+              <Text fontSize="sm">
+                Écart <br /> rémunérations
+              </Text>
               <Text fontSize="md" fontWeight="bold">
                 {company.notes_remunerations[yearSelected] ?? "NC"}
               </Text>
