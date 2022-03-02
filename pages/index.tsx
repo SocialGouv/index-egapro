@@ -1,8 +1,9 @@
 import React, { ReactElement } from "react"
-import { Box, Center, Heading, Input, Text, VStack } from "@chakra-ui/react"
+import { Box, Center, Flex, Heading, Input, Text, useColorModeValue, VStack } from "@chakra-ui/react"
 import { HiDownload } from "react-icons/hi"
 import { useRouter } from "next/router"
 import Head from "next/head"
+import { format } from "date-fns"
 
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
@@ -16,7 +17,7 @@ async function getDateCsv(): Promise<string> {
 
     if (date) {
       const lastModified = new Date(date)
-      return `${lastModified.getDate()}/${lastModified.getMonth() + 1}/${lastModified.getFullYear()}`
+      return format(lastModified, "dd/MM/yyyy")
     }
   } catch (error) {
     console.error("Error on fetch HEAD /index-egalite-fh.csv", error)
@@ -27,6 +28,7 @@ async function getDateCsv(): Promise<string> {
 function FormSearchSiren() {
   const router = useRouter()
   const formRef = React.useRef(null)
+  const bgSelect = useColorModeValue("white", "blue.700")
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
@@ -39,13 +41,20 @@ function FormSearchSiren() {
 
   return (
     <form onSubmit={handleSubmit} style={{ textAlign: "center" }} ref={formRef} noValidate>
-      <Heading as="h1" size="md" mb="8" mt={["0", "16"]}>
-        Rechercher l'index de l'égalité professionnelle d'une entreprise de plus de 250 salariés
+      <Heading as="h1" size="md" mb={["8", "12"]} mt={["0", "4"]}>
+        Rechercher l'index de l'égalité professionnelle d'une entreprise
       </Heading>
-      <Box mt={4} maxW="container.md" mx="auto">
-        <Input placeholder="Saisissez le nom ou le SIREN d'une entreprise" size="lg" name="query" type="text" />
-      </Box>
-      <ButtonAction mt={8} label="Rechercher" type="submit" />
+      <Flex maxW="container.md" justify="center" align="center" margin="auto" mx={["4", "0"]}>
+        <Input
+          placeholder="Saisissez le nom ou le SIREN d'une entreprise"
+          size="lg"
+          name="query"
+          type="text"
+          bgColor={bgSelect}
+          mr="4"
+        />
+        <ButtonAction label="Rechercher" type="submit" />
+      </Flex>
     </form>
   )
 }
@@ -63,18 +72,15 @@ function DownloadCsvFileZone() {
   return (
     <>
       {dateCsv && (
-        <Center>
-          <Box textAlign="center" py={8}>
-            <Text fontSize="lg">Vous souhaitez consulter les données de toutes les entreprises ?</Text>
-            <Text fontSize="lg">
-              Téléchargez le fichier recensant toutes les notes de l’Index pour les entreprises de plus de 250 salariés
-              au {dateCsv} au format tableur (.csv) :
+        <Center w="100vw" paddingTop="0" paddingBottom="12">
+          <Flex justify="center" align="center" mx={["4", "0"]} direction={["column", "row"]}>
+            <Text fontSize={["md", "lg"]} mr={["0", "6"]} mb={["4", "0"]} textAlign="center">
+              Télécharger le fichier des entreprises au {dateCsv}
             </Text>
-
-            <LinkButton leftIcon={<HiDownload />} href="/index-egalite-fh.csv">
-              Télécharger
+            <LinkButton leftIcon={<HiDownload />} href="/index-egalite-fh.csv" isExternal>
+              <Text fontSize={["md", "lg"]}>Télécharger (CSV)</Text>
             </LinkButton>
-          </Box>
+          </Flex>
         </Center>
       )}
     </>
@@ -83,16 +89,17 @@ function DownloadCsvFileZone() {
 
 export default function HomePage() {
   return (
-    <VStack spacing={8}>
+    <VStack spacing={["6"]}>
       <Head>
         <title>Index Egapro</title>
       </Head>
 
       <FormSearchSiren />
-
-      <AverageIndicator />
+      <Box h="8" />
 
       <DownloadCsvFileZone />
+
+      <AverageIndicator />
     </VStack>
   )
 }

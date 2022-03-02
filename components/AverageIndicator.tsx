@@ -13,10 +13,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 
+import ButtonAction from "@/components/ds/ButtonAction"
 import { StatsParams, useStats } from "@/models/useStats"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
-import ButtonAction from "./ds/ButtonAction"
 import { makeUrlSearchParam } from "@/utils/url"
 
 export function FilterSelect({ name, onChange, value, children, ...rest }: SelectProps) {
@@ -72,7 +72,7 @@ export function AverageIndicator() {
   const getValue = (name: keyof StatsParams) => filters[name] || ""
 
   return (
-    <Center bgColor={bgColor} w="100vw" py={16}>
+    <Center bgColor={bgColor} w="100vw" py={8}>
       <Box textAlign="center">
         <Text fontFamily="cabin" fontSize="6xl" height="90px">
           {isLoading ? (

@@ -1,5 +1,5 @@
-import { Flex, LinkBox, LinkOverlay, Spacer } from "@chakra-ui/react"
 import React from "react"
+import { Flex, LinkBox, LinkOverlay, Spacer } from "@chakra-ui/react"
 
 type LinkButtonProps = {
   children: React.ReactNode
@@ -13,16 +13,14 @@ export function LinkButton({ children, href, isExternal = false, leftIcon = null
     <LinkBox>
       <LinkOverlay href={href} isExternal={isExternal}>
         <Flex
-          mr="2px"
           justify="center"
           align="center"
           border="1px solid"
           width="fit-content"
           px={3}
           py={2}
-          borderRadius="md"
+          borderRadius="lg"
           margin="auto"
-          mt={8}
           {...rest}
         >
           {leftIcon}
