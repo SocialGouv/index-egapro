@@ -406,8 +406,8 @@ export default function SearchPage() {
       </Head>
 
       <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
-        <Heading as="h1" size="md" mb="8">
-          Rechercher l'index de l'égalité professionnelle d'une entreprise de plus de 250 salariés
+        <Heading fontFamily="gabriela" as="h1" size="lg" mb="8">
+          Rechercher l'index de l'égalité professionnelle d'une entreprise
         </Heading>
         <Box mt={4} maxW="container.md" mx="auto">
           <Input

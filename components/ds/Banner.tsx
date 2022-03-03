@@ -49,7 +49,7 @@ export const Banner = () => {
           </Square>
         )}
         <Text fontWeight="medium" textColor="gray.800">
-          Les informations entreprise (ou de l'UES) ainsi que la tranche d'effectif, correspondent à la dernière
+          Les informations de l'entreprise ou de l'UES ainsi que la tranche d'effectifs, correspondent à la dernière
           déclaration.
         </Text>
       </HStack>

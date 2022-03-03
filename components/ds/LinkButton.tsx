@@ -3,12 +3,20 @@ import { Flex, LinkBox, LinkOverlay, Spacer } from "@chakra-ui/react"
 
 type LinkButtonProps = {
   children: React.ReactNode
+  color?: string
   href: string
   isExternal?: boolean
   leftIcon?: React.ReactNode
 }
 
-export function LinkButton({ children, href, isExternal = false, leftIcon = null, ...rest }: LinkButtonProps) {
+export function LinkButton({
+  children,
+  color = "primary.500",
+  href,
+  isExternal = false,
+  leftIcon = null,
+  ...rest
+}: LinkButtonProps) {
   return (
     <LinkBox>
       <LinkOverlay href={href} isExternal={isExternal}>
@@ -20,6 +28,7 @@ export function LinkButton({ children, href, isExternal = false, leftIcon = null
           px={3}
           py={2}
           borderRadius="lg"
+          borderColor={color}
           margin="auto"
           {...rest}
         >

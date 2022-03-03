@@ -7,12 +7,11 @@ import { format } from "date-fns"
 
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
-import { LinkButton } from "@/components/ds/LinkButton"
 import { AverageIndicator } from "@/components/AverageIndicator"
 
 async function getDateCsv(): Promise<string> {
   try {
-    const responseCsv = await fetch("/index-egalite-fh.csv", { method: "HEAD" })
+    const responseCsv = await fetch("/consulter-index/index-egalite-fh.csv", { method: "HEAD" })
     const date = responseCsv?.headers?.get("last-modified")
 
     if (date) {
@@ -41,7 +40,7 @@ function FormSearchSiren() {
 
   return (
     <form onSubmit={handleSubmit} style={{ textAlign: "center" }} ref={formRef} noValidate>
-      <Heading as="h1" size="md" mb={["8", "12"]} mt={["0", "4"]}>
+      <Heading as="h1" fontFamily="gabriela" size="lg" mb={["8", "12"]} mt={["0", "4"]}>
         Rechercher l'index de l'égalité professionnelle d'une entreprise
       </Heading>
       <Flex maxW="container.md" justify="center" align="center" margin="auto" mx={["4", "0"]}>
@@ -61,6 +60,7 @@ function FormSearchSiren() {
 
 function DownloadCsvFileZone() {
   const [dateCsv, setDateCsv] = React.useState("")
+  const router = useRouter()
 
   React.useEffect(() => {
     async function runEffect() {
@@ -77,9 +77,12 @@ function DownloadCsvFileZone() {
             <Text fontSize={["md", "lg"]} mr={["0", "6"]} mb={["4", "0"]} textAlign="center">
               Télécharger le fichier des entreprises au {dateCsv}
             </Text>
-            <LinkButton leftIcon={<HiDownload />} href="/index-egalite-fh.csv">
-              <Text fontSize={["md", "lg"]}>Télécharger (CSV)</Text>
-            </LinkButton>
+            <ButtonAction
+              variant="outline"
+              leftIcon={<HiDownload />}
+              label="Télécharger (CSV)"
+              onClick={() => router.push("/index-egalite-fh.csv")}
+            />
           </Flex>
         </Center>
       )}
