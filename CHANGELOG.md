@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/SocialGouv/egapro-next/compare/v1.7.0...v1.8.0) (2022-03-03)
+
+
+### Bug Fixes
+
+* naf misnamed in form ([1c03431](https://github.com/SocialGouv/egapro-next/commit/1c034315011c1d34bfb032e0dbb9bba40d336dd0))
+
+
+### Features
+
+* UI improvements ([7b085c2](https://github.com/SocialGouv/egapro-next/commit/7b085c2b7f8c8f677b51e7b07d10641862299b4a))
+
 # [1.7.0](https://github.com/SocialGouv/egapro-next/compare/v1.6.2...v1.7.0) (2022-03-03)
 
 
