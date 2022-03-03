@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/SocialGouv/egapro-next/compare/v1.6.2...v1.7.0) (2022-03-03)
+
+
+### Features
+
+* new gh action for ci ([cfb6c02](https://github.com/SocialGouv/egapro-next/commit/cfb6c02401093f5b76164d365932e04f23740a30))
+
 ## [1.6.2](https://github.com/SocialGouv/egapro-next/compare/v1.6.1...v1.6.2) (2022-03-03)
 
 
