@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/SocialGouv/egapro-next/compare/v1.8.0...v1.9.0) (2022-03-03)
+
+
+### Features
+
+* improve csv button ([dc7bb63](https://github.com/SocialGouv/egapro-next/commit/dc7bb637772ab14d1d3f9e7a473b194512970675))
+
 # [1.8.0](https://github.com/SocialGouv/egapro-next/compare/v1.7.0...v1.8.0) (2022-03-03)
 
 
