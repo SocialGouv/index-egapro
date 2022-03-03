@@ -30,7 +30,7 @@ export type CompaniesType = {
 }
 
 export type SearchCompanyParams = {
-  query?: string
+  q?: string
   region?: string
   departement?: string
   section_naf?: string

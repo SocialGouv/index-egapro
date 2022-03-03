@@ -338,10 +338,10 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
  * Inputs in URLSearchParams can be string or array of string. We need to have a consistent type as a string.
  */
 function normalizeInputs(parsedUrlQuery: ParsedUrlQuery) {
-  const { query, region, departement, section_naf } = parsedUrlQuery
+  const { q, region, departement, section_naf } = parsedUrlQuery
 
   return {
-    ...(query && { query: Array.isArray(query) ? query[0] : query }),
+    ...(q && { q: Array.isArray(q) ? q[0] : q }),
     ...(region && { region: Array.isArray(region) ? region[0] : region }),
     ...(departement && { departement: Array.isArray(departement) ? departement[0] : departement }),
     ...(section_naf && { section_naf: Array.isArray(section_naf) ? section_naf[0] : section_naf }),
@@ -359,7 +359,7 @@ export default function SearchPage() {
 
   const { companies, isLoading, error, size, setSize } = useSearch(inputs)
 
-  const { query, region, departement, section_naf } = inputs
+  const { q, region, departement, section_naf } = inputs
 
   const reset = useCallbackOnMount(() => {
     setDepartements(filterDepartements(config))
@@ -376,8 +376,8 @@ export default function SearchPage() {
       setDepartements(filterDepartements(config, region))
     }
 
-    setSearch({ query, region, departement, section_naf })
-  }, [query, region, departement, section_naf, config])
+    setSearch({ q, region, departement, section_naf })
+  }, [q, region, departement, section_naf, config])
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
@@ -413,10 +413,10 @@ export default function SearchPage() {
           <Input
             placeholder="Saisissez le nom ou le SIREN d'une entreprise"
             size="md"
-            name="query"
+            name="q"
             type="text"
             onChange={handleChange}
-            value={getValue("query")}
+            value={getValue("q")}
             aria-label="filtre sur le nom ou le SIREN de l'entreprise"
           />
           <HStack mt="2">

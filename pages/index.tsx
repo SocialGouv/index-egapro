@@ -44,9 +44,9 @@ function FormSearchSiren() {
     event.preventDefault()
     const data = new FormData(formRef.current || undefined)
 
-    const { query } = Object.fromEntries(data)
+    const { q } = Object.fromEntries(data)
 
-    router.push("/recherche" + (query ? `?query=${query}` : ""))
+    router.push("/recherche" + (q ? `?q=${q}` : ""))
   }
 
   return (
@@ -58,7 +58,7 @@ function FormSearchSiren() {
         <Input
           placeholder="Saisissez le nom ou le SIREN d'une entreprise"
           size="lg"
-          name="query"
+          name="q"
           type="text"
           bgColor={bgSelect}
           mr="4"
