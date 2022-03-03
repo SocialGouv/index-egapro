@@ -1,5 +1,16 @@
 import React, { ReactElement } from "react"
-import { Box, Center, Flex, Heading, Input, Text, useColorModeValue, VStack } from "@chakra-ui/react"
+import {
+  Box,
+  Center,
+  Flex,
+  Heading,
+  Input,
+  LinkBox,
+  LinkOverlay,
+  Text,
+  useColorModeValue,
+  VStack,
+} from "@chakra-ui/react"
 import { HiDownload } from "react-icons/hi"
 import { useRouter } from "next/router"
 import Head from "next/head"
@@ -11,7 +22,7 @@ import { AverageIndicator } from "@/components/AverageIndicator"
 
 async function getDateCsv(): Promise<string> {
   try {
-    const responseCsv = await fetch("/consulter-index/index-egalite-fh.csv", { method: "HEAD" })
+    const responseCsv = await fetch("/index-egalite-fh.csv", { method: "HEAD" })
     const date = responseCsv?.headers?.get("last-modified")
 
     if (date) {
@@ -60,7 +71,6 @@ function FormSearchSiren() {
 
 function DownloadCsvFileZone() {
   const [dateCsv, setDateCsv] = React.useState("")
-  const router = useRouter()
 
   React.useEffect(() => {
     async function runEffect() {
@@ -77,12 +87,12 @@ function DownloadCsvFileZone() {
             <Text fontSize={["md", "lg"]} mr={["0", "6"]} mb={["4", "0"]} textAlign="center">
               Télécharger le fichier des entreprises au {dateCsv}
             </Text>
-            <ButtonAction
-              variant="outline"
-              leftIcon={<HiDownload />}
-              label="Télécharger (CSV)"
-              onClick={() => router.push("/index-egalite-fh.csv")}
-            />
+
+            <LinkBox>
+              <LinkOverlay href="/index-egalite-fh.csv">
+                <ButtonAction variant="outline" leftIcon={<HiDownload />} label="Télécharger (CSV)" />
+              </LinkOverlay>
+            </LinkBox>
           </Flex>
         </Center>
       )}
