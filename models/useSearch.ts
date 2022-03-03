@@ -2,6 +2,7 @@ import useSWRInfinite, { SWRInfiniteKeyLoader } from "swr/infinite"
 
 import type { FetcherInfiniteReturn } from "@/utils/fetcher"
 import { fetcher } from "@/utils/fetcher"
+import { buildUrlParams } from "@/utils/url"
 
 export type CompanyType = {
   entreprise: {
@@ -32,19 +33,15 @@ export type SearchCompanyParams = {
   query?: string
   region?: string
   departement?: string
-  naf?: string
+  section_naf?: string
 }
 
 function getKey(search?: SearchCompanyParams) {
   return function (pageIndex: number): ReturnType<SWRInfiniteKeyLoader> {
     if (!search) return null
 
-    var searchParams = new URLSearchParams()
+    const searchParams = buildUrlParams(search)
 
-    if (search.query) searchParams.set("q", search.query)
-    if (search.region) searchParams.set("region", search.region)
-    if (search.departement) searchParams.set("departement", search.departement)
-    if (search.naf) searchParams.set("section_naf", search.naf)
     if (pageIndex > 0) searchParams.set("offset", String(pageIndex * 10))
 
     return "/search?" + searchParams.toString()

@@ -338,13 +338,13 @@ function DisplayCompanies({ companies, error }: { companies: CompaniesType; erro
  * Inputs in URLSearchParams can be string or array of string. We need to have a consistent type as a string.
  */
 function normalizeInputs(parsedUrlQuery: ParsedUrlQuery) {
-  const { query, region, departement, naf } = parsedUrlQuery
+  const { query, region, departement, section_naf } = parsedUrlQuery
 
   return {
     ...(query && { query: Array.isArray(query) ? query[0] : query }),
     ...(region && { region: Array.isArray(region) ? region[0] : region }),
     ...(departement && { departement: Array.isArray(departement) ? departement[0] : departement }),
-    ...(naf && { naf: Array.isArray(naf) ? naf[0] : naf }),
+    ...(section_naf && { section_naf: Array.isArray(section_naf) ? section_naf[0] : section_naf }),
   }
 }
 
@@ -359,7 +359,7 @@ export default function SearchPage() {
 
   const { companies, isLoading, error, size, setSize } = useSearch(inputs)
 
-  const { query, region, departement, naf } = inputs
+  const { query, region, departement, section_naf } = inputs
 
   const reset = useCallbackOnMount(() => {
     setDepartements(filterDepartements(config))
@@ -376,8 +376,8 @@ export default function SearchPage() {
       setDepartements(filterDepartements(config, region))
     }
 
-    setSearch({ query, region, departement, naf })
-  }, [query, region, departement, naf, config])
+    setSearch({ query, region, departement, section_naf })
+  }, [query, region, departement, section_naf, config])
 
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
@@ -454,9 +454,9 @@ export default function SearchPage() {
             <Select
               placeholder="Secteur d'activité"
               size="sm"
-              name="naf"
+              name="section_naf"
               onChange={handleChange}
-              value={getValue("naf")}
+              value={getValue("section_naf")}
               aria-label="filtre sur le secteur d'activité"
             >
               {SECTIONS_NAF_TRIES.map(([key, value]) => (

@@ -1,6 +1,7 @@
-import { fetcher, FetcherReturn } from "@/utils/fetcher"
-import { makeUrlSearchParam } from "@/utils/url"
 import useSWR from "swr"
+
+import { fetcher, FetcherReturn } from "@/utils/fetcher"
+import { buildUrlParamsString } from "@/utils/url"
 
 type StatsType = {
   avg: number
@@ -12,13 +13,13 @@ type StatsType = {
 export type StatsParams = {
   region?: string
   departement?: string
-  naf?: string
+  section_naf?: string
   year?: string
 }
 
 export function useStats(params?: StatsParams): FetcherReturn & { stats: StatsType | null } {
-  const searchParams = makeUrlSearchParam(params)
-  const key = "/stats?" + searchParams.toString()
+  const urlParams = buildUrlParamsString(params)
+  const key = "/stats?" + urlParams
 
   const { data, error, mutate } = useSWR(key, fetcher)
 

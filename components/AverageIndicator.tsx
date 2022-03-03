@@ -17,7 +17,8 @@ import ButtonAction from "@/components/ds/ButtonAction"
 import { StatsParams, useStats } from "@/models/useStats"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
-import { makeUrlSearchParam } from "@/utils/url"
+import { buildUrlParamsString } from "@/utils/url"
+import { InfoOutlineIcon } from "@chakra-ui/icons"
 
 export function FilterSelect({ name, onChange, value, children, ...rest }: SelectProps) {
   const borderSelect = useColorModeValue("cyan.200", "cyan.100")
@@ -44,7 +45,7 @@ export function AverageIndicator() {
   const { year, ...filtersWithoutYear } = filters
 
   // Need to destructure and restructure to avoid TS error. Don't know why...
-  const urlSearchParams = makeUrlSearchParam({ ...filtersWithoutYear })
+  const urlSearchParams = buildUrlParamsString({ ...filtersWithoutYear })
 
   React.useEffect(() => {
     setFilters({ year: LAST_PUBLIC_YEAR })
@@ -79,7 +80,12 @@ export function AverageIndicator() {
             <Spinner as="span" />
           ) : (
             getAverage() || (
-              <Tooltip label="Il n'y pas assez de données pour les critères demandés">Non applicable</Tooltip>
+              <Center>
+                N/A
+                <Tooltip label="Non applicable : il n'y pas assez de données pour les critères demandés">
+                  <InfoOutlineIcon h="5" />
+                </Tooltip>
+              </Center>
             )
           )}
         </Text>
@@ -129,9 +135,9 @@ export function AverageIndicator() {
             </FilterSelect>
             <FilterSelect
               placeholder="Secteur d'activité"
-              name="naf"
+              name="section_naf"
               onChange={handleChange}
-              value={getValue("naf")}
+              value={getValue("section_naf")}
               aria-label="filtre sur le secteur d'activité"
             >
               {SECTIONS_NAF_TRIES.map(([key, value]) => (

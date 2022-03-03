@@ -17,7 +17,6 @@ export const Banner = () => {
   const bgColor = useColorModeValue("yellow.100", "yellow.400")
 
   React.useEffect(() => {
-    console.log("dans useEffect")
     // First case : on mount, the variable in localStorage is undefined.
     if (localStorage.getItem("banner.dontShow") === null || localStorage.getItem("banner.dontShow") === "false")
       onOpen()
