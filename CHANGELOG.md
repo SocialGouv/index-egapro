@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/SocialGouv/egapro-next/compare/v1.6.0...v1.6.1) (2022-03-03)
+
+
+### Bug Fixes
+
+* footer wording ([89dd2a1](https://github.com/SocialGouv/egapro-next/commit/89dd2a143a336d33a66bdc1149efa0ab1fcd8998))
+
 # [1.6.0](https://github.com/SocialGouv/egapro-next/compare/v1.5.4...v1.6.0) (2022-03-02)
 
 
