@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/SocialGouv/egapro-next/compare/v1.6.1...v1.6.2) (2022-03-03)
+
+
+### Bug Fixes
+
+* no need of isExternal for csv file ([28b6f44](https://github.com/SocialGouv/egapro-next/commit/28b6f445a4c80f5c5ab5f0f789a22501077e6f26))
+
 ## [1.6.1](https://github.com/SocialGouv/egapro-next/compare/v1.6.0...v1.6.1) (2022-03-03)
 
 
