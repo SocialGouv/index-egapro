@@ -77,7 +77,7 @@ function DownloadCsvFileZone() {
             <Text fontSize={["md", "lg"]} mr={["0", "6"]} mb={["4", "0"]} textAlign="center">
               Télécharger le fichier des entreprises au {dateCsv}
             </Text>
-            <LinkButton leftIcon={<HiDownload />} href="/index-egalite-fh.csv" isExternal>
+            <LinkButton leftIcon={<HiDownload />} href="/index-egalite-fh.csv">
               <Text fontSize={["md", "lg"]}>Télécharger (CSV)</Text>
             </LinkButton>
           </Flex>
