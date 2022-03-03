@@ -104,7 +104,8 @@ function Footer() {
               isExternal
             >
               donnez-nous votre avis
-            </TextLink>{" "}
+            </TextLink>
+            {", "}
             <TextLink to={`https://github.com/SocialGouv/egapro/tree/${version}`} isExternal>
               contribuez sur Github
             </TextLink>
