@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/SocialGouv/egapro-next/compare/v1.9.0...v1.9.1) (2022-03-03)
+
+
+### Bug Fixes
+
+* query was misnamed ([8578d56](https://github.com/SocialGouv/egapro-next/commit/8578d5614d9eae59cb17b081eddf5fa942f92893))
+
 # [1.9.0](https://github.com/SocialGouv/egapro-next/compare/v1.8.0...v1.9.0) (2022-03-03)
 
 
