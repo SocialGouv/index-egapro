@@ -1,4 +1,4 @@
-[![Install, build & test](https://github.com/SocialGouv/egapro-next/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/SocialGouv/egapro-next/actions/workflows/build-and-test.yml)
+[![Continuous integration](https://github.com/SocialGouv/egapro-next/actions/workflows/continuous-integration.yml/badge.svg?branch=master)](https://github.com/SocialGouv/egapro-next/actions/workflows/continuous-integration.yml)
 
 # EgaPro
 
