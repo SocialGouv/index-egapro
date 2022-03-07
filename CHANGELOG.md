@@ -1,3 +1,11 @@
+# [1.11.0](https://github.com/SocialGouv/egapro-next/compare/v1.10.1...v1.11.0) (2022-03-07)
+
+
+### Features
+
+* add moize for useSearch caching ([3ee5bfb](https://github.com/SocialGouv/egapro-next/commit/3ee5bfb6dc2e81f17ca84ebb29e08adb6fc78593))
+* sessionStorage instead of localStorage ([dbdee54](https://github.com/SocialGouv/egapro-next/commit/dbdee54c0c6f9352d7eb831fe62350861116e0d9))
+
 ## [1.10.1](https://github.com/SocialGouv/egapro-next/compare/v1.10.0...v1.10.1) (2022-03-07)
 
 
