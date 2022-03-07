@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/SocialGouv/egapro-next/compare/v1.9.1...v1.10.0) (2022-03-07)
+
+
+### Features
+
+* improve UI ([af61853](https://github.com/SocialGouv/egapro-next/commit/af61853f6c452440d1f015295d5b2d9ac3e3da7c))
+
 ## [1.9.1](https://github.com/SocialGouv/egapro-next/compare/v1.9.0...v1.9.1) (2022-03-03)
 
 
