@@ -17,17 +17,17 @@ export const Banner = () => {
   const bgColor = useColorModeValue("yellow.100", "yellow.400")
 
   React.useEffect(() => {
-    // First case : on mount, the variable in localStorage is undefined.
-    if (localStorage.getItem("banner.dontShow") === null || localStorage.getItem("banner.dontShow") === "false")
+    // First case : on mount, the variable in sessionStorage is undefined.
+    if (sessionStorage.getItem("banner.dontShow") === null || sessionStorage.getItem("banner.dontShow") === "false")
       onOpen()
-    // Second case : the variable in localStorage exists and the user opted to don't show the banner.
-    if (localStorage.getItem("banner.dontShow") === "true") onClose()
+    // Second case : the variable in sessionStorage exists and the user opted to don't show the banner.
+    if (sessionStorage.getItem("banner.dontShow") === "true") onClose()
   }, [onClose, onOpen])
 
   if (!isOpen) return null
 
   function handleClose() {
-    localStorage.setItem("banner.dontShow", "true")
+    sessionStorage.setItem("banner.dontShow", "true")
     onClose()
   }
 
