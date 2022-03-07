@@ -54,17 +54,19 @@ function FormSearchSiren() {
       <Heading as="h1" fontFamily="gabriela" size="lg" mb={["8", "12"]} mt={["0", "4"]}>
         Rechercher l'index de l'égalité professionnelle d'une entreprise
       </Heading>
-      <Flex maxW="container.md" justify="center" align="center" margin="auto" mx={["4", "0"]}>
-        <Input
-          placeholder="Saisissez le nom ou le SIREN d'une entreprise"
-          size="lg"
-          name="q"
-          type="text"
-          bgColor={bgSelect}
-          mr="4"
-        />
-        <ButtonAction label="Rechercher" type="submit" />
-      </Flex>
+      <Box>
+        <Flex align="center" justifyContent="center" mx={["0", "16"]}>
+          <Input
+            placeholder="Saisissez le nom ou le SIREN d'une entreprise"
+            size="lg"
+            name="q"
+            type="text"
+            bgColor={bgSelect}
+            mr="4"
+          />
+          <ButtonAction label="Rechercher" type="submit" />
+        </Flex>
+      </Box>
     </form>
   )
 }
@@ -102,7 +104,7 @@ function DownloadCsvFileZone() {
 
 export default function HomePage() {
   return (
-    <VStack spacing={["6"]}>
+    <VStack spacing={["3", "6"]}>
       <Head>
         <title>Index Egapro</title>
       </Head>
