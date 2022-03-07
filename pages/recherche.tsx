@@ -145,6 +145,7 @@ function Company({ company }: { company: CompanyType }) {
             justify="center"
             align="center"
             grow="1"
+            cursor="pointer"
           >
             <Box>
               <Text fontSize="lg" fontWeight="bold">
