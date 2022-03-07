@@ -1,3 +1,18 @@
+## [1.10.1](https://github.com/SocialGouv/egapro-next/compare/v1.10.0...v1.10.1) (2022-03-07)
+
+
+### Bug Fixes
+
+* **recherche:** use cursor pointer for year cell ([f04d5c8](https://github.com/SocialGouv/egapro-next/commit/f04d5c8f1312334dd6ff11f80582c6c33c7e32d6))
+* **recherche:** use cursor pointer for year cell ([b0fec87](https://github.com/SocialGouv/egapro-next/commit/b0fec87f5ea8331479ad84d545490622c8a0f1c7))
+
+# [1.10.0](https://github.com/SocialGouv/egapro-next/compare/v1.9.1...v1.10.0) (2022-03-07)
+
+
+### Features
+
+* improve UI ([af61853](https://github.com/SocialGouv/egapro-next/commit/af61853f6c452440d1f015295d5b2d9ac3e3da7c))
+
 ## [1.9.1](https://github.com/SocialGouv/egapro-next/compare/v1.9.0...v1.9.1) (2022-03-03)
 
 
