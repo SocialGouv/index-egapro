@@ -1,4 +1,5 @@
 import useSWRInfinite, { SWRInfiniteKeyLoader } from "swr/infinite"
+import moize from "moize"
 
 import type { FetcherInfiniteReturn } from "@/utils/fetcher"
 import { fetcher } from "@/utils/fetcher"
@@ -36,6 +37,12 @@ export type SearchCompanyParams = {
   section_naf?: string
 }
 
+const moizeConfig = {
+  maxSize: 1000,
+  maxAge: 1000 * 60 * 60, // 1 hour
+  isPromise: true,
+}
+
 function getKey(search?: SearchCompanyParams) {
   return function (pageIndex: number): ReturnType<SWRInfiniteKeyLoader> {
     if (!search) return null
@@ -48,8 +55,10 @@ function getKey(search?: SearchCompanyParams) {
   }
 }
 
+const moizedFetcher = moize(moizeConfig)(fetcher)
+
 export function useSearch(search?: SearchCompanyParams): FetcherInfiniteReturn & { companies: CompaniesType } {
-  const { data: companies, error, size, setSize } = useSWRInfinite(getKey(search), fetcher)
+  const { data: companies, error, size, setSize } = useSWRInfinite(getKey(search), moizedFetcher)
 
   const isLoading = !companies && !error
   const isError = Boolean(error)
