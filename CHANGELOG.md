@@ -1,3 +1,15 @@
+# [1.12.0](https://github.com/SocialGouv/egapro-next/compare/v1.11.0...v1.12.0) (2022-03-08)
+
+
+### Bug Fixes
+
+* shift years in home page ([ca63ae4](https://github.com/SocialGouv/egapro-next/commit/ca63ae4d6cf40011023d90d117b891d2422b1d9b))
+
+
+### Features
+
+* only 4 numbers for 50:250 company ([515d3a8](https://github.com/SocialGouv/egapro-next/commit/515d3a847ac0ea43b912425c8a0ff765dc7aa509))
+
 # [1.11.0](https://github.com/SocialGouv/egapro-next/compare/v1.10.1...v1.11.0) (2022-03-07)
 
 
