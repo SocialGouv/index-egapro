@@ -12,13 +12,13 @@ import {
   Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react"
+import { InfoOutlineIcon } from "@chakra-ui/icons"
 
 import ButtonAction from "@/components/ds/ButtonAction"
 import { StatsParams, useStats } from "@/models/useStats"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
 import { buildUrlParamsString } from "@/utils/url"
-import { InfoOutlineIcon } from "@chakra-ui/icons"
 
 export function FilterSelect({ name, onChange, value, children, ...rest }: SelectProps) {
   const borderSelect = useColorModeValue("cyan.200", "cyan.100")
@@ -90,7 +90,12 @@ export function AverageIndicator() {
           )}
         </Text>
         <Text fontFamily="cabin" fontSize="2xl" fontWeight="bold" casing="capitalize">
-          Index moyen {config?.LAST_PUBLIC_YEAR}
+          Index moyen{" "}
+          {getValue("year")
+            ? Number(getValue("year")) + 1
+            : config?.LAST_PUBLIC_YEAR
+            ? Number(config?.LAST_PUBLIC_YEAR) + 1
+            : ""}
         </Text>
         <Container maxW="container.md">
           <Stack direction={["column", "row"]} mt={8}>
@@ -103,7 +108,7 @@ export function AverageIndicator() {
             >
               {PUBLIC_YEARS_TRIES.map((year) => (
                 <option key={year} value={String(year)}>
-                  {year}
+                  {year + 1}
                 </option>
               ))}
             </FilterSelect>
