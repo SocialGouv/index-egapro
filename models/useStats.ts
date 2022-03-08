@@ -3,7 +3,7 @@ import useSWR from "swr"
 import { fetcher, FetcherReturn } from "@/utils/fetcher"
 import { buildUrlParamsString } from "@/utils/url"
 
-type StatsType = {
+export type StatsType = {
   avg: number
   count: number
   max: number

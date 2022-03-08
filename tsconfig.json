@@ -10,6 +10,9 @@
       ],
       "@/utils/*": [
         "utils/*"
+      ],
+      "@/types/*": [
+        "types/*"
       ]
     },
     "target": "es5",

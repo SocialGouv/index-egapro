@@ -1,8 +1,10 @@
 import useSWRImmutable from "swr/immutable"
+import React from "react"
+
+import type { SelectItemsType } from "@/types/utils/select"
 
 import type { FetcherReturnImmutable } from "@/utils/fetcher"
 import { fetcher } from "@/utils/fetcher"
-import React from "react"
 
 export type ConfigTypeApi = {
   YEARS: number[]
@@ -23,8 +25,6 @@ export type ConfigTypeFormatted = ConfigTypeApi & {
   LAST_PUBLIC_YEAR: string
   PUBLIC_YEARS_TRIES: number[]
 }
-
-type SelectItemsType = [string, string][]
 
 /**
  * Return all departments found in config API endpoint, possibly filtered by region.

@@ -27,12 +27,12 @@ import {
 import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import { HiOutlineLocationMarker, HiOutlineOfficeBuilding } from "react-icons/hi"
 
-import type { CompaniesType, CompanyType, SearchCompanyParams } from "@/models/useSearch"
+import type { CompaniesType, CompanyType, TrancheType } from "@/types/models/company"
 
 import ButtonAction from "@/components/ds/ButtonAction"
 import { SinglePageLayout } from "@/components/ds/SinglePageLayout"
 import { AlertSpinner } from "@/components/ds/AlertSpinner"
-import { useSearch } from "@/models/useSearch"
+import { SearchCompanyParams, useSearch } from "@/models/useSearch"
 import { filterDepartements, useConfig } from "@/models/useConfig"
 import { capitalize } from "@/utils/string"
 import { useCallbackOnMount } from "@/utils/hooks"
@@ -54,7 +54,7 @@ function useAdressLabel({ departement, region }: { departement?: string; region?
   }
   return result
 }
-const workforceLabels: Record<string, string[]> = {
+const workforceLabels: Record<TrancheType, string[]> = {
   "50:250": ["50 à 250", "salariés"],
   "251:999": ["251 à 999", "salariés"],
   "1000:": ["1000", "salariés ou plus"],
@@ -189,42 +189,67 @@ function Company({ company }: { company: CompanyType }) {
               </Text>
             </Box>
           </Flex>
-          <Flex
-            borderLeft="1px solid gray"
-            px="2"
-            bgColor={highlightColor}
-            p={2}
-            textAlign="center"
-            borderTop="1px solid gray"
-            justify="center"
-            align="center"
-            maxW="14%"
-          >
-            <Box>
-              <Text fontSize="sm">Écart taux d'augmentation</Text>
-              <Text fontSize="md" fontWeight="bold">
-                {company.notes_augmentations[yearSelected] ?? "NC"}
-              </Text>
-            </Box>
-          </Flex>
-          <Flex
-            borderLeft="1px solid gray"
-            px="2"
-            bgColor={highlightColor}
-            p={2}
-            textAlign="center"
-            borderTop="1px solid gray"
-            justify="center"
-            align="center"
-            maxW="14%"
-          >
-            <Box>
-              <Text fontSize="sm">Écart taux promotion</Text>
-              <Text fontSize="md" fontWeight="bold">
-                {company.notes_promotions[yearSelected] ?? "NC"}
-              </Text>
-            </Box>
-          </Flex>
+
+          {company?.entreprise?.effectif?.tranche === "50:250" ? (
+            <Flex
+              borderLeft="1px solid gray"
+              px="2"
+              bgColor={highlightColor}
+              p={2}
+              textAlign="center"
+              borderTop="1px solid gray"
+              justify="center"
+              align="center"
+              maxW="14%"
+            >
+              <Box>
+                <Text fontSize="sm">Écart taux d'augmentation</Text>
+                <Text fontSize="md" fontWeight="bold">
+                  {company.notes_augmentations_et_promotions[yearSelected] ?? "NC"}
+                </Text>
+              </Box>
+            </Flex>
+          ) : (
+            <>
+              <Flex
+                borderLeft="1px solid gray"
+                px="2"
+                bgColor={highlightColor}
+                p={2}
+                textAlign="center"
+                borderTop="1px solid gray"
+                justify="center"
+                align="center"
+                maxW="14%"
+              >
+                <Box>
+                  <Text fontSize="sm">Écart taux d'augmentation</Text>
+                  <Text fontSize="md" fontWeight="bold">
+                    {company.notes_augmentations[yearSelected] ?? "NC"}
+                  </Text>
+                </Box>
+              </Flex>
+              <Flex
+                borderLeft="1px solid gray"
+                px="2"
+                bgColor={highlightColor}
+                p={2}
+                textAlign="center"
+                borderTop="1px solid gray"
+                justify="center"
+                align="center"
+                maxW="14%"
+              >
+                <Box>
+                  <Text fontSize="sm">Écart taux promotion</Text>
+                  <Text fontSize="md" fontWeight="bold">
+                    {company.notes_promotions[yearSelected] ?? "NC"}
+                  </Text>
+                </Box>
+              </Flex>
+            </>
+          )}
+
           <Flex
             borderLeft="1px solid gray"
             px="2"
