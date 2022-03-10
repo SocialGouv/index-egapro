@@ -1,3 +1,11 @@
+# [1.13.0](https://github.com/SocialGouv/egapro-next/compare/v1.12.0...v1.13.0) (2022-03-10)
+
+
+### Features
+
+* add matomo ([4ce1604](https://github.com/SocialGouv/egapro-next/commit/4ce1604ee528b7d7d953d663bda485ccd7b412b0))
+* add matomo ([e16027f](https://github.com/SocialGouv/egapro-next/commit/e16027fdcf456a145a78546abb7839d2421b52eb))
+
 # [1.12.0](https://github.com/SocialGouv/egapro-next/compare/v1.11.0...v1.12.0) (2022-03-08)
 
 
