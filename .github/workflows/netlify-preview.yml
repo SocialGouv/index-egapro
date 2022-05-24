@@ -48,9 +48,6 @@ jobs:
         CI: false
         NEXT_PUBLIC_API_URL: ${{github.event.inputs.apiUrl}}
 
-    - name: Copy Netlify files
-      run: cp .netlify/_redirects build/
-
     - name: Export app
       run: yarn export
 
