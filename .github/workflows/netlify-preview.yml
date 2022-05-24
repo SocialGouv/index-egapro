@@ -2,6 +2,10 @@ name: Netlify preview
 on:
   workflow_dispatch:
     inputs:
+      egaproNextBranch:
+        description: "Branche principale (Next.js, pour consultation et futurs fronts)"
+        required: true
+        default: "feat/egapro-next-merge"
       simuBranch:
         description: "Branche pour la simulation-déclaration"
         required: true
@@ -10,10 +14,6 @@ on:
         description: "Branche pour la déclaration directe"
         required: true
         default: "master"
-      consultationBranch:
-        description: "Branche pour la consultation"
-        required: true
-        default: "feat/egapro-next-merge"
       apiUrl:
         description: "URL de l'API"
         required: true
@@ -27,6 +27,38 @@ concurrency:
   group: netlify-deploy-${{ github.ref }}
 
 jobs:
+
+  build-consultation:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout commit
+      uses: actions/checkout@v2
+      with:
+        ref: ${{github.event.inputs.egaproNextBranch}}
+        repository: "SocialGouv/egapro-next"
+
+    - name: Install Dependencies
+      run: |
+        yarn install --frozen-lockfile --force --non-interactive
+
+    - name: Build app
+      run: yarn build
+      env:
+        CI: false
+        NEXT_PUBLIC_API_URL: ${{github.event.inputs.apiUrl}}
+
+    - name: Copy Netlify files
+      run: cp .netlify/_redirects build/
+
+    - name: Export app
+      run: yarn export
+
+    - name: Upload react build
+      uses: actions/upload-artifact@v2
+      with:
+        name: egapro-next-export
+        path: out
 
   build-simulation:
     runs-on: ubuntu-latest
@@ -48,13 +80,10 @@ jobs:
         CI: false
         REACT_APP_EGAPRO_API_URL: ${{github.event.inputs.apiUrl}}
 
-    - name: Copy Netlify files
-      run: cp .netlify/_redirects build/
-
     - name: Upload react build
       uses: actions/upload-artifact@v2
       with:
-        name: react-build
+        name: simulation-export
         path: build
 
   build-declaration:
@@ -82,58 +111,28 @@ jobs:
     - name: Upload _site artifact
       uses: actions/upload-artifact@v2
       with:
-        name: jekyll-site
+        name: declaration-export
         path: _site
-
-  build-consultation:
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Checkout commit
-      uses: actions/checkout@v2
-      with:
-        ref: ${{github.event.inputs.consultationBranch}}
-        repository: "SocialGouv/egapro-next"
-
-
-    - name: Install Dependencies
-      run: |
-        yarn install --frozen-lockfile --force --non-interactive
-
-    - name: Build app
-      run: yarn build
-      env:
-        CI: false
-        NEXT_PUBLIC_API_URL: ${{github.event.inputs.apiUrl}}
-
-    - name: Export app
-      run: yarn export
-
-    - name: Upload react build
-      uses: actions/upload-artifact@v2
-      with:
-        name: consultation-export
-        path: out
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [build-simulation, build-declaration, build-consultation]
+    needs: [build-consultation, build-simulation, build-declaration]
     steps:
 
     - uses: actions/download-artifact@v2
       with:
-        name: react-build
+        name: egapro-next-export
         path: dist
 
     - uses: actions/download-artifact@v2
       with:
-        name: jekyll-site
-        path: dist/declaration
+        name: simulation-export
+        path: dist/simulation
 
     - uses: actions/download-artifact@v2
       with:
-        name: consultation-export
-        path: dist/consulter-index
+        name: declaration-export
+        path: dist/declaration
 
     - name: debug
       run: |
