@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/SocialGouv/egapro-next/compare/v1.15.0...v1.16.0) (2022-05-24)
+
+
+### Features
+
+* **netlify:** wip ([08ea86e](https://github.com/SocialGouv/egapro-next/commit/08ea86e7d846b7165617669986b10ca7a0735bfa))
+
 # [1.15.0](https://github.com/SocialGouv/egapro-next/compare/v1.14.0...v1.15.0) (2022-05-24)
 
 
