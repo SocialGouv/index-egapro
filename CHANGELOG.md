@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/SocialGouv/egapro-next/compare/v1.20.0...v1.21.0) (2022-05-25)
+
+
+### Features
+
+* **netlify:** use PUBLIC_URL for simu ([f415fcf](https://github.com/SocialGouv/egapro-next/commit/f415fcfbcc60af3932a185d52eda5aa86ba1100b))
+
 # [1.20.0](https://github.com/SocialGouv/egapro-next/compare/v1.19.0...v1.20.0) (2022-05-25)
 
 
