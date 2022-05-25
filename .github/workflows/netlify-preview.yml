@@ -135,6 +135,7 @@ jobs:
       run: |
         ls -lah
         ls -lah dist/
+        ls -lah dist/simulation
         ls -lah dist/declaration/
 
     - name: Deploy to Netlify
