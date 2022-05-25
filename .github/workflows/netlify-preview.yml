@@ -76,6 +76,7 @@ jobs:
       env:
         CI: false
         REACT_APP_EGAPRO_API_URL: ${{github.event.inputs.apiUrl}}
+        PUBLIC_URL: "/simulateur"
 
     - name: Upload react build
       uses: actions/upload-artifact@v2
