@@ -14,8 +14,9 @@
     "check-all": "yarn lint && yarn type-check && yarn test --watchAll=false",
     "dev:up": "docker-compose up --build",
     "dev:prod": "docker-compose -f docker-compose.build.yaml up --build",
-    "postinstall": "[ -n .env ] && cp .env.sample .env || true",
-    "test:api": "docker exec egapro-next_api_1 /usr/local/bin/py.test -vv --cov"
+    "postinstall": "[ -n .env ] && cp .env.sample .env || true && cd packages/api && python3 -m venv venv && set -o allexport && source venv/bin/activate && venv/bin/pip3 install -e .[dev,test,prod]",
+    "test:api:docker": "docker exec -it egapro-next_api_1 /usr/local/bin/py.test -vv --cov",
+    "test:api": "cd packages/api && EGAPRO_DBPORT=5436 EGAPRO_DBNAME=test_egapro ./venv/bin/py.test -vv --cov"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.5",
