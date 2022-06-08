@@ -35,3 +35,16 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# API Python
+__pycache__
+*.egg-info
+*.db
+tmp/
+.coverage
+htmlcov/
+site/
+venv/
+.env
+.history/
+settings.json

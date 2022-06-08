@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  #  maildev:
+  #   image: djfarrelly/maildev
+  #   command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
+  #   ports:
+  #     - "1025:1025"
+  #     - "1080:1080"
+  #   restart: always
+
+  api:
+    image: egapro_api
+    build:
+      context: ./packages/api
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./packages/api:/app
+    environment:
+      EGAPRO_TEST_DBHOST: test_db
+      EGAPRO_DBHOST: ${EGAPRO_DBHOST:-db}
+      EGAPRO_DBNAME: ${EGAPRO_DBNAME:-egapro}
+      EGAPRO_DBPORT: ${EGAPRO_DBPORT:-5432}
+      EGAPRO_DBUSER: ${EGAPRO_DBUSER:-postgres}
+      EGAPRO_DBPASS: ${EGAPRO_DBPASS:-postgres}
+    ports:
+      - 2626:2626
+    depends_on:
+      - db
+      - test_db
+    restart: always
+
+  db:
+    restart: always
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: egapro
+    ports:
+      - 5437:5432
+    volumes:
+      - egapro-pgdata2:/var/lib/postgresql/data
+
+  test_db:
+    restart: always
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: test_egapro
+    ports:
+      - 5436:5432
+    volumes:
+      - ./packages/api/egapro/sql/init_test.sql:/docker-entrypoint-initdb.d/init_test.sql
+
+volumes:
+  egapro-pgdata2:
