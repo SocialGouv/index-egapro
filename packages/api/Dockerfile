@@ -5,7 +5,7 @@ WORKDIR /app
 COPY setup.py .
 COPY setup.cfg .
 
-RUN	pip install -e .[dev,test,prod]
+RUN	pip install -e .[prod]
 
 COPY . .
 

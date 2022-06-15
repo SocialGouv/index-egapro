@@ -23,12 +23,32 @@ services:
       EGAPRO_DBPORT: ${EGAPRO_DBPORT:-5432}
       EGAPRO_DBUSER: ${EGAPRO_DBUSER:-postgres}
       EGAPRO_DBPASS: ${EGAPRO_DBPASS:-postgres}
+      EGAPRO_STAFF: ${EGAPRO_STAFF}
     ports:
       - 2626:2626
     depends_on:
       - db
       - test_db
-    restart: always
+    restart: "no"
+
+  # declaration:
+  #   image: egapro_declaration
+  #   build:
+  #     context: ./packages/declaration
+  #     dockerfile: Dockerfile.dev
+  #     args:
+  #       EGAPRO_API_URL: ${EGAPRO_API_URL:-http://localhost:2626}
+  #   volumes:
+  #     - ./packages/declaration/_doc:/srv/jekyll/_doc
+  #     - ./packages/declaration/src:/srv/jekyll/src
+  #     - ./packages/declaration/favicon.ico:/srv/jekyll/_site/favicon.ico
+  #   # environment:
+  #   #   EGAPRO_API_URL: ${EGAPRO_API_URL:-http://localhost:2626}
+  #   ports:
+  #     - 4000:4000
+  #   depends_on:
+  #     - api
+  #   restart: always
 
   db:
     restart: always
@@ -40,7 +60,7 @@ services:
     ports:
       - 5437:5432
     volumes:
-      - egapro-pgdata2:/var/lib/postgresql/data
+      - egapro-pgdata4:/var/lib/postgresql/data
 
   test_db:
     restart: always
@@ -55,4 +75,4 @@ services:
       - ./packages/api/egapro/sql/init_test.sql:/docker-entrypoint-initdb.d/init_test.sql
 
 volumes:
-  egapro-pgdata2:
+  egapro-pgdata4:

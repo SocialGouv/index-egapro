@@ -15,4 +15,17 @@
 
 FROM jekyll/jekyll:4
 
+ARG EGAPRO_API_URL
+
+ENV EGAPRO_API_URL=${EGAPRO_API_URL}
+
+COPY Gemfile .
+
+COPY _config.yml .
+
+# echo "sentry-dsn: 'https://b2f84ee9dc6044abbeb0f417f4335a26@sentry.fabrique.social.gouv.fr/48'" >> _config.yml
+# echo "version: `date +"%Y.%m.%d"`" >> _config.yml
+RUN echo "EGAPRO_API_URL: ${EGAPRO_API_URL}" >> _config.yml
+# jekyll build --baseurl "/declaration"
+
 CMD ["jekyll", "serve"]
