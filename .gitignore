@@ -1,19 +1,19 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
+node_modules
+/packages/app/.pnp
 .pnp.js
 
 # testing
-/coverage
+/packages/app//coverage
 
 # next.js
-/.next/
-/out/
+/packages/app//.next/
+/packages/app//out/
 
 # production
-/build
+/packages/app//build
 
 # misc
 .DS_Store
@@ -25,6 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -37,14 +38,14 @@ yarn-error.log*
 *.tsbuildinfo
 
 # API Python
-__pycache__
-*.egg-info
-*.db
-tmp/
-.coverage
-htmlcov/
-site/
-venv/
-.env
-.history/
-settings.json
+/packages/api/__pycache__
+/packages/api/*.egg-info
+/packages/api/*.db
+/packages/api/tmp/
+/packages/api/.coverage
+/packages/api/htmlcov/
+/packages/api/site/
+/packages/api/venv/
+/packages/api/.env
+/packages/api/.history/
+/packages/api/settings.json

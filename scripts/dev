@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+exec yarn concurrently \
+  "docker-compose up --build" \
+  "yarn workspace app run dev"
