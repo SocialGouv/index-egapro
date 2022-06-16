@@ -16,6 +16,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./packages/api:/app
+      - api_egginfos:/app/egapro.egg-info
     environment:
       EGAPRO_TEST_DBHOST: test_db
       EGAPRO_DBHOST: ${EGAPRO_DBHOST:-db}
@@ -23,7 +24,7 @@ services:
       EGAPRO_DBPORT: ${EGAPRO_DBPORT:-5432}
       EGAPRO_DBUSER: ${EGAPRO_DBUSER:-postgres}
       EGAPRO_DBPASS: ${EGAPRO_DBPASS:-postgres}
-      EGAPRO_STAFF: ${EGAPRO_STAFF}
+      EGAPRO_STAFF: ${EGAPRO_STAFF:-""}
     ports:
       - 2626:2626
     depends_on:
@@ -60,7 +61,7 @@ services:
     ports:
       - 5437:5432
     volumes:
-      - egapro-pgdata4:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
 
   test_db:
     restart: always
@@ -75,4 +76,5 @@ services:
       - ./packages/api/egapro/sql/init_test.sql:/docker-entrypoint-initdb.d/init_test.sql
 
 volumes:
-  egapro-pgdata4:
+  pgdata:
+  api_egginfos:
