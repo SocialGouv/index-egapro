@@ -43,19 +43,19 @@ jobs:
         yarn install --frozen-lockfile --force --non-interactive
 
     - name: Build app
-      run: yarn build
+      run: yarn workspace app build
       env:
         CI: false
         NEXT_PUBLIC_API_URL: ${{github.event.inputs.apiUrl}}
 
     - name: Export app
-      run: yarn export
+      run: yarn workspace app export
 
     - name: Upload react build
       uses: actions/upload-artifact@v2
       with:
         name: egapro-next-export
-        path: out
+        path: packages/app/out
 
   build-simulation:
     runs-on: ubuntu-latest

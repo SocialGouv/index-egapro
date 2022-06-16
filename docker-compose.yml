@@ -32,24 +32,24 @@ services:
       - test_db
     restart: "no"
 
-  # declaration:
-  #   image: egapro_declaration
-  #   build:
-  #     context: ./packages/declaration
-  #     dockerfile: Dockerfile.dev
-  #     args:
-  #       EGAPRO_API_URL: ${EGAPRO_API_URL:-http://localhost:2626}
-  #   volumes:
-  #     - ./packages/declaration/_doc:/srv/jekyll/_doc
-  #     - ./packages/declaration/src:/srv/jekyll/src
-  #     - ./packages/declaration/favicon.ico:/srv/jekyll/_site/favicon.ico
-  #   # environment:
-  #   #   EGAPRO_API_URL: ${EGAPRO_API_URL:-http://localhost:2626}
-  #   ports:
-  #     - 4000:4000
-  #   depends_on:
-  #     - api
-  #   restart: always
+  declaration:
+    image: egapro_declaration
+    build:
+      context: ./packages/declaration
+      dockerfile: Dockerfile.dev
+      args:
+        EGAPRO_API_URL: ${EGAPRO_API_URL:-http://localhost:2626}
+    volumes:
+      - ./packages/declaration/_doc:/srv/jekyll/_doc
+      - ./packages/declaration/src:/srv/jekyll/src
+      - ./packages/declaration/favicon.ico:/srv/jekyll/_site/favicon.ico
+    # environment:
+    #   EGAPRO_API_URL: ${EGAPRO_API_URL:-http://localhost:2626}
+    ports:
+      - 4000:4000
+    depends_on:
+      - api
+    restart: always
 
   db:
     restart: always

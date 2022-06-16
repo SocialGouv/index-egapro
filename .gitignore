@@ -6,14 +6,14 @@ node_modules
 .pnp.js
 
 # testing
-/packages/app//coverage
+/packages/app/coverage
 
 # next.js
-/packages/app//.next/
-/packages/app//out/
+/packages/app/.next
+/packages/app/out
 
 # production
-/packages/app//build
+/packages/app/build
 
 # misc
 .DS_Store
