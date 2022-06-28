@@ -18,10 +18,12 @@ services:
       - ./packages/api:/app
       - api_egginfos:/app/egapro.egg-info
     environment:
+      EGAPRO_SEND_EMAILS: "True"
       EGAPRO_SMTP_HOST: maildev
       EGAPRO_SMTP_PORT: 1025
       EGAPRO_SMTP_LOGIN: ""
       EGAPRO_SMTP_PASSWORD: ""
+      EGAPRO_SMTP_SSL: ""
       EGAPRO_TEST_DBHOST: test_db
       EGAPRO_DBHOST: ${EGAPRO_DBHOST:-db}
       EGAPRO_DBNAME: ${EGAPRO_DBNAME:-egapro}
