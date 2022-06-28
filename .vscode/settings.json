@@ -13,5 +13,7 @@
         "**/Thumbs.db": true,
         "**/.history": true
     },
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    // https://github.com/colinhacks/zod/issues/443
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

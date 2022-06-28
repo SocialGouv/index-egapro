@@ -8,8 +8,10 @@
   "scripts": {
     "dev": "scripts/dev",
     "dev:app": "yarn workspace app run dev",
+    "dev:simulateur": "yarn workspace simulateur run dev",
     "dev:up": "docker-compose up --build",
     "dev:prod": "docker-compose -f docker-compose.build.yaml up --build",
+    "lint": "yarn workspaces run lint",
     "fresh-install": "scripts/fresh-install",
     "check-all": "scripts/check-all",
     "postinstall": "scripts/postinstall",
