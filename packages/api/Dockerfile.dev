@@ -17,5 +17,5 @@ RUN cp -r egapro.egg-info /tmp/egapro.egg-info
 EXPOSE 2626
 
 ENTRYPOINT ["./entrypoint.sh"]
-# CMD ["./start.sh"]
+
 CMD ["./dev.sh"]

@@ -1,15 +1,27 @@
-FROM jekyll/jekyll:4
+FROM jekyll/jekyll:4 as builder
 
-FROM ghcr.io/socialgouv/docker/nginx:7.0.0
+WORKDIR /home/jekyll
+
+COPY . .
+RUN chown 1000:1000 -R .
+
+ENV GEM_HOME=/home/jekyll/gems
+
 
 ARG EGAPRO_API_URL
-
 ENV EGAPRO_API_URL=${EGAPRO_API_URL}
+RUN echo "EGAPRO_API_URL: ${EGAPRO_API_URL}" >> _config.yml
 
-# echo "sentry-dsn: 'https://b2f84ee9dc6044abbeb0f417f4335a26@sentry.fabrique.social.gouv.fr/48'" >> _config.yml
-# echo "version: `date +"%Y.%m.%d"`" >> _config.yml
-# RUN echo "EGAPRO_API_URL: ${EGAPRO_API_URL}" >> _config.yml
-# jekyll build --baseurl "/declaration"
+ARG EGAPRO_SENTRY_DSN
+ENV EGAPRO_SENTRY_DSN=${EGAPRO_SENTRY_DSN}
+RUN echo "sentry-dsn: '$SENTRY_DSN'" >> _config.yml
 
+RUN echo "version: `date +"%Y.%m.%d"`" >> _config.yml
 
-COPY --from=builder --chown=nginx:nginx /out /usr/share/nginx/html
+ARG BASE_URL
+ENV BASE_URL=${BASE_URL}
+RUN if [ -z "$BASE_URL" ]; then jekyll build; else jekyll build --baseurl $BASE_URL; fi
+
+FROM ghcr.io/socialgouv/docker/nginx:7.0.1
+
+COPY --from=builder --chown=nginx:nginx /home/jekyll/_site /usr/share/nginx/html

@@ -21,3 +21,4 @@ CMD ["./entrypoint.sh"]
 ## PROD
 ENV PRODUCTION="true"
 COPY . .
+CMD ["./start.sh"]
