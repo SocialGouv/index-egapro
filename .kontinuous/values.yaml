@@ -34,7 +34,7 @@ jobs:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         imagePackage: app
-        context: packages/app
+        dockerfile: packages/app/Dockerfile
 
     build-declaration:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
@@ -46,4 +46,4 @@ jobs:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         imagePackage: simulateur
-        context: packages/simulateur
+        dockerfile: packages/simulateur/Dockerfile
