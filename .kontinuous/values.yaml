@@ -1,22 +1,32 @@
-api:
-  needs: [build-api]
-  imagePackage: api
-  probesPath: /healthz
-  containerPort: 2626
-
 app:
   needs: [build-app]
   imagePackage: app
   probesPath: /healthz
   containerPort: 3000
 
-declaration:
+app-api:
+  needs: [build-api]
+  imagePackage: api
+  probesPath: /healthz
+  containerPort: 2626
+  envFrom:
+    - secretRef:
+        name: "{{ .Values.global.pgSecretName }}"
+  vars:
+    EGAPRO_DBHOST: "$(PGHOST)"
+    EGAPRO_DBNAME: "$(PGDATABASE)"
+    EGAPRO_DBPORT: "$(PGPORT)"
+    EGAPRO_DBUSER: "$(PGUSER)"
+    EGAPRO_DBPASS: "$(PGPASSWORD)"
+    EGAPRO_DBSSL: "$(PGSSLMODE)"
+
+app-declaration:
   needs: [build-declaration]
   imagePackage: declaration
   probesPath: /index.html
   containerPort: 8080
 
-simulateur:
+app-simulateur:
   needs: [build-simulateur]
   imagePackage: simulateur
   probesPath: /index.html
@@ -24,26 +34,30 @@ simulateur:
 
 jobs:
   runs:
+    build-app:
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
+      with:
+        imagePackage: app
+        dockerfile: packages/app/Dockerfile
+    
     build-api:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         imagePackage: api
         context: packages/api
 
-    build-app:
-      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
-      with:
-        imagePackage: app
-        dockerfile: packages/app/Dockerfile
-
     build-declaration:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         imagePackage: declaration
         context: packages/declaration
+        buildArgs:
+          EGAPRO_API_URL: "https://api-{{ .Values.global.host }}/"
 
     build-simulateur:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
         imagePackage: simulateur
         dockerfile: packages/simulateur/Dockerfile
+        buildArgs:
+          REACT_APP_EGAPRO_API_URL: "https://api-{{ .Values.global.host }}/"
