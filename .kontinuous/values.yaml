@@ -1,17 +1,49 @@
-global:
-  registry: harbor.fabrique.social.gouv.fr
+api:
+  needs: [build-api]
+  imagePackage: api
+  probesPath: /healthz
+  containerPort: 2626
 
 app:
-  # chart: fabrique.app # implicited by `app` and `app-*` chart root key caller
   needs: [build-app]
   imagePackage: app
   probesPath: /healthz
+  containerPort: 3000
+
+declaration:
+  needs: [build-declaration]
+  imagePackage: declaration
+  probesPath: /index.html
+  containerPort: 8080
+
+simulateur:
+  needs: [build-simulateur]
+  imagePackage: simulateur
+  probesPath: /index.html
+  containerPort: 8080
 
 jobs:
   runs:
-    build-app:
-      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build@master
+    build-api:
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
       with:
-        registrySecretRefName: harbor
-        imagePackage: app
+        imagePackage: api
+        context: packages/api
 
+    build-app:
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
+      with:
+        imagePackage: app
+        context: packages/app
+
+    build-declaration:
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
+      with:
+        imagePackage: declaration
+        context: packages/declaration
+
+    build-simulateur:
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
+      with:
+        imagePackage: simulateur
+        context: packages/simulateur

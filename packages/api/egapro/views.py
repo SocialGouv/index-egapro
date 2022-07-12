@@ -107,6 +107,12 @@ def ensure_owner(view):
     return wrapper
 
 
+@app.route("/healthz", methods=["GET"])
+async def healthz(request, response):
+    response.status = 200
+    response.json = {"message": "OK"}
+
+
 @app.route("/declaration/{siren}/{year}", methods=["PUT"])
 @tokens.require
 @ensure_owner
