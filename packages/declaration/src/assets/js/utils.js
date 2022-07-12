@@ -26,7 +26,7 @@ function redirect(url) {
 
 function buildSelectOptions(select, list, value) {
   select.innerHTML = ""
-  if (select.hasAttribute("empty")) list.unshift({ value: "", label: " â€“â€“â€“ " })
+  if (select.hasAttribute("empty")) list.unshift({ value: "", label: " --- " })
   list.forEach((val) => {
     const option = document.createElement("option")
     option.value = val.value
@@ -146,7 +146,7 @@ checkSirenValidity = async (event) => {
   const allSirens = Array.from(document.querySelectorAll("input.siren")).map((node) => node.value)
   if (allSirens.filter((siren) => siren === target.value).length >= 2) {
     // We check if the length is >= 2 because the list of sirens also contains the current value
-    target.setCustomValidity("Le Siren a dÃ©jÃ  Ã©tÃ© saisi")
+    target.setCustomValidity("Le Siren a déjà été saisi")
     target.reportValidity()
     return
   }
@@ -160,7 +160,7 @@ checkSirenValidity = async (event) => {
       raisonSocialeField.value = ""
     }
     const errorMessage =
-      (response && response.data && response.data.error) || "Le numÃ©ro Siren que vous avez saisi n'est pas valide"
+      (response && response.data && response.data.error) || "Le numéro Siren que vous avez saisi n'est pas valide"
     target.setCustomValidity(errorMessage)
   } else {
     if (raisonSocialeField) {
@@ -234,7 +234,7 @@ function notifyPercentage(event) {
   const target = event.target
   if (target.checkValidity() && !isNaN(Number(target.value)) && Number(target.value) >= 100) {
     notify.warning(
-      "Vous avez renseignÃ© un Ã©cart en pourcentage supÃ©rieur ou Ã©gal Ã  100%, si votre saisie est correcte continuez, sinon veuillez la corriger",
+      "Vous avez renseigné un écart en pourcentage supérieur ou égal à 100%, si votre saisie est correcte continuez, sinon veuillez la corriger",
     )
   }
 }
@@ -265,7 +265,7 @@ class AppStorage {
   resetData() {
     this.data = {
       source: "formulaire",
-      dÃ©claration: {},
+      déclaration: {},
     }
   }
 
@@ -275,7 +275,7 @@ class AppStorage {
 
   async loadConfig() {
     const response = await request("GET", "/config")
-    if (!response.ok) notify.error("Le serveur ne rÃ©pond pas. Veuillez contacter l'Ã©quipe technique.")
+    if (!response.ok) notify.error("Le serveur ne répond pas. Veuillez contacter l'équipe technique.")
     Object.entries(response.data).forEach(([key, value]) => {
       this.config[key.toLowerCase()] = value
     })
@@ -322,11 +322,11 @@ class AppStorage {
   }
 
   set annee(annee) {
-    return this.setItem("dÃ©claration.annÃ©e_indicateurs", Number(annee))
+    return this.setItem("déclaration.année_indicateurs", Number(annee))
   }
 
   get annee() {
-    return this.getItem("dÃ©claration.annÃ©e_indicateurs")
+    return this.getItem("déclaration.année_indicateurs")
   }
 
   set siren(siren) {
@@ -338,15 +338,15 @@ class AppStorage {
   }
 
   get isDraft() {
-    return this.data.dÃ©claration.brouillon
+    return this.data.déclaration.brouillon
   }
 
   set isDraft(value) {
-    this.data.dÃ©claration.brouillon = value
+    this.data.déclaration.brouillon = value
   }
 
   get mode() {
-    if (!this.getItem("dÃ©claration.date")) return "creating"
+    if (!this.getItem("déclaration.date")) return "creating"
     if (this.isDraft) return "updating"
     return "reading"
   }
