@@ -1,0 +1,10 @@
+api:
+  needs: [build-api,create-db]
+
+jobs-dev:
+  runs:
+    create-db:
+      use: SocialGouv/kontinuous/plugins/fabrique/jobs/create-db
+      with:
+        pgAdminSecretRefName: azure-pg-admin-user
+
