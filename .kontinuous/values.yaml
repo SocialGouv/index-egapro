@@ -1,14 +1,19 @@
 app:
   needs: [build-app]
   imagePackage: app
-  probesPath: /healthz
+  probesPath: /consulter-index/healthz
   containerPort: 3000
+  host: "{{ .Values.global.host }}"
+  ~ingress.path: /consulter-index(/|$)(.*)
 
 app-api:
   needs: [build-api]
   imagePackage: api
   probesPath: /healthz
   containerPort: 2626
+  host: "{{ .Values.global.host }}"
+  ~ingress.path: /api(/|$)(.*)
+  ~ingress.rewriteTarget: /$2
   envFrom:
     - secretRef:
         name: "{{ .Values.global.pgSecretName }}"
@@ -25,12 +30,17 @@ app-declaration:
   imagePackage: declaration
   probesPath: /index.html
   containerPort: 8080
+  host: "{{ .Values.global.host }}"
+  ~ingress.path: /declaration(/|$)(.*)
+  ~ingress.rewriteTarget: /$2
 
 app-simulateur:
   needs: [build-simulateur]
   imagePackage: simulateur
   probesPath: /index.html
   containerPort: 8080
+  host: "{{ .Values.global.host }}"
+  ~ingress.path: /
 
 jobs:
   runs:
@@ -52,7 +62,8 @@ jobs:
         imagePackage: declaration
         context: packages/declaration
         buildArgs:
-          EGAPRO_API_URL: "https://api-{{ .Values.global.host }}/"
+          BASE_URL: "https://{{ .Values.global.host }}/declaration"
+          EGAPRO_API_URL: "https://{{ .Values.global.host }}/api"
 
     build-simulateur:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
@@ -60,4 +71,5 @@ jobs:
         imagePackage: simulateur
         dockerfile: packages/simulateur/Dockerfile
         buildArgs:
-          REACT_APP_EGAPRO_API_URL: "https://api-{{ .Values.global.host }}/"
+          REACT_APP_EGAPRO_API_URL: "https://{{ .Values.global.host }}/api"
+          REACT_APP_DECLARATION_URL: "https://{{ .Values.global.host }}/declaration"
