@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // basePath: "/consulter-index",
-  basePath: "",
+  basePath: "/consulter-index",
   rewrites: async () => {
     return [
       {
