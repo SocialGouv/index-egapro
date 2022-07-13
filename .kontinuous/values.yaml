@@ -6,6 +6,23 @@ app:
   host: "{{ .Values.global.host }}"
   ~ingress.path: /consulter-index(/|$)(.*)
 
+app-declaration:
+  needs: [build-declaration]
+  imagePackage: declaration
+  probesPath: /index.html
+  containerPort: 8080
+  host: "{{ .Values.global.host }}"
+  ~ingress.path: /declaration(/|$)(.*)
+  ~ingress.rewriteTarget: /$2
+
+app-simulateur:
+  needs: [build-simulateur]
+  imagePackage: simulateur
+  probesPath: /index.html
+  containerPort: 8080
+  host: "{{ .Values.global.host }}"
+  ~ingress.path: /
+
 app-api:
   needs: [build-api]
   imagePackage: api
@@ -24,8 +41,19 @@ app-api:
     EGAPRO_DBUSER: "$(PGUSER)"
     EGAPRO_DBPASS: "$(PGPASSWORD)"
     EGAPRO_DBSSL: "$(PGSSLMODE)"
-  addVolumes:
-    - files
+  # addVolumes:
+  #   - files
+
+app-files:
+  image: ghcr.io/socialgouv/docker/nginx:7.0.1
+  containerPort: 8080
+  volumes:
+    - name: files
+      persistentVolumeClaim:
+        claimName: files
+  volumeMounts:
+    - name: files
+      mountPath: /usr/share/nginx/html
 
 project:
   apiJobs:
@@ -37,23 +65,23 @@ project:
       command: egapro full /mnt/files/full.ndjson
     - name: export-indexes
       command: egapro export-indexes /mnt/files/indexes.csv
-
-app-declaration:
-  needs: [build-declaration]
-  imagePackage: declaration
-  probesPath: /index.html
-  containerPort: 8080
-  host: "{{ .Values.global.host }}"
-  ~ingress.path: /declaration(/|$)(.*)
-  ~ingress.rewriteTarget: /$2
-
-app-simulateur:
-  needs: [build-simulateur]
-  imagePackage: simulateur
-  probesPath: /index.html
-  containerPort: 8080
-  host: "{{ .Values.global.host }}"
-  ~ingress.path: /
+  whitelist:
+    # DigDash dev
+    - "94.23.250.213"
+    # DigDash prod 1 and 2
+    - "37.187.27.197"
+    - "37.187.137.149"
+    # Invenis prod
+    - "217.182.142.112"
+    # test, to remove after debugging
+    - "37.166.237.149"
+  files:
+    public:
+      - index-egalite-fh.csv
+    restricted:
+      - dgt.xlsx
+      - full.ndjson
+      - indexes.csv
 
 
 jobs:

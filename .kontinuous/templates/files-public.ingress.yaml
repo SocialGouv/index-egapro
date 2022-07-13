@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: files-public
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  tls:
+  - hosts:
+      - {{ .Values.global.host }}
+    secretName: app-api-crt
+  rules:
+  {{ range $fileName := .Values.files.public }}
+  - host: {{ $.Values.global.host }}
+    http:
+      paths:
+      - path: /{{ $fileName }}
+        pathType: Exact
+        backend:
+          service:
+            name: app-files
+            port: 
+              number: 80
+
+    {{ end }}
