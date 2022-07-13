@@ -24,6 +24,19 @@ app-api:
     EGAPRO_DBUSER: "$(PGUSER)"
     EGAPRO_DBPASS: "$(PGPASSWORD)"
     EGAPRO_DBSSL: "$(PGSSLMODE)"
+  addVolumes:
+    - files
+
+project:
+  apiJobs:
+    - name: export-public-data
+      command: egapro export-public-data /mnt/files/index-egalite-fh.csv
+    - name: dump-dgt
+      command: egapro dump-dgt /mnt/files/dgt.xlsx
+    - name: full
+      command: egapro full /mnt/files/full.ndjson
+    - name: export-indexes
+      command: egapro export-indexes /mnt/files/indexes.csv
 
 app-declaration:
   needs: [build-declaration]
@@ -41,6 +54,7 @@ app-simulateur:
   containerPort: 8080
   host: "{{ .Values.global.host }}"
   ~ingress.path: /
+
 
 jobs:
   runs:
