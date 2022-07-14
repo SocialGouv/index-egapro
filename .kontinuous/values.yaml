@@ -48,6 +48,8 @@ app-files:
   image: ghcr.io/socialgouv/docker/nginx:7.0.1
   containerPort: 8080
   probesPort: 8080
+  host: "{{ .Values.global.host }}"
+  ~ingress.enabled: false
   volumes:
     - name: files
       persistentVolumeClaim:
