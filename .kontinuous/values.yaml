@@ -4,7 +4,7 @@ app:
   probesPath: /consulter-index/healthz
   containerPort: 3000
   host: "{{ .Values.global.host }}"
-  ~ingress.path: /consulter-index(/|$)(.*)
+  .ingress.path: /consulter-index(/|$)(.*)
 
 app-declaration:
   needs: [build-declaration]
@@ -12,8 +12,8 @@ app-declaration:
   probesPath: /index.html
   containerPort: 8080
   host: "{{ .Values.global.host }}"
-  ~ingress.path: /declaration(/|$)(.*)
-  ~ingress.rewriteTarget: /$2
+  .ingress.path: /declaration(/|$)(.*)
+  .ingress.rewriteTarget: /$2
 
 app-simulateur:
   needs: [build-simulateur]
@@ -21,7 +21,7 @@ app-simulateur:
   probesPath: /index.html
   containerPort: 8080
   host: "{{ .Values.global.host }}"
-  ~ingress.path: /
+  .ingress.path: /
 
 app-api:
   needs: [build-api]
@@ -29,8 +29,8 @@ app-api:
   probesPath: /healthz
   containerPort: 2626
   host: "{{ .Values.global.host }}"
-  ~ingress.path: /api(/|$)(.*)
-  ~ingress.rewriteTarget: /$2
+  .ingress.path: /api(/|$)(.*)
+  .ingress.rewriteTarget: /$2
   envFrom:
     - secretRef:
         name: "{{ .Values.global.pgSecretName }}"
@@ -49,7 +49,7 @@ app-files:
   containerPort: 8080
   probesPort: 8080
   host: "{{ .Values.global.host }}"
-  ~ingress.enabled: false
+  .ingress.enabled: false
   volumes:
     - name: files
       persistentVolumeClaim:
