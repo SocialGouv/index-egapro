@@ -81,8 +81,6 @@ project:
     - "37.187.137.149"
     # Invenis prod
     - "217.182.142.112"
-    # test, to remove after debugging
-    - "37.166.237.149"
   files:
     public:
       - index-egalite-fh.csv
