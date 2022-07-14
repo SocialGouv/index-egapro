@@ -1,4 +1,5 @@
 app:
+  _chart: app
   needs: [build-app]
   imagePackage: app
   probesPath: /consulter-index/healthz
@@ -6,7 +7,8 @@ app:
   host: "{{ .Values.global.host }}"
   .ingress.path: /consulter-index(/|$)(.*)
 
-app-declaration:
+declaration:
+  _chart: app
   needs: [build-declaration]
   imagePackage: declaration
   probesPath: /index.html
@@ -15,7 +17,8 @@ app-declaration:
   .ingress.path: /declaration(/|$)(.*)
   .ingress.rewriteTarget: /$2
 
-app-simulateur:
+simulateur:
+  _chart: app
   needs: [build-simulateur]
   imagePackage: simulateur
   probesPath: /index.html
@@ -23,7 +26,8 @@ app-simulateur:
   host: "{{ .Values.global.host }}"
   .ingress.path: /
 
-app-api:
+api:
+  _chart: app
   needs: [build-api]
   imagePackage: api
   probesPath: /healthz
@@ -44,7 +48,8 @@ app-api:
   # addVolumes:
   #   - files
 
-app-files:
+files:
+  _chart: app
   image: ghcr.io/socialgouv/docker/nginx:7.0.1
   containerPort: 8080
   probesPort: 8080
@@ -88,6 +93,7 @@ project:
 
 
 jobs:
+  _chart: jobs
   runs:
     build-app:
       use: SocialGouv/kontinuous/plugins/fabrique/jobs/build
