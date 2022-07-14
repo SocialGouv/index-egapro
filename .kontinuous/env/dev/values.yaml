@@ -1,4 +1,4 @@
-app-api:
+api:
   needs: [build-api,create-db]
   vars:
     EGAPRO_SEND_EMAILS: "True"

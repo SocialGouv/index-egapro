@@ -13,7 +13,7 @@ spec:
   tls:
   - hosts:
       - {{ .Values.global.host }}
-    secretName: app-api-crt
+    secretName: api-crt
   rules:
   {{ range $fileName := .Values.files.restricted }}
   - host: {{ $.Values.global.host }}
@@ -23,7 +23,7 @@ spec:
         pathType: Exact
         backend:
           service:
-            name: app-files
+            name: files
             port: 
               number: 80
 

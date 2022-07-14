@@ -1,4 +1,4 @@
-app-api:
+api:
   vars:
     EGAPRO_SEND_EMAILS: "True"
     EGAPRO_SMTP_HOST: maildev
