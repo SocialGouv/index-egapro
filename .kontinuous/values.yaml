@@ -47,6 +47,7 @@ app-api:
 app-files:
   image: ghcr.io/socialgouv/docker/nginx:7.0.1
   containerPort: 8080
+  probesPort: 8080
   volumes:
     - name: files
       persistentVolumeClaim:
