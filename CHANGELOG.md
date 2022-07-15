@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/SocialGouv/index-egapro/compare/v1.1.0...v1.1.1) (2022-07-15)
+
+
+### Bug Fixes
+
+* override ks repositoryName ([7eb5add](https://github.com/SocialGouv/index-egapro/commit/7eb5add27fc14645f1b526a9d19f939f944f365a))
+
 # [1.1.0](https://github.com/SocialGouv/index-egapro/compare/v1.0.0...v1.1.0) (2022-07-15)
 
 
