@@ -1,3 +1,45 @@
+# [1.1.0](https://github.com/SocialGouv/index-egapro/compare/v1.0.0...v1.1.0) (2022-07-15)
+
+
+### Bug Fixes
+
+* add basic-auth sealed secret ([a9ce26e](https://github.com/SocialGouv/index-egapro/commit/a9ce26e785ac4c9dc8117a3b755cab710d4c94a6))
+* add create db on review ([54406fd](https://github.com/SocialGouv/index-egapro/commit/54406fda774109f2c5ebdefab0f4b26c1ac237f9))
+* app emotion monorepo ([de2c3de](https://github.com/SocialGouv/index-egapro/commit/de2c3de7b2e32fe4b076c38b283d8ffb488e6050))
+* build context ([94af3ac](https://github.com/SocialGouv/index-egapro/commit/94af3ac5f1f51cf645088987ead5d3faa8c7a038))
+* encoding to utf8 ([b4d38b0](https://github.com/SocialGouv/index-egapro/commit/b4d38b0b87160d90a934ed0cb6f7bae7d00dd98a))
+* files ingress host ([ceaddd3](https://github.com/SocialGouv/index-egapro/commit/ceaddd30706cdb6f3429cd2bdf6832a4ae7b9b49))
+* files probes using tcp port ([1a74895](https://github.com/SocialGouv/index-egapro/commit/1a748955ce770afa394ac14b1aee189969726300))
+* kontinuous set env ([d3a029f](https://github.com/SocialGouv/index-egapro/commit/d3a029f2a1133c4a1b680a2004e5a0c27a701851))
+* lint to fix encoding ([5be66e7](https://github.com/SocialGouv/index-egapro/commit/5be66e7d5526240af679bc351c17cb665c78df31))
+* mv sealed secrets ([2817b83](https://github.com/SocialGouv/index-egapro/commit/2817b83ee6003fd9095ef7fe1de560478c6ed1fa))
+* remove rewrite for ingress files ([bc4bce6](https://github.com/SocialGouv/index-egapro/commit/bc4bce6c79b20824a3af8b0be0d34a9f246b62a7))
+* rootless api + unhost symlink + fix warn ([3b4b990](https://github.com/SocialGouv/index-egapro/commit/3b4b9906edb4c8a5421d61cb083517e4544d05e5))
+* simulateur emotion monorepo ([fa28833](https://github.com/SocialGouv/index-egapro/commit/fa28833bce2ce6bbf7cf2307d6cbb33253dfe064))
+* testing issue ([30c1f8c](https://github.com/SocialGouv/index-egapro/commit/30c1f8ce36f7480dc3d8e26ebd1114334d966e0a))
+* up dot notation ks convention ([2dac5dc](https://github.com/SocialGouv/index-egapro/commit/2dac5dc1690c119f606ba9249a3bd389a11477c4))
+* up to ks explicit chart ([29757b6](https://github.com/SocialGouv/index-egapro/commit/29757b665ff06c0b79f092e2c821aaf6a2c7b58d))
+* up to ks explicit chart ([0c54a74](https://github.com/SocialGouv/index-egapro/commit/0c54a74f5c1224c78132d8e530fcc1bca82e5a32))
+
+
+### Features
+
+* add .gitignore for declaration ([4168bd5](https://github.com/SocialGouv/index-egapro/commit/4168bd540e6424aaf07d22b62583b058dba5eb30))
+* add healthchecks ([3bf3b2b](https://github.com/SocialGouv/index-egapro/commit/3bf3b2bef2c61db8ceea1e1c482fcf35e4656910))
+* add prod dockerfiles +declaration url as var ([0698e3b](https://github.com/SocialGouv/index-egapro/commit/0698e3bb861fb4288b7d4a13af83035c84e0a700))
+* cronjobs gen files ([f616c6c](https://github.com/SocialGouv/index-egapro/commit/f616c6c483f9300e67a573b64fc58b00524f9d8b))
+* declaration docker ([e94d7b7](https://github.com/SocialGouv/index-egapro/commit/e94d7b777d26481c53071286fbbd5b33b5113c9f))
+* expose files ([b2f43c6](https://github.com/SocialGouv/index-egapro/commit/b2f43c6f58972ee4e0f7ff13bb05df64271d1f99))
+* kube ingress ([9f4e855](https://github.com/SocialGouv/index-egapro/commit/9f4e8556ff804b279f5be5f94d1f38dd879b7dd1))
+* maildev + improve scripts ([7d49a8b](https://github.com/SocialGouv/index-egapro/commit/7d49a8b9753a6278bd5ba8f1f6d1af99e7a4aa16))
+* monorepo and kontinuous ([2374acc](https://github.com/SocialGouv/index-egapro/commit/2374acc951b87ecfe24bc5931e1611c398a808dc))
+* remove temporary folder from git ([8387d00](https://github.com/SocialGouv/index-egapro/commit/8387d00bc0615a22de68f6cf19e1200681f1215c))
+* simulateur dev integration ([c795aea](https://github.com/SocialGouv/index-egapro/commit/c795aeadcba1f4f9d2eaaa22d311796b957ccf7c))
+* test api script in local mode ([e247ec9](https://github.com/SocialGouv/index-egapro/commit/e247ec93a92a3a8f98c60a0148013564c7bc713c))
+* update for declaration app ([df88675](https://github.com/SocialGouv/index-egapro/commit/df886759423eba05ddf43370200cb170021c4273))
+* watchdog python ([fa58a28](https://github.com/SocialGouv/index-egapro/commit/fa58a28fef9df4ee4f4c513cb9d7a90fb0fed0b0))
+* **docker:** config ([9703783](https://github.com/SocialGouv/index-egapro/commit/97037837b907d15ef65f013f417c9657a69d8db7))
+
 # 1.0.0 (2022-07-15)
 
 
