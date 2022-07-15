@@ -12,20 +12,20 @@ jobs:
       - name: Checkout Commit
         uses: actions/checkout@v2
 
-      - name: Cache yarn dependencies
-        uses: actions/cache@v2
-        id: cache-dependencies
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+      # - name: Cache yarn dependencies
+      #   uses: actions/cache@v2
+      #   id: cache-dependencies
+      #   with:
+      #     path: node_modules
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-yarn-
 
       - name: Install Dependencies
         # Check for `cache-hit` (`steps.cache-dependencies.cache-hit != 'true'`)
         # If there's a cache hit, we skip this step (the dependencies are already available)
         # If there's no cache hit, we run "yarn install"
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        # if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
           yarn install --frozen-lockfile --force --non-interactive
 
