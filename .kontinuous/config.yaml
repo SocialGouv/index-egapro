@@ -1,4 +1,5 @@
 projectName: egapro
+repositoryName: egapro
 dependencies:
   fabrique:
     import: SocialGouv/kontinuous/plugins/fabrique
