@@ -2,7 +2,7 @@ on:
   push:
     branches: ["*"]
 
-name: check-all
+name: Tests
 jobs:
   check-all:
     runs-on: ubuntu-latest
