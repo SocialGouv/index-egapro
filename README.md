@@ -1,27 +1,39 @@
-[![Continuous integration](https://github.com/SocialGouv/egapro-next/actions/workflows/continuous-integration.yml/badge.svg?branch=master)](https://github.com/SocialGouv/egapro-next/actions/workflows/continuous-integration.yml)
-
 # EgaPro
 
-> Calcul de l'index de l'égalité homme / femme dans les entreprises
-
-Ce projet est le frontend qui permet de faire une simulation-déclaration pour Egapro.
-
-Repository pour la réécriture des fronts de Index Egapro.
-
-## Installer et lancer
+## Installer
 
 ```bash
 yarn
-yarn build
-yarn start
 ```
 
-Le site est alors accessible sur http://localhost:3000.
+## Lancer
+
+One component at time
+
+```bash
+yarn dev:api
+yarn dev:app
+yarn dev:simulateur
+yarn dev:declaration
+```
+
+- [api         -> http://localhost:2626](http://localhost:2626)
+- [app         -> http://localhost:3000/consulter-index/](http://localhost:3000/consulter-index/)
+- [simulateur  -> http://localhost:3001](http://localhost:3001)
+- [declaration -> http://localhost:4000](http://localhost:4000)
+
+
+All in one
+
+```bash
+yarn dev
+```
+
 
 ## Tests
 
 ```bash
-yarn test
+yarn check-all
 ```
 
 

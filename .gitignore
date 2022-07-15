@@ -1,23 +1,27 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+
 # dependencies
-/node_modules
-/.pnp
+node_modules
+/packages/app/.pnp
 .pnp.js
 
 # testing
-/coverage
+/packages/app/coverage
 
 # next.js
-/.next/
-/out/
+/packages/app/.next
+/packages/app/out
+/packages/app/build
 
-# production
-/build
+# cra
+/packages/simulateur/build
 
 # misc
 .DS_Store
 *.pem
+.history
+.idea
 
 # debug
 npm-debug.log*
@@ -25,13 +29,26 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+/.env
 
 # vercel
 .vercel
+packages/app/.env.local
+packages/app/.env.development.local
+packages/app/.env.test.local
+packages/app/.env.production.local
 
 # typescript
 *.tsbuildinfo
+
+# API Python
+/packages/api/__pycache__
+/packages/api/*.egg-info
+/packages/api/*.db
+/packages/api/tmp/
+/packages/api/.coverage
+/packages/api/htmlcov/
+/packages/api/site/
+/packages/api/venv/
+/packages/api/.env
+/packages/api/settings.json
