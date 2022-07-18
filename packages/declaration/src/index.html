@@ -25,7 +25,7 @@ EGAPRO_API_URL="{{ site.EGAPRO_API_URL }}"
     if (urlParams.has('token')) {
       // Coming from an "authentication link" in the confirmation email
       app.token = urlParams.get('token')
-      return redirect('commencer.html')
+      return redirect('{{site.baseurl}}/commencer.html')
     }
     if (urlParams.has('siren') && urlParams.has('year')) {
       // Coming from a "declaration link" from the declaration validation email
@@ -33,11 +33,11 @@ EGAPRO_API_URL="{{ site.EGAPRO_API_URL }}"
       app.annee = urlParams.get('year')
       app.dataToLocalStorage()
       if (app.token) {
-        return redirect('commencer.html')
+        return redirect('{{site.baseurl}}/commencer.html')
       } else {
-        return redirect('email.html')
+        return redirect('{{site.baseurl}}/email.html')
       }
     }
-    redirect('presentation.html')
+    redirect('{{site.baseurl}}/presentation.html')
   }
 </script>
