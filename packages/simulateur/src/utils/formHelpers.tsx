@@ -1,7 +1,7 @@
-import { fractionToPercentage, parseDate, percentageToFraction } from "./helpers"
-
-import { PeriodeDeclaration, TrancheEffectifs } from "../globals"
+import { PeriodeDeclaration } from "../globals"
 import { FieldMetaState } from "react-final-form"
+import { fractionToPercentage, percentageToFraction } from "./number"
+import { parseDate } from "./date"
 
 // INT PARSE
 
@@ -20,7 +20,7 @@ export const parseFloatStateValue = (value: number | undefined) =>
 
 // Boolean PARSE
 
-export const parseBooleanFormValue = (value: string) => value === "true"
+export const parseBooleanFormValue = (value: string | undefined) => value === "true"
 
 export const parseBooleanStateValue = (value: boolean) => String(value)
 
@@ -37,26 +37,14 @@ export const parsePeriodeDeclarationFormValue = (value: string): PeriodeDeclarat
   }
 }
 
-// TrancheEffectif PARSE
-
-export const parseTrancheEffectifsFormValue = (value: string): TrancheEffectifs => {
-  switch (value) {
-    case "251 à 999":
-      return "251 à 999" as TrancheEffectifs
-    case "1000 et plus":
-      return "1000 et plus" as TrancheEffectifs
-    default:
-      return "50 à 250" as TrancheEffectifs
-  }
-}
-
 // VALIDATION
 
 export type ValidatorFunction = (value: string, allValues?: any) => undefined | string
 export type AsyncValidatorFunction = (value: string, allValues?: string[]) => Promise<undefined | string>
 export type FormValidatorFunction = (values: Record<string, unknown>) => undefined | string
 
-export const required: ValidatorFunction = (value) => (value ? undefined : "Ce champ ne peut être vide")
+export const required: ValidatorFunction = (value: string | undefined) =>
+  value && value.trim && value.trim().length ? undefined : "Ce champ ne peut être vide"
 
 export const mustBeNumber: ValidatorFunction = (value) =>
   isNaN(Number(value)) ? "Renseignez une valeur numérique" : undefined
@@ -114,3 +102,11 @@ export function isFormValid(formState: { formValidated: string }) {
 export const isFieldHasError = (meta: FieldMetaState<string>): boolean =>
   (meta.error && meta.submitFailed) ||
   (meta.error && meta.touched && Object.values({ ...meta.error, required: false }).includes(true))
+
+/**
+ * Helper type because all inputs in form are considered string.
+ * So with this, we can infer name of properties and we set string as type for all of them.
+ */
+export type FormInputs<K> = {
+  [key in keyof K]: string
+}

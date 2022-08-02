@@ -2,6 +2,7 @@ import deepmerge from "deepmerge"
 import { format } from "date-fns"
 
 import type { AppState, ActionType, PeriodeDeclaration } from "./globals"
+
 import { CategorieSocioPro, TranchesAges } from "./globals"
 import mapEnum from "./utils/mapEnum"
 import { overwriteMerge, combineMerge } from "./utils/merge"

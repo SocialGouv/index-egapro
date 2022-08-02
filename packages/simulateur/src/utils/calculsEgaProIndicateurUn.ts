@@ -6,9 +6,8 @@ import {
   GroupeIndicateurUn,
   GroupeCoefficient,
   GroupTranchesAgesIndicateurUn,
+  GroupTranchesAgesEffectif,
 } from "../globals"
-
-import { roundDecimal } from "./helpers"
 
 import {
   calculEcartsPonderesParGroupe,
@@ -18,6 +17,7 @@ import {
   EffectifGroup,
   calculEffectifsIndicateurCalculable,
 } from "./calculsEgaPro"
+import { roundDecimal } from "./number"
 
 /* INDICATEUR 1 CONST */
 
@@ -85,13 +85,6 @@ export interface effectifEtEcartRemuGroupCsp extends EffectifGroup {
   ecartApresApplicationSeuilPertinence: number | undefined
 }
 
-export interface tmpGroupTranchesAgesCsp {
-  categorieSocioPro: CategorieSocioPro
-  trancheAge: TranchesAges
-  nombreSalariesFemmes: number | undefined
-  nombreSalariesHommes: number | undefined
-}
-
 export interface effectifEtEcartRemuGroupCoef extends EffectifGroup {
   id: any
   name: string
@@ -145,12 +138,14 @@ export const calculEcartTauxRemunerationParTrancheAgeCoef = (coefficient: Array<
     }
   })
 
+export type FlatGroupTranchesAgesCsp = GroupTranchesAgesEffectif & { categorieSocioPro: CategorieSocioPro }
+
 export const calculEffectifsEtEcartRemuParTrancheAgeCsp = (
   dataEffectif: Array<GroupeEffectif>,
   dataIndicateurUn: Array<GroupeIndicateurUn>,
 ): Array<effectifEtEcartRemuGroupCsp> => {
   const dataEffectifByRow = dataEffectif.reduce(
-    (acc: Array<tmpGroupTranchesAgesCsp>, { categorieSocioPro, tranchesAges }) =>
+    (acc: Array<FlatGroupTranchesAgesCsp>, { categorieSocioPro, tranchesAges }) =>
       acc.concat(tranchesAges.map((trancheAge) => ({ ...trancheAge, categorieSocioPro }))),
     [],
   )
@@ -159,7 +154,7 @@ export const calculEffectifsEtEcartRemuParTrancheAgeCsp = (
     [],
   )
 
-  const computedDataByRow = dataEffectifByRow.map((groupTrancheAgeEffectif: tmpGroupTranchesAgesCsp, index: number) => {
+  const computedDataByRow = dataEffectifByRow.map((groupTrancheAgeEffectif, index: number) => {
     const groupTrancheAgeIndicateurUn = dataIndicateurUnByRow[index]
 
     const remunerationAnnuelleBrutFemmes =
