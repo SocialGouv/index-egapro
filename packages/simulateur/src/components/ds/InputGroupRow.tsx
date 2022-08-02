@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import {
   Box,
   FormControl,
@@ -14,7 +14,7 @@ import { Field } from "react-final-form"
 import { isFieldHasError } from "../../utils/formHelpers"
 import ActivityIndicator from "../ActivityIndicator"
 
-export type InputGroupProps = FormControlProps & {
+export type InputGroupRowProps = FormControlProps & {
   label: string
   placeholder?: string
   isLabelHidden?: boolean
@@ -28,13 +28,15 @@ export type InputGroupProps = FormControlProps & {
   min?: number
   max?: number
   showError?: boolean
+  htmlSize?: number
+  width?: string
   message?: {
     help?: React.ReactElement | string
     error?: React.ReactElement | string
   }
 }
 
-const InputGroup: FunctionComponent<InputGroupProps> = ({
+const InputGroupRow: React.FC<InputGroupRowProps> = ({
   isLabelHidden,
   label,
   placeholder,
@@ -49,6 +51,8 @@ const InputGroup: FunctionComponent<InputGroupProps> = ({
   min,
   max,
   showError = true,
+  htmlSize,
+  width = "auto",
   ...rest
 }) => {
   const msgStyle = { flexDirection: "column", alignItems: "flex-start" }
@@ -66,6 +70,8 @@ const InputGroup: FunctionComponent<InputGroupProps> = ({
                 placeholder={placeholder}
                 autoComplete={autocomplete}
                 type={type}
+                width={width}
+                {...(htmlSize && { htmlSize })}
                 {...input}
                 {...(textAlign && { textAlign })}
                 {...(type === "number" && min && { min })}
@@ -76,12 +82,12 @@ const InputGroup: FunctionComponent<InputGroupProps> = ({
                   <ActivityIndicator />
                 </Box>
               )}
+              {showError && message?.error && <FormErrorMessage sx={msgStyle}>{message.error}</FormErrorMessage>}
+              {showError && !message?.error && meta?.error && (
+                <FormErrorMessage sx={msgStyle}>{meta.error}</FormErrorMessage>
+              )}
             </Box>
             {message?.help && <FormHelperText sx={msgStyle}>{message.help}</FormHelperText>}
-            {showError && message?.error && <FormErrorMessage sx={msgStyle}>{message.error}</FormErrorMessage>}
-            {showError && !message?.error && meta?.error && (
-              <FormErrorMessage sx={msgStyle}>{meta.error}</FormErrorMessage>
-            )}
           </FormControl>
         )
       }}
@@ -89,4 +95,4 @@ const InputGroup: FunctionComponent<InputGroupProps> = ({
   )
 }
 
-export default InputGroup
+export default InputGroupRow

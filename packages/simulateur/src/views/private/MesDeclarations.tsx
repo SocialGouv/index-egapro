@@ -1,27 +1,31 @@
 import { Flex, FormControl, FormLabel, Select } from "@chakra-ui/react"
 import React, { FunctionComponent } from "react"
+import { useHistory, useParams } from "react-router-dom"
 
 import { useTitle } from "../../utils/hooks"
 
 import { useUser } from "../../components/AuthContext"
+import DeclarationsListe from "../../components/DeclarationsListe"
 import InfoEntreprise from "../../components/InfoEntreprise"
 import NoSiren from "../../components/ds/NoSiren"
 import Page from "../../components/Page"
-import UtilisateursEntreprise from "../../components/UtilisateursEntreprise"
 import { SinglePageLayout } from "../../containers/SinglePageLayout"
 
-const title = "Mes entreprises"
+const title = "Mes déclarations"
 
-const MesEntreprises: FunctionComponent = () => {
+const MesDeclarations: FunctionComponent = () => {
   useTitle(title)
+  const history = useHistory()
+
+  const { siren: sirenFromUrl } = useParams<{ siren?: string }>()
 
   const { ownership: sirens } = useUser()
-  const orderedSirens = sirens.sort()
+  const orderedSirens = [...sirens].sort()
 
-  const [chosenSiren, setChosenSiren] = React.useState(orderedSirens?.[0] || "")
+  const siren = sirenFromUrl || orderedSirens?.[0]
 
   return (
-    <SinglePageLayout>
+    <SinglePageLayout size="container.xl">
       <Page title={title}>
         {!sirens?.length ? (
           <NoSiren />
@@ -30,8 +34,8 @@ const MesEntreprises: FunctionComponent = () => {
             <FormControl id="siren">
               <FormLabel>SIREN</FormLabel>
               <Select
-                onChange={(event) => setChosenSiren(event?.target?.value)}
-                defaultValue={chosenSiren}
+                onChange={(event) => history.push(`/tableauDeBord/mes-declarations/${event?.target?.value}`)}
+                defaultValue={siren}
                 aria-label="Liste des SIREN"
               >
                 {orderedSirens.map((siren) => (
@@ -43,8 +47,8 @@ const MesEntreprises: FunctionComponent = () => {
             </FormControl>
 
             <Flex mt="6" direction="column">
-              <InfoEntreprise siren={chosenSiren} />
-              <UtilisateursEntreprise siren={chosenSiren} />
+              <InfoEntreprise siren={siren} />
+              <DeclarationsListe siren={siren} />
             </Flex>
           </>
         )}
@@ -53,4 +57,4 @@ const MesEntreprises: FunctionComponent = () => {
   )
 }
 
-export default MesEntreprises
+export default MesDeclarations

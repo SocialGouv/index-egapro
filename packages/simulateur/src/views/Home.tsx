@@ -4,13 +4,13 @@ import { Heading, SimpleGrid } from "@chakra-ui/react"
 
 import { ActionType } from "../globals"
 import { postIndicatorsDatas } from "../utils/api"
-import { logToSentry } from "../utils/helpers"
 
 import ButtonAction from "../components/ds/ButtonAction"
 import ButtonLinkNoRouter from "../components/ds/ButtonLinkNoRouter"
 import Card from "../components/ds/Card"
 import Page from "../components/Page"
 import ErrorMessage from "../components/ErrorMessage"
+import { logToSentry } from "../utils/sentry"
 
 interface HomeProps extends RouteComponentProps {
   dispatch: (action: ActionType) => void
@@ -85,13 +85,7 @@ const Home: FunctionComponent<HomeProps> = ({ history, location, dispatch }) => 
           }}
           content="Vous pouvez déclarer votre index égalité professionnelle F/H calculé par ailleurs directement via le
                 formulaire suivant."
-          action={
-            <ButtonLinkNoRouter
-              to={process.env.REACT_APP_DECLARATION_URL || "/declaration/"}
-              label="Déclarer directement"
-              fullWidth
-            />
-          }
+          action={<ButtonLinkNoRouter to="/declaration/" label="Déclarer directement" fullWidth />}
         />
       </SimpleGrid>
     </Page>

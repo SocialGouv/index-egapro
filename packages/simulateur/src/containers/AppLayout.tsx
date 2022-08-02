@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex } from "@chakra-ui/react"
+import { Flex, Spinner } from "@chakra-ui/react"
 
 import { Route, Switch, Redirect, RouteProps } from "react-router-dom"
 
@@ -25,6 +25,8 @@ import Footer from "../components/Footer"
 import GererUtilisateursPage from "../views/private/GererUtilisateursPage"
 import ResetPage from "../views/ResetPage"
 import GenererTokenUtilisateurPage from "../views/private/GenererTokenUtilisateurPage"
+import MesDeclarations from "../views/private/MesDeclarations"
+import ObjectifsMesuresPage from "../views/private/ObjectifsMesuresPage"
 
 interface Props {
   state: AppState | undefined
@@ -37,21 +39,15 @@ interface Props {
  * @param staffOnly true is only staff member can access this page
  */
 function PrivateRoute({ children, staffOnly, ...rest }: RouteProps & { staffOnly?: boolean }) {
-  const { isAuthenticated, staff } = useUser()
+  const { isAuthenticated, staff, loading: isLoadingAuth } = useUser()
 
-  if (staffOnly) {
-    if (!staff) {
-      return isAuthenticated ? (
-        <Redirect to="/tableauDeBord/mes-entreprises" />
-      ) : (
-        <Redirect to="/tableauDeBord/me-connecter" />
-      )
-    }
+  if (isLoadingAuth) return <Spinner />
 
-    return <Route {...rest} render={() => children} />
-  }
+  if (!isAuthenticated) return <Mire />
 
-  return <Route {...rest} render={() => (isAuthenticated ? children : <Redirect to="/tableauDeBord/me-connecter" />)} />
+  if (staffOnly && !staff) return <Redirect to="/tableauDeBord/mes-declarations" />
+
+  return <Route {...rest} render={() => children} />
 }
 
 function DashboardRoutes() {
@@ -62,6 +58,15 @@ function DashboardRoutes() {
       </Route>
       <PrivateRoute path="/tableauDeBord/mes-entreprises" exact>
         <MesEntreprises />
+      </PrivateRoute>
+      <PrivateRoute path="/tableauDeBord/mes-declarations" exact>
+        <MesDeclarations />
+      </PrivateRoute>
+      <PrivateRoute path="/tableauDeBord/mes-declarations/:siren" exact>
+        <MesDeclarations />
+      </PrivateRoute>
+      <PrivateRoute path="/tableauDeBord/objectifs-mesures/:siren/:year" exact>
+        <ObjectifsMesuresPage />
       </PrivateRoute>
       <PrivateRoute path="/tableauDeBord/gerer-utilisateurs" staffOnly exact>
         <GererUtilisateursPage />
