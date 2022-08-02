@@ -148,7 +148,7 @@ checkSirenValidity = async event => {
   const allSirens = Array.from(document.querySelectorAll("input.siren")).map(node => node.value)
   if (allSirens.filter(siren => siren === target.value).length >= 2) {
     // We check if the length is >= 2 because the list of sirens also contains the current value
-    target.setCustomValidity("Le Siren a déjà été saisi")
+    target.setCustomValidity("Le Siren a dÃ©jÃ  Ã©tÃ© saisi")
     target.reportValidity()
     return
   }
@@ -165,7 +165,7 @@ checkSirenValidity = async event => {
     }
     const errorMessage =
       (response && response.data && response.data.error) ||
-      "Le numéro Siren que vous avez saisi n'est pas valide"
+      "Le numÃ©ro Siren que vous avez saisi n'est pas valide"
     target.setCustomValidity(errorMessage)
   } else {
     if (raisonSocialeField) {
@@ -240,7 +240,7 @@ function notifyPercentage(event) {
   if (target.checkValidity()
       && !isNaN(Number(target.value))
       && Number(target.value) >= 100) {
-    notify.warning("Vous avez renseigné un écart en pourcentage supérieur ou égal à 100%, si votre saisie est correcte continuez, sinon veuillez la corriger")
+    notify.warning("Vous avez renseignÃ© un Ã©cart en pourcentage supÃ©rieur ou Ã©gal Ã  100%, si votre saisie est correcte continuez, sinon veuillez la corriger")
   }
 }
 
@@ -258,7 +258,7 @@ class AppStorage {
   }
 
   async init() {
-    // Réinitialise l'objet this.data.
+    // RÃ©initialise l'objet this.data.
     this.resetData()
     // Appele le endpoint config et le stocke dans this.config.
     await this.loadConfig()
@@ -268,14 +268,14 @@ class AppStorage {
     // Charge this.data avec le local storage.
     this.loadLocalData()
     // Is remote data actually necessary as we must have local data for token anyways?
-    // Recharge this.data avec les données issues de l'API.
+    // Recharge this.data avec les donnÃ©es issues de l'API.
     if(this.siren && this.annee) await this.loadRemoteData()
   }
 
   resetData() {
     this.data = {
       source: 'formulaire',
-      déclaration: {}
+      dÃ©claration: {}
     }
   }
 
@@ -285,7 +285,7 @@ class AppStorage {
 
   async loadConfig() {
     const response = await request('GET', '/config')
-    if(!response.ok) notify.error("Le serveur ne répond pas. Veuillez contacter l'équipe technique.")
+    if(!response.ok) notify.error("Le serveur ne rÃ©pond pas. Veuillez contacter l'Ã©quipe technique.")
     Object.entries(response.data).forEach(([key, value]) => {
       this.config[key.toLowerCase()] = value
     })
@@ -332,11 +332,11 @@ class AppStorage {
   }
 
   set annee(annee) {
-    return this.setItem('déclaration.année_indicateurs', Number(annee))
+    return this.setItem('dÃ©claration.annÃ©e_indicateurs', Number(annee))
   }
 
   get annee() {
-    return this.getItem('déclaration.année_indicateurs')
+    return this.getItem('dÃ©claration.annÃ©e_indicateurs')
   }
 
   set siren(siren) {
@@ -348,22 +348,22 @@ class AppStorage {
   }
 
   get isDraft() {
-    return this.data.déclaration.brouillon
+    return this.data.dÃ©claration.brouillon
   }
 
   set isDraft(value) {
-    this.data.déclaration.brouillon = value
+    this.data.dÃ©claration.brouillon = value
   }
 
   get mode() {
-    if(!this.getItem('déclaration.date')) return "creating"
+    if(!this.getItem('dÃ©claration.date')) return "creating"
     if(this.isDraft) return "updating"
     return "reading"
   }
 
   /**
-   * Rend la valeur d'un champ avec une notation dot et renvoie chaîne vide si le champ n'existe pas.
-   * Récupère les données à partir de app.data.
+   * Rend la valeur d'un champ avec une notation dot et renvoie chaÃ®ne vide si le champ n'existe pas.
+   * RÃ©cupÃ¨re les donnÃ©es Ã  partir de app.data.
    */
   getItem(flatKey) {
     const keys = flatKey.split(".");
