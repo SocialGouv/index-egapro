@@ -207,6 +207,22 @@ async def resend_receipt(request, response, siren, year):
     response.status = 204
 
 
+@app.route("/declaration/{siren}/{year}/objectifs-receipt", methods=["POST"])
+@tokens.require
+@ensure_owner
+async def resend_objectifs_receipt(request, response, siren, year):
+    try:
+        record = await db.declaration.get(siren, year)
+    except db.NoData:
+        raise HttpError(404, f"No declaration with siren {siren} and year {year}")
+    owners = await db.ownership.emails(siren)
+    if not owners:  # Staff member
+        owners = request["email"]
+    data = record.data
+    emails.objectives.send(owners, **data)
+    response.status = 204
+
+
 @app.route("/ownership/{siren}", methods=["GET"])
 @tokens.require
 @ensure_owner
@@ -309,6 +325,7 @@ async def send_token(request, response):
         link = f"{url}{token}"
         if "localhost" in link or "127.0.0.1" in link:
             print(link)
+            loggers.logger.info(link)
         body = emails.ACCESS_GRANTED.format(link=link)
         emails.send(email, "Validation de l'email", body)
         response.status = 204
