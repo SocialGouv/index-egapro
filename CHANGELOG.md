@@ -1,3 +1,43 @@
+# [1.2.0](https://github.com/SocialGouv/index-egapro/compare/v1.1.0...v1.2.0) (2022-08-03)
+
+
+### Bug Fixes
+
+* add egapro cli shortcut from api container ([5aed9bf](https://github.com/SocialGouv/index-egapro/commit/5aed9bfed85cbbbbbad6f8113b23c16f04bce92f))
+* character (wip) ([83a980d](https://github.com/SocialGouv/index-egapro/commit/83a980deded810bf95d4b58ba71c3efe63e528e0))
+* go to prod ([7e72b12](https://github.com/SocialGouv/index-egapro/commit/7e72b128ccc26e8140e55d4ad77f68805245bf47))
+* monorepo linters ([a3037db](https://github.com/SocialGouv/index-egapro/commit/a3037dbbd9ce73b3f122327955f152f6ed3e166f))
+* monorepo linters ([ede97b7](https://github.com/SocialGouv/index-egapro/commit/ede97b726506bcbde0862c733a2d101a64b66eb2))
+* nginx4spa ([a6c102e](https://github.com/SocialGouv/index-egapro/commit/a6c102e658b88991a88648a18876e84d01e1dd3f))
+* override ks repositoryName ([7eb5add](https://github.com/SocialGouv/index-egapro/commit/7eb5add27fc14645f1b526a9d19f939f944f365a))
+* prod from prod branch ([b33ee77](https://github.com/SocialGouv/index-egapro/commit/b33ee77ba2ead0c86877342ffdbd67db675972d1))
+* redirect declaration baseUrl ([67287bc](https://github.com/SocialGouv/index-egapro/commit/67287bc5a17c0c322a6ce95e1a82bbaf6c84a5af))
+* rollback to utf8 for utils.js ([a856db9](https://github.com/SocialGouv/index-egapro/commit/a856db9367f611b59f8be93d93073ae37141b43c))
+* test for non utf8 char ([001e201](https://github.com/SocialGouv/index-egapro/commit/001e20124bbceb92959ae54f1b6ec20fb3379fc6))
+* tests ([1d13119](https://github.com/SocialGouv/index-egapro/commit/1d1311928bad157c0f8b0bb149cbc8f60760b896))
+* tests cache hash ([ebf1fad](https://github.com/SocialGouv/index-egapro/commit/ebf1fadca03bfd871030944190ec5c45f5406a42))
+* tests readd unbuggy cache ([7021df0](https://github.com/SocialGouv/index-egapro/commit/7021df08e4b9fa2a59467ef3a08604838fd9dfae))
+* try to fix gh cache for tests ([0961a03](https://github.com/SocialGouv/index-egapro/commit/0961a0386b4a34250ca8e30a497bebd3844ccd31))
+* try utf8 with bom for utils.js (wip) ([676af09](https://github.com/SocialGouv/index-egapro/commit/676af09ac8d637efa5c85ff728a7232b96fe91e1))
+* up nginx version ([5e2f97b](https://github.com/SocialGouv/index-egapro/commit/5e2f97bfbb2d62f67153f495ba2aab604ede7549))
+* utf8 problem (wip) ([19bc85e](https://github.com/SocialGouv/index-egapro/commit/19bc85e8031e718f59dd684fc22585b25771a703))
+* utils.js in utf-8 w/o bom ([bb77601](https://github.com/SocialGouv/index-egapro/commit/bb77601cf4c81eba8bc7d249c0dcf7a601857c83))
+* utils.js in utf8 with bom to prevent error with nginx ([3c822bb](https://github.com/SocialGouv/index-egapro/commit/3c822bb6e670fbc85b500be8634fbafac02bbc4f))
+
+
+### Features
+
+* diff app with legacy consulter ([10eacb2](https://github.com/SocialGouv/index-egapro/commit/10eacb2c60af99adeb3ab2ec6567996285ca36c6))
+* diff migration with legacy API ([84303de](https://github.com/SocialGouv/index-egapro/commit/84303dea93663c3fb720fa0fa06947187bf38996))
+* diff migration with legacy declaration ([ccedebc](https://github.com/SocialGouv/index-egapro/commit/ccedebc07e22a5647298650d6df4e8b639a663ba))
+* diff migration with legacy simulateur ([5e763b8](https://github.com/SocialGouv/index-egapro/commit/5e763b8d2cff40b269e9541db5478fffd21639cf))
+* diff migration with legacy simulateur ([46ac667](https://github.com/SocialGouv/index-egapro/commit/46ac667b45b9e54ea2cb13174f6ed3807a111d94))
+* fetch all other repos code + end monorepo implem ([9715565](https://github.com/SocialGouv/index-egapro/commit/97155659b4ac997b2c3ce012fc1e51a6c0d5b411))
+* fix url for declaration in simu homepage ([ebaed95](https://github.com/SocialGouv/index-egapro/commit/ebaed957461e11c0aced274d15b625ecdd3f7eed))
+* save utils.js as iso-8859-1 (wip) ([a602df3](https://github.com/SocialGouv/index-egapro/commit/a602df30b466845a3bb368fdcac85ebf748401ec))
+* update README ([6295adb](https://github.com/SocialGouv/index-egapro/commit/6295adbc436b450885aa724860761ce3e739acf1))
+* yarn.lock ([b11092c](https://github.com/SocialGouv/index-egapro/commit/b11092c260c049166f8747df82d6b22b6a9795a1))
+
 # [1.1.0](https://github.com/SocialGouv/index-egapro/compare/v1.0.0...v1.1.0) (2022-07-15)
 
 
