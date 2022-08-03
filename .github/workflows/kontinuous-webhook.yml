@@ -1,6 +1,8 @@
 name: Kontinuous
 on:
   push:
+    tags-ignore:
+      - "v*"
   delete:
 
 concurrency:
