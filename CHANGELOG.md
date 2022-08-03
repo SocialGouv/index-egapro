@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/SocialGouv/index-egapro/compare/v1.2.0...v1.2.1) (2022-08-03)
+
+
+### Bug Fixes
+
+* tags workflows ([f77a14c](https://github.com/SocialGouv/index-egapro/commit/f77a14c366505801a84bafd979494be36a1491bf))
+
 # [1.2.0](https://github.com/SocialGouv/index-egapro/compare/v1.1.0...v1.2.0) (2022-08-03)
 
 
