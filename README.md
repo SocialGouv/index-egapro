@@ -1,5 +1,11 @@
 # EgaPro
 
+
+## URL
+
+Prod : https://index-egapro.travail.gouv.fr/
+Préprod : https://egapro-preprod.dev.fabrique.social.gouv.fr/
+
 ## Installer
 
 ```bash
@@ -31,6 +37,13 @@ All in one
 yarn dev
 ```
 
+## Pour tout arrêter
+
+````bash
+docker-compose down # pour arrêter API, déclaration et maildev (ou Ctl-C)
+# Ctl-C simulateur
+# Ctl-C app
+````
 
 ## Tests
 
@@ -38,4 +51,32 @@ yarn dev
 yarn check-all
 ```
 
+## FAQ
 
+__Comment ajouter une librairie dans un workspace__
+
+````bash
+yarn workspace simulateur add moment
+````
+
+__Comment lancer un script dans un package__
+
+````bash
+yarn workspace simulateur run test
+````
+
+__Comment lancer un script dans tous les workspaces__
+
+````bash
+yarn workspaces run lint
+````
+
+
+## Fichiers
+
+Le fichier index-egalite-fh.csv est généré tous les jours.
+
+Les fichiers suivants, sont accessibles uniquement si authentifié ou pour certains host.
+- dgt.xlsx
+- full.ndjson
+- indexes.csv
