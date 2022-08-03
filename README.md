@@ -1,5 +1,11 @@
 # EgaPro
 
+
+## URL
+
+Prod : https://index-egapro.travail.gouv.fr/
+Préprod : https://egapro-preprod.dev.fabrique.social.gouv.fr/
+
 ## Installer
 
 ```bash
@@ -64,3 +70,13 @@ __Comment lancer un script dans tous les workspaces__
 ````bash
 yarn workspaces run lint
 ````
+
+
+## Fichiers
+
+Le fichier index-egalite-fh.csv est généré tous les jours.
+
+Les fichiers suivants, sont accessibles uniquement si authentifié ou pour certains host.
+- dgt.xlsx
+- full.ndjson
+- indexes.csv
