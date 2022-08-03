@@ -28,7 +28,7 @@ function redirect(url) {
 
 function buildSelectOptions(select, list, value) {
   select.innerHTML = ""
-  if(select.hasAttribute('empty')) list.unshift({ value: "", label: " --- " })
+  if(select.hasAttribute('empty')) list.unshift({ value: "", label: " ––– " })
   list.forEach((val) => {
     const option = document.createElement('option')
     option.value = val.value
