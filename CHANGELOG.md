@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/SocialGouv/index-egapro/compare/v1.2.4...v1.2.5) (2022-08-03)
+
+
+### Bug Fixes
+
+* use socialgouv/releaserc ([5de3296](https://github.com/SocialGouv/index-egapro/commit/5de3296e7bd66b765538471e8d7aca65285421b4))
+
 ## [1.2.4](https://github.com/SocialGouv/index-egapro/compare/v1.2.3...v1.2.4) (2022-08-03)
 
 
