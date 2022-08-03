@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/SocialGouv/index-egapro/compare/v1.3.3...v1.3.4) (2022-08-03)
+
+
+### Bug Fixes
+
+* secrets api ([f822abe](https://github.com/SocialGouv/index-egapro/commit/f822abe0176992f9043d2e2e4d2dee7da542a0f5))
+
 ## [1.3.3](https://github.com/SocialGouv/index-egapro/compare/v1.3.2...v1.3.3) (2022-08-03)
 
 
