@@ -1,5 +1,8 @@
 simulateur:
-  .ingress.enabled: false
+  host: index-egapro.travail.gouv.fr
+  redirectFrom:
+    - "{{ .Values.global.host }}"
+
   
 api:
   envFrom:
