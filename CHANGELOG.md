@@ -1,3 +1,18 @@
+# [1.3.0](https://github.com/SocialGouv/index-egapro/compare/v1.2.5...v1.3.0) (2022-08-03)
+
+
+### Features
+
+* rollback 18 juillet pour déclaration ([221989f](https://github.com/SocialGouv/index-egapro/commit/221989f8f263c98752e95d14fa5eb657a3d31af3))
+* sync with the code of declaration of 2022-07-22 ([e70db17](https://github.com/SocialGouv/index-egapro/commit/e70db175c223dce1d94ff5cbbf5e0a60cd197d84))
+
+## [1.2.5](https://github.com/SocialGouv/index-egapro/compare/v1.2.4...v1.2.5) (2022-08-03)
+
+
+### Bug Fixes
+
+* use socialgouv/releaserc ([5de3296](https://github.com/SocialGouv/index-egapro/commit/5de3296e7bd66b765538471e8d7aca65285421b4))
+
 ## [1.2.4](https://github.com/SocialGouv/index-egapro/compare/v1.2.3...v1.2.4) (2022-08-03)
 
 

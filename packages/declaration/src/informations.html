@@ -3,13 +3,14 @@ layout: tunnel
 title: "Informations calcul et période de référence"
 ---
 
-<h1 class="text-3xl mt-0">{{ page.title }}</h1>
+<h1>{{ page.title }}</h1>
 
-<div class="row">
-  <fieldset>
+<fieldset>
+  <div class="row">
     {% include input.html type="number" name="déclaration.année_indicateurs" label="Année au titre de laquelle les indicateurs sont calculés" readonly=true data-always-readonly=true %}
-  </fieldset>
-</div>
+  </div>
+</fieldset>
+
 
 <fieldset>
   <div class=row>
