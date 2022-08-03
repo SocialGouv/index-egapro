@@ -5,5 +5,4 @@ dependencies:
     import: SocialGouv/kontinuous/plugins/fabrique
 
 environmentPatterns:
-  prod: prod
-  preprod: master
+  prod: false
