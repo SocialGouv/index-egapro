@@ -1,3 +1,6 @@
+global:
+  host: index-egapro.travail.gouv.fr
+
 simulateur:
   host: index-egapro.travail.gouv.fr
   redirectFrom:
