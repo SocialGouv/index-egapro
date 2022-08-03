@@ -4,4 +4,6 @@ simulateur:
 api:
   envFrom:
     - secretRef:
+        name: "{{ .Values.global.pgSecretName }}"
+    - secretRef:
         name: smtp
