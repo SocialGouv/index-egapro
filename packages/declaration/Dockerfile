@@ -22,6 +22,6 @@ ARG BASE_URL
 ENV BASE_URL=${BASE_URL}
 RUN if [ -z "$BASE_URL" ]; then jekyll build; else jekyll build --baseurl $BASE_URL; fi
 
-FROM ghcr.io/socialgouv/docker/nginx:7.0.1
+FROM ghcr.io/socialgouv/docker/nginx:7.1.0
 
 COPY --from=builder --chown=nginx:nginx /home/jekyll/_site /usr/share/nginx/html

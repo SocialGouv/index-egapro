@@ -14,6 +14,8 @@
     "dev:maildev": "docker-compose up --build maildev",
     "docker:dev": "docker-compose up --build",
     "docker:prod": "docker-compose -f docker-compose.build.yml up --build",
+    "egapro": "docker exec -it $(basename $PWD)_api_1 egapro",
+    "egapro:local": "packages/api/egapro/bin/egapro",
     "lint": "yarn workspaces run lint",
     "fresh-install": "scripts/fresh-install",
     "check-all": "scripts/check-all",

@@ -28,6 +28,6 @@ ENV NODE_ENV=production
 RUN yarn build && yarn --frozen-lockfile --production
 
 # SERVER
-FROM ghcr.io/socialgouv/docker/nginx:7.0.1
+FROM ghcr.io/socialgouv/docker/nginx4spa:7.1.0
 
 COPY --from=builder --chown=nginx:nginx /app/build /usr/share/nginx/html
