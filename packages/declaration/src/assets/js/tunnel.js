@@ -1,7 +1,7 @@
 const form = document.getElementById("page-form");
 const progress = document.querySelector("progress");
-const previousButton = document.querySelector(".history-back");
-const nextButton = document.querySelector(".button-next");
+const previousButton = document.querySelector("a[rel=prev]");
+const nextButton = document.querySelector("button[rel=next]");
 const steps = [
   { name: "commencer" },
   { name: "declarant" },
@@ -244,20 +244,7 @@ function toggleDeclarationValidatedBar() {
     document.getElementById("declaration-readonly").hidden = app.mode !== 'reading'
     document.getElementById("declaration-draft").hidden = app.mode !== 'updating'
   }
-
-  const année = app.getItem("déclaration.année_indicateurs")
-  const index = app.getItem("déclaration.index")
-
-  // index may be undefined if it is Non calculable. Don't show the bar in this case.
-  const objectifsMesuresIsVisible = année >= 2021 && index && index < 85
-  const objectifsMesuresLabel = objectifsMesuresIsVisible && index < 75
-    ? "Aller aux objectifs de progression et mesures de correction"
-    : "Aller aux objectifs de progression"
-
-  document.getElementById("objectifs-mesures-button").hidden = !objectifsMesuresIsVisible
-  document.getElementById("objectifs-mesures-button").innerHTML = objectifsMesuresLabel
 }
-
 
 async function setDraftStatus() {
   if (confirm("Vous allez modifier une déclaration déjà validée et transmise.")) {
@@ -286,7 +273,6 @@ function goToSimulationApp() {
   simulation.focus()
 }
 
-
 async function resendReceipt() {
   const response = await request('POST', `/declaration/${app.siren}/${app.annee}/receipt`)
   if (response.ok) {
@@ -295,5 +281,3 @@ async function resendReceipt() {
     return notify.error("Erreur lors du renvoi de l'accusé de réception");
   }
 }
-
-

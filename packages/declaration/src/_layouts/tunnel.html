@@ -2,24 +2,19 @@
 layout: default
 ---
 <section id="declaration-readonly" class="declaration-mode" hidden>
-  <p class="text-lg font-bold mt-0 mb-0">
+  <p>
     Cette déclaration a été validée et transmise.
   </p>
-  <p class="mt-0">
+  <p>
     Vous pouvez la modifier et elle remplacera la déclaration actuelle une fois à nouveau validée et transmise à la dernière étape.
   </p>
-  <div class="buttons">
-    <button type="button" onclick="setDraftStatus()" class="button--warning">Modifier la déclaration</button>
-    <button type="button" onclick="resendReceipt()" class="button--warning">Renvoyer l'accusé de réception</button>
-    <button id="objectifs-mesures-button" type="button" onclick="goToMeConnecter()" class="button--warning" style="margin-top: 10px">Aller aux objectifs de progression et mesures de correction
-  </div>
+  <button type="button" onclick="setDraftStatus()">Modifier la déclaration</button>
+  <button type="button" onclick="resendReceipt()">Renvoyer l'accusé de réception</button>
 </section>
 
 <section id="declaration-draft" class="declaration-mode" hidden>
-  <p class="text-lg font-bold mt-0 mb-0">
-    Vous êtes en train de modifier une déclaration validée et transmise.
-  </p>
-  <p class="mt-0 mb-0">
+  <p>
+    Vous êtes en train de modifier une déclaration validée et transmise.<br>
     Vos modifications ne seront enregistrées que lorsque vous l'aurez à nouveau validée et transmise à la dernière étape.
   </p>
 </section>
@@ -34,23 +29,23 @@ layout: default
   <button type="button" onclick="goToSimulationApp()">Modifier ma déclaration</button>
 </section>
 
-<section>
+<main>
   {{ content }}
-</section>
+</main>
 
-<div id="tunnel-actions" class="buttons">
+<nav id="tunnel-actions">
   {% if page.prevButtonLabel %}
-  <button class="button history-back">{{ page.prevButtonLabel }}</button>
+  <a class=button rel=prev>{{ page.prevButtonLabel }}</a>
   {% else %}
-  <button class="button history-back" aria-label="étape précédent">Précédent</button>
-  {% endif %}
-  {% if page.nextButtonLabel %}
-  <button class="button--primary button-next">{{ page.nextButtonLabel }}</button>
-  {% else %}
-  <button class="button--primary button-next" aria-label="étape suivante">Suivant</button>
+  <a class=button rel=prev>Précédent</a>
   {% endif %}
   <progress max=0 value=0></progress>
-</div>
+  {% if page.nextButtonLabel %}
+  <button rel=next>{{ page.nextButtonLabel }}</button>
+  {% else %}
+  <button rel=next>Suivant</button>
+  {% endif %}
+</nav>
 
 <!-- tunnel.js uses DOM and should be loaded last -->
 <script src="{{ site.baseurl }}/assets/js/tunnel.js"></script>
