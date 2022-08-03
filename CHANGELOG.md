@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/SocialGouv/index-egapro/compare/v1.2.1...v1.2.2) (2022-08-03)
+
+
+### Bug Fixes
+
+* test remove cache ([2758e08](https://github.com/SocialGouv/index-egapro/commit/2758e083a46c8ba4373f52ecd7006a59afceb481))
+
 ## [1.2.1](https://github.com/SocialGouv/index-egapro/compare/v1.2.0...v1.2.1) (2022-08-03)
 
 
