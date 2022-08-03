@@ -31,6 +31,13 @@ All in one
 yarn dev
 ```
 
+## Pour tout arrêter
+
+````bash
+docker-compose down # pour arrêter API, déclaration et maildev (ou Ctl-C)
+# Ctl-C simulateur
+# Ctl-C app
+````
 
 ## Tests
 
@@ -38,4 +45,22 @@ yarn dev
 yarn check-all
 ```
 
+## FAQ
 
+__Comment ajouter une librairie dans un workspace__
+
+````bash
+yarn workspace simulateur add moment
+````
+
+__Comment lancer un script dans un package__
+
+````bash
+yarn workspace simulateur run test
+````
+
+__Comment lancer un script dans tous les workspaces__
+
+````bash
+yarn workspaces run lint
+````
