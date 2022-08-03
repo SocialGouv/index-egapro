@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/SocialGouv/index-egapro/compare/v1.3.1...v1.3.2) (2022-08-03)
+
+
+### Bug Fixes
+
+* smtp ([97a3cff](https://github.com/SocialGouv/index-egapro/commit/97a3cffd45d7c7010e02ba67f0e4abafb9aa55b3))
+
 ## [1.3.1](https://github.com/SocialGouv/index-egapro/compare/v1.3.0...v1.3.1) (2022-08-03)
 
 
