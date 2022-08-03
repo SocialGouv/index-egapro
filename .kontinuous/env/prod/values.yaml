@@ -1,0 +1,9 @@
+simulateur:
+  host: index-egapro.travail.gouv.fr
+  redirectFrom:
+    - "{{ .Values.global.host }}"
+
+api:
+  envFrom:
+    - secretRef:
+        name: smtp
