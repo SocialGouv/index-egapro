@@ -6,6 +6,7 @@ app:
   containerPort: 3000
   host: "{{ .Values.global.host }}"
   .ingress.path: /consulter-index(/|$)(.*)
+  certSecretName: api-crt
 
 declaration:
   _chart: app
@@ -16,6 +17,7 @@ declaration:
   host: "{{ .Values.global.host }}"
   .ingress.path: /declaration(/|$)(.*)
   .ingress.rewriteTarget: /$2
+  certSecretName: api-crt
 
 simulateur:
   _chart: app
@@ -25,6 +27,7 @@ simulateur:
   containerPort: 8080
   host: "{{ .Values.global.host }}"
   .ingress.path: /
+  certSecretName: api-crt
 
 api:
   _chart: app
@@ -35,6 +38,7 @@ api:
   host: "{{ .Values.global.host }}"
   .ingress.path: /api(/|$)(.*)
   .ingress.rewriteTarget: /$2
+  certSecretName: api-crt
   envFrom:
     - secretRef:
         name: "{{ .Values.global.pgSecretName }}"
