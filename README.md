@@ -1,10 +1,10 @@
 # EgaPro
 
-
 ## URL
 
-Prod : https://index-egapro.travail.gouv.fr/
-Préprod : https://egapro-preprod.dev.fabrique.social.gouv.fr/
+Prod : <https://index-egapro.travail.gouv.fr/>
+
+Préprod : <https://egapro-preprod.dev.fabrique.social.gouv.fr/>
 
 ## Installer
 
@@ -30,7 +30,6 @@ yarn dev:maildev
 - [declaration -> http://localhost:4000](http://localhost:4000)
 - [maildev     -> http://localhost:1080](http://localhost:1080)
 
-
 All in one
 
 ```bash
@@ -39,11 +38,9 @@ yarn dev
 
 ## Pour tout arrêter
 
-````bash
-docker-compose down # pour arrêter API, déclaration et maildev (ou Ctl-C)
-# Ctl-C simulateur
-# Ctl-C app
-````
+Faire `Ctl-C` sur tous les terminaux
+
+Remarque : pour l'API, la déclaration et maildev, on peut faire `docker-compose down`.
 
 ## Tests
 
@@ -51,32 +48,50 @@ docker-compose down # pour arrêter API, déclaration et maildev (ou Ctl-C)
 yarn check-all
 ```
 
+Cette commande lance le linter, la compilation des types TS et les tests.
+
 ## FAQ
 
-__Comment ajouter une librairie dans un workspace__
+### Comment ajouter une librairie dans un workspace
 
 ````bash
 yarn workspace simulateur add moment
 ````
 
-__Comment lancer un script dans un package__
+### Comment lancer un script dans un package
 
 ````bash
 yarn workspace simulateur run test
 ````
 
-__Comment lancer un script dans tous les workspaces__
+### Comment lancer un script dans tous les workspaces
 
 ````bash
 yarn workspaces run lint
 ````
 
-
 ## Fichiers
 
-Le fichier index-egalite-fh.csv est généré tous les jours.
+Certains fichiers sont exposés par le serveur web pour différents acteurs.
 
-Les fichiers suivants, sont accessibles uniquement si authentifié ou pour certains host.
+Le fichier index-egalite-fh.csv est généré tous les jours et accessible sans restriction.
+
+Les fichiers suivants, sont accessibles uniquement si authentifié ou pour certaines adresses IP (voir la liste blanche dans `.kontinuous/values.yaml`).
+
 - dgt.xlsx
 - full.ndjson
 - indexes.csv
+
+## Helpers egapro
+
+L'API contient un CLI avec certaines commandes utiles :
+
+Pour les lancer :
+
+```sh
+yarn egapro --help
+```
+
+Les commandes vont se lancer dans l'environnement local.
+
+Si l'on veut lancer ces commandes dans un container (ex: en prod, en préprod ou dans un environnement lié à une PR), il faut se connecter au container et lancer la commande egapro.
