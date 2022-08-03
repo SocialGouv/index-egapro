@@ -1,3 +1,11 @@
+## [1.3.6](https://github.com/SocialGouv/index-egapro/compare/v1.3.5...v1.3.6) (2022-08-03)
+
+
+### Bug Fixes
+
+* build host ([b5ad428](https://github.com/SocialGouv/index-egapro/commit/b5ad4288f91f983db8825207e0cd0bcae5b7bacd))
+* certSecretName ([72c40ea](https://github.com/SocialGouv/index-egapro/commit/72c40ea9b87a52c2292cce04a53e89044a6cfe87))
+
 ## [1.3.5](https://github.com/SocialGouv/index-egapro/compare/v1.3.4...v1.3.5) (2022-08-03)
 
 
