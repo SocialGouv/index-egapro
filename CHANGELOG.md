@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/SocialGouv/index-egapro/compare/v1.3.0...v1.3.1) (2022-08-03)
+
+
+### Bug Fixes
+
+* concurrency gotoprod ([12ea44b](https://github.com/SocialGouv/index-egapro/commit/12ea44b0dfcf049fc503f15d833d69df8bda88de))
+
 # [1.3.0](https://github.com/SocialGouv/index-egapro/compare/v1.2.5...v1.3.0) (2022-08-03)
 
 
