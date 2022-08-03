@@ -1,3 +1,11 @@
+## [1.2.4](https://github.com/SocialGouv/index-egapro/compare/v1.2.3...v1.2.4) (2022-08-03)
+
+
+### Bug Fixes
+
+* jekyll css cache with time suffix ([6433603](https://github.com/SocialGouv/index-egapro/commit/6433603a320956e358aa936f48e2a36df410b4f5))
+* test concurrency ([4abed19](https://github.com/SocialGouv/index-egapro/commit/4abed19cfa5751d70bbb0e6f5e716b6b1a773abb))
+
 ## [1.2.3](https://github.com/SocialGouv/index-egapro/compare/v1.2.2...v1.2.3) (2022-08-03)
 
 
