@@ -1,4 +1,4 @@
-﻿async function request(method, uri, body, options = {}) {
+async function request(method, uri, body, options = {}) {
   if(!['get', 'head'].includes(method.toLowerCase()))
     options.body = body ? JSON.stringify(body) : ""
   options.method = method
