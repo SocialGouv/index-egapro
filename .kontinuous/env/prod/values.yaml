@@ -4,7 +4,7 @@ global:
 simulateur:
   host: index-egapro.travail.gouv.fr
   redirectFrom:
-    - "{{ .Values.global.host }}"
+    - "egapro.fabrique.social.gouv.fr"
 
   
 api:
