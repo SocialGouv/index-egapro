@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/SocialGouv/index-egapro/compare/v1.3.2...v1.3.3) (2022-08-03)
+
+
+### Bug Fixes
+
+* ingress redirect ([9ca220a](https://github.com/SocialGouv/index-egapro/commit/9ca220ad3e3fc3ec6aded26a03c53c8733fe645b))
+
 ## [1.3.2](https://github.com/SocialGouv/index-egapro/compare/v1.3.1...v1.3.2) (2022-08-03)
 
 
