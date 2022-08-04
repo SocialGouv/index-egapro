@@ -1,6 +1,6 @@
 on:
   push:
-    branches: ["*"]
+    branches: ["**"]
 
 concurrency:
   cancel-in-progress: true
