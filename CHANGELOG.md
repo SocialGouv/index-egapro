@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/SocialGouv/index-egapro/compare/v1.4.0...v1.4.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* app version ([#10](https://github.com/SocialGouv/index-egapro/issues/10)) ([c4d78a3](https://github.com/SocialGouv/index-egapro/commit/c4d78a394336cf863b69b52298f957f437ab63ae))
+
 # [1.4.0](https://github.com/SocialGouv/index-egapro/compare/v1.3.7...v1.4.0) (2022-08-04)
 
 
