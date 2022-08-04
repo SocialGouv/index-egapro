@@ -1,11 +1,10 @@
-name: Kontinuous
+name: Deployment
 on:
   push:
     branches:
       - "**"
     tags-ignore:
       - "v*"
-  delete:
 
 concurrency:
   cancel-in-progress: true
