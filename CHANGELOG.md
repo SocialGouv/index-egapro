@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/SocialGouv/index-egapro/compare/v1.4.1...v1.4.2) (2022-08-04)
+
+
+### Bug Fixes
+
+* decouple workflows ([#11](https://github.com/SocialGouv/index-egapro/issues/11)) ([1c05efc](https://github.com/SocialGouv/index-egapro/commit/1c05efcd0ab9b88f199e738bec439f8a7f254e90))
+
 ## [1.4.1](https://github.com/SocialGouv/index-egapro/compare/v1.4.0...v1.4.1) (2022-08-04)
 
 
