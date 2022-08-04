@@ -1,3 +1,11 @@
+# [1.4.0](https://github.com/SocialGouv/index-egapro/compare/v1.3.7...v1.4.0) (2022-08-04)
+
+
+### Features
+
+* add tests api in CI ([07023b8](https://github.com/SocialGouv/index-egapro/commit/07023b818c805fc22c9a6c51f739e8504b04d4ef))
+* change glob on branch for tests yaml ([09c45f7](https://github.com/SocialGouv/index-egapro/commit/09c45f7d1f6a0c6baefeb7d3f8e79b18f47fd98c))
+
 ## [1.3.7](https://github.com/SocialGouv/index-egapro/compare/v1.3.6...v1.3.7) (2022-08-03)
 
 
