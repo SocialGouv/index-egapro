@@ -1,3 +1,11 @@
+## [1.4.3](https://github.com/SocialGouv/index-egapro/compare/v1.4.2...v1.4.3) (2022-08-04)
+
+
+### Bug Fixes
+
+* rename workflows ([#12](https://github.com/SocialGouv/index-egapro/issues/12)) ([0b59b97](https://github.com/SocialGouv/index-egapro/commit/0b59b97e4c862f71ec7b59d4d5865fd32acdbd88))
+* show print output in stdout ([#6](https://github.com/SocialGouv/index-egapro/issues/6)) ([d21ce93](https://github.com/SocialGouv/index-egapro/commit/d21ce93708cf2b7ebcf042bfc0ac6127c7e6ab97))
+
 ## [1.4.2](https://github.com/SocialGouv/index-egapro/compare/v1.4.1...v1.4.2) (2022-08-04)
 
 
